@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Case Converter Tool - Transform Text Instantly | Free Online Tool</title>
+    <meta name="description" content="Free online text case converter tool. Instantly transform text to uppercase, lowercase, proper case, sentence case and more. Fast, easy-to-use, and mobile-friendly.">
+    <meta name="keywords" content="text case converter, uppercase, lowercase, proper case, title case, text transformation, online tool">
+    <meta name="author" content="Text Tools">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4319187914977768"
+     crossorigin="anonymous">
+    </script>
+
+    <!-- AdMob SDK -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4319187914977768" crossorigin="anonymous"></script>
+    <script>
+        // Initialize AdMob
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-4319187914977768",
+            enable_page_level_ads: false
+        });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --gray-color: #6c757d;
+            --success-color: #4bb543;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7ff;
+            color: var(--dark-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 25px 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+        
+        .header-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header-content p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Main Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        @media (min-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr 300px;
+            }
+        }
+        
+        /* Main Tool Section */
+        .tool-container {
+            background-color: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            overflow: hidden;
+        }
+        
+        .input-section, .output-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 180px;
+            padding: 18px;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            resize: vertical;
+            transition: var(--transition);
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        /* Controls Section */
+        .controls-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .control-btn {
+            flex: 1;
+            min-width: 160px;
+            padding: 14px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .control-btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        .control-btn:active {
+            transform: translateY(0);
+        }
+        
+        .control-btn i {
+            font-size: 1.1rem;
+        }
+        
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .action-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 14px 20px;
+            background-color: #f1f3f9;
+            color: var(--dark-color);
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .action-btn.primary {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .action-btn:hover {
+            background-color: #e2e6f1;
+        }
+        
+        .action-btn.primary:hover {
+            background-color: #3ab5d9;
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .stat-box {
+            flex: 1;
+            min-width: 150px;
+            background-color: #f8f9ff;
+            padding: 15px;
+            border-radius: var(--radius);
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray-color);
+        }
+        
+        /* Ad Containers */
+        .ad-container {
+            background-color: #f8f9fa;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 15px;
+            margin-bottom: 25px;
+            height: auto;
+            min-height: 100px;
+            overflow: hidden;
+        }
+        
+        .ad-container.leaderboard {
+            min-height: 90px;
+        }
+        
+        .ad-container.banner {
+            min-height: 100px;
+        }
+        
+        .ad-container.medium-rectangle {
+            min-height: 250px;
+        }
+        
+        .ad-container.skyscraper {
+            min-height: 600px;
+        }
+        
+        /* Ad Loading State */
+        .ad-loading {
+            color: var(--gray-color);
+            font-style: italic;
+            padding: 20px;
+        }
+        
+        .ad-info {
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #495057;
+        }
+        
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--success-color);
+            color: white;
+            padding: 15px 25px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 1000;
+        }
+        
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2rem;
+            }
+            
+            .tool-container {
+                padding: 20px;
+            }
+            
+            .control-btn, .action-btn {
+                min-width: 100%;
+            }
+            
+            .controls-section, .action-buttons {
+                flex-direction: column;
+            }
+            
+            .ad-container.leaderboard {
+                min-height: 50px;
+            }
+            
+            .ad-container.banner {
+                min-height: 50px;
+            }
+            
+            .ad-container.medium-rectangle {
+                min-height: 250px;
+            }
+            
+            .ad-container.skyscraper {
+                min-height: 250px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-content h1 {
+                font-size: 1.7rem;
+            }
+            
+            .header-content p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.2rem;
+            }
+            
+            .stat-box {
+                min-width: 100%;
+            }
+            
+            .ad-container {
+                padding: 10px;
+                margin-bottom: 20px;
+            }
+        }
+        
+        /* Policy Compliance Notice */
+        .policy-notice {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: var(--radius);
+            margin-top: 20px;
+            font-size: 0.9rem;
+            display: none;
+        }
+        
+        .policy-notice.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>Text Case Converter</h1>
+                <p>Transform your text to UPPERCASE, lowercase, Proper Case, Sentence case and more with this free online tool. Fast, easy-to-use, and works on all devices.</p>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Policy Compliance Notice -->
+        <div class="policy-notice" id="policyNotice">
+            <strong><i class="fas fa-info-circle"></i> AdMob Policy Compliance:</strong> This site follows Google AdMob policies. Ads are placed in designated areas without interfering with user experience.
+        </div>
+        
+        <div class="content-wrapper">
+            <!-- Main Tool Section -->
+            <main>
+                <!-- Top Banner Ad - Leaderboard (728x90) / Banner (320x50) -->
+                <div class="ad-container leaderboard" id="topBannerAd">
+                    <div class="ad-loading">
+                        <i class="fas fa-ad"></i> Loading Ad...
+                    </div>
+                    <!-- AdMob Ad will be inserted here -->
+                </div>
+                
+                <!-- Text Case Converter Tool -->
+                <div class="tool-container">
+                    <!-- Input Section -->
+                    <div class="input-section">
+                        <h2 class="section-title">Enter Your Text</h2>
+                        <textarea id="inputText" placeholder="Type or paste your text here...">Hello, welcome to the Text Case Converter tool. This is a sample text that you can transform to different cases. Try it out by clicking the buttons below!</textarea>
+                    </div>
+                    
+                    <!-- Controls Section -->
+                    <div class="controls-section">
+                        <button class="control-btn" id="uppercaseBtn">
+                            <i class="fas fa-text-height"></i> UPPERCASE
+                        </button>
+                        <button class="control-btn" id="lowercaseBtn">
+                            <i class="fas fa-text-height"></i> lowercase
+                        </button>
+                        <button class="control-btn" id="propercaseBtn">
+                            <i class="fas fa-text-height"></i> Proper Case
+                        </button>
+                        <button class="control-btn" id="sentencecaseBtn">
+                            <i class="fas fa-text-height"></i> Sentence case
+                        </button>
+                        <button class="control-btn" id="titlecaseBtn">
+                            <i class="fas fa-heading"></i> Title Case
+                        </button>
+                    </div>
+                    
+                    <!-- Output Section -->
+                    <div class="output-section">
+                        <h2 class="section-title">Converted Text</h2>
+                        <textarea id="outputText" placeholder="Your converted text will appear here..." readonly></textarea>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button class="action-btn" id="clearBtn">
+                            <i class="fas fa-broom"></i> Clear Text
+                        </button>
+                        <button class="action-btn" id="copyBtn">
+                            <i class="far fa-copy"></i> Copy Text
+                        </button>
+                        <button class="action-btn primary" id="swapBtn">
+                            <i class="fas fa-exchange-alt"></i> Swap Text
+                        </button>
+                    </div>
+                    
+                    <!-- Statistics -->
+                    <div class="stats-section">
+                        <div class="stat-box">
+                            <div class="stat-value" id="charCount">0</div>
+                            <div class="stat-label">Characters</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value" id="wordCount">0</div>
+                            <div class="stat-label">Words</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value" id="lineCount">0</div>
+                            <div class="stat-label">Lines</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value" id="sentenceCount">0</div>
+                            <div class="stat-label">Sentences</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Medium Rectangle Ad (300x250) -->
+                <div class="ad-container medium-rectangle" id="mediumRectangleAd">
+                    <div class="ad-loading">
+                        <i class="fas fa-ad"></i> Loading Ad...
+                    </div>
+                    <!-- AdMob Ad will be inserted here -->
+                </div>
+            </main>
+            
+            <!-- Sidebar with Skyscraper Ad (300x600) -->
+            <aside>
+                <div class="ad-container skyscraper" id="skyscraperAd">
+                    <div class="ad-loading">
+                        <i class="fas fa-ad"></i> Loading Ad...
+                    </div>
+                    <!-- AdMob Ad will be inserted here -->
+                </div>
+            </aside>
+        </div>
+    </div>
+    
+    <!-- AdMob Configuration Info -->
+    <div class="container">
+        <div class="ad-info">
+            <strong>AdMob Configuration:</strong> App ID: ca-app-pub-4319187914977768~7345655475 | 
+            Ad Unit ID: ca-app-pub-4319187914977768/9707260784
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">Text copied to clipboard!</div>
+    
+    <script>
+        // DOM Elements
+        const inputText = document.getElementById('inputText');
+        const outputText = document.getElementById('outputText');
+        const uppercaseBtn = document.getElementById('uppercaseBtn');
+        const lowercaseBtn = document.getElementById('lowercaseBtn');
+        const propercaseBtn = document.getElementById('propercaseBtn');
+        const sentencecaseBtn = document.getElementById('sentencecaseBtn');
+        const titlecaseBtn = document.getElementById('titlecaseBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const swapBtn = document.getElementById('swapBtn');
+        const toast = document.getElementById('toast');
+        const policyNotice = document.getElementById('policyNotice');
+        
+        // Statistics elements
+        const charCountEl = document.getElementById('charCount');
+        const wordCountEl = document.getElementById('wordCount');
+        const lineCountEl = document.getElementById('lineCount');
+        const sentenceCountEl = document.getElementById('sentenceCount');
+        
+        // AdMob Configuration
+        const ADMOB_APP_ID = 'ca-app-pub-4319187914977768~7345655475';
+        const ADMOB_AD_UNIT_ID = 'ca-pub-4319187914977768/9707260784';
+        
+        // Initialize with sample text
+        window.addEventListener('DOMContentLoaded', () => {
+            convertToProperCase();
+            updateStatistics();
+            initializeAds();
+            showPolicyNotice();
+        });
+        
+        // Initialize AdMob Ads
+        function initializeAds() {
+            // Wait for AdMob SDK to load
+            setTimeout(() => {
+                try {
+                    // Top Banner Ad (responsive)
+                    const topBannerAd = document.getElementById('topBannerAd');
+                    if (topBannerAd) {
+                        // Create ad container
+                        const adScript = document.createElement('script');
+                        adScript.innerHTML = `
+                            (adsbygoogle = window.adsbygoogle || []).push({
+                                google_ad_client: "ca-pub-4319187914977768",
+                                enable_page_level_ads: false,
+                                overlays: {bottom: true}
+                            });
+                            
+                            // Load responsive top banner
+                            (adsbygoogle = window.adsbygoogle || []).push({
+                                google_ad_client: "ca-pub-4319187914977768",
+                                enable_page_level_ads: false
+                            });
+                        `;
+                        topBannerAd.appendChild(adScript);
+                        
+                        // Create responsive ad
+                        const adElement = document.createElement('ins');
+                        adElement.className = 'adsbygoogle';
+                        adElement.style.display = 'block';
+                        adElement.setAttribute('data-ad-client', 'ca-pub-4319187914977768');
+                        adElement.setAttribute('data-ad-slot', ADMOB_AD_UNIT_ID);
+                        adElement.setAttribute('data-ad-format', 'auto');
+                        adElement.setAttribute('data-full-width-responsive', 'true');
+                        
+                        topBannerAd.innerHTML = '';
+                        topBannerAd.appendChild(adElement);
+                        
+                        // Load the ad
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    }
+                    
+                    // Medium Rectangle Ad (300x250)
+                    const mediumRectAd = document.getElementById('mediumRectangleAd');
+                    if (mediumRectAd) {
+                        const adElement = document.createElement('ins');
+                        adElement.className = 'adsbygoogle';
+                        adElement.style.display = 'block';
+                        adElement.setAttribute('data-ad-client', 'ca-pub-4319187914977768');
+                        adElement.setAttribute('data-ad-slot', ADMOB_AD_UNIT_ID);
+                        adElement.setAttribute('data-ad-format', 'rectangle');
+                        adElement.setAttribute('data-ad-layout', 'in-article');
+                        
+                        mediumRectAd.innerHTML = '';
+                        mediumRectAd.appendChild(adElement);
+                        
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    }
+                    
+                    // Skyscraper Ad (300x600)
+                    const skyscraperAd = document.getElementById('skyscraperAd');
+                    if (skyscraperAd) {
+                        const adElement = document.createElement('ins');
+                        adElement.className = 'adsbygoogle';
+                        adElement.style.display = 'block';
+                        adElement.setAttribute('data-ad-client', 'ca-pub-4319187914977768');
+                        adElement.setAttribute('data-ad-slot', ADMOB_AD_UNIT_ID);
+                        adElement.setAttribute('data-ad-format', 'vertical');
+                        adElement.setAttribute('data-ad-layout', 'in-article');
+                        
+                        skyscraperAd.innerHTML = '';
+                        skyscraperAd.appendChild(adElement);
+                        
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    }
+                    
+                    console.log('AdMob ads initialized successfully');
+                    
+                } catch (error) {
+                    console.error('Error initializing AdMob ads:', error);
+                    showAdPlaceholders();
+                }
+            }, 1000);
+        }
+        
+        // Show placeholders if ads fail to load
+        function showAdPlaceholders() {
+            const adContainers = document.querySelectorAll('.ad-container');
+            adContainers.forEach(container => {
+                container.innerHTML = `
+                    <div class="ad-loading">
+                        <i class="fas fa-ad"></i> 
+                        <p>AdMob Ad Unit: ${ADMOB_AD_UNIT_ID.substring(0, 20)}...</p>
+                        <small>If ads don't load, check your AdMob configuration</small>
+                    </div>
+                `;
+            });
+        }
+        
+        // Show policy compliance notice
+        function showPolicyNotice() {
+            // Show notice for 5 seconds on first load
+            policyNotice.classList.add('show');
+            setTimeout(() => {
+                policyNotice.classList.remove('show');
+            }, 5000);
+        }
+        
+        // Update statistics function
+        function updateStatistics() {
+            const text = inputText.value;
+            
+            // Character count
+            charCountEl.textContent = text.length;
+            
+            // Word count
+            const words = text.trim().split(/\s+/).filter(word => word.length > 0);
+            wordCountEl.textContent = words.length;
+            
+            // Line count
+            const lines = text.split('\n').filter(line => line.trim().length > 0);
+            lineCountEl.textContent = lines.length;
+            
+            // Sentence count (simple approximation)
+            const sentences = text.split(/[.!?]+/).filter(sentence => sentence.trim().length > 0);
+            sentenceCountEl.textContent = sentences.length;
+        }
+        
+        // Case conversion functions
+        function convertToUpperCase() {
+            outputText.value = inputText.value.toUpperCase();
+        }
+        
+        function convertToLowerCase() {
+            outputText.value = inputText.value.toLowerCase();
+        }
+        
+        function convertToProperCase() {
+            const text = inputText.value;
+            outputText.value = text.replace(/\w\S*/g, function(txt) {
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            });
+        }
+        
+        function convertToSentenceCase() {
+            const text = inputText.value.toLowerCase();
+            outputText.value = text.replace(/(^\s*\w|[.!?]\s+\w)/g, function(c) {
+                return c.toUpperCase();
+            });
+        }
+        
+        function convertToTitleCase() {
+            const text = inputText.value.toLowerCase();
+            const smallWords = /^(a|an|and|as|at|but|by|en|for|if|in|nor|of|on|or|per|the|to|v.?|vs.?|via)$/i;
+            const alphanumericPattern = /([A-Za-z0-9\u00C0-\u00FF])/;
+            
+            outputText.value = text.replace(/[A-Za-z0-9\u00C0-\u00FF]+[^\s-]*/g, function(match, index, title) {
+                if (index > 0 && index + match.length !== title.length &&
+                    match.search(smallWords) > -1 && title.charAt(index - 2) !== ":" &&
+                    (title.charAt(index + match.length) !== '-' || title.charAt(index - 1) === '-') &&
+                    title.charAt(index - 1).search(/[^\s-]/) < 0) {
+                    return match.toLowerCase();
+                }
+                
+                if (match.substr(1).search(/[A-Z]|\../) > -1) {
+                    return match;
+                }
+                
+                return match.charAt(0).toUpperCase() + match.substr(1);
+            });
+        }
+        
+        // Clear text function
+        function clearText() {
+            inputText.value = '';
+            outputText.value = '';
+            updateStatistics();
+        }
+        
+        // Copy text function
+        function copyToClipboard() {
+            if (!outputText.value.trim()) {
+                showToast("No text to copy!");
+                return;
+            }
+            
+            outputText.select();
+            outputText.setSelectionRange(0, 99999); // For mobile devices
+            
+            try {
+                navigator.clipboard.writeText(outputText.value).then(() => {
+                    showToast("Text copied to clipboard!");
+                });
+            } catch (err) {
+                // Fallback for older browsers
+                document.execCommand('copy');
+                showToast("Text copied to clipboard!");
+            }
+        }
+        
+        // Swap text function
+        function swapText() {
+            const temp = inputText.value;
+            inputText.value = outputText.value;
+            outputText.value = temp;
+            updateStatistics();
+        }
+        
+        // Show toast notification
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Event listeners for buttons
+        uppercaseBtn.addEventListener('click', convertToUpperCase);
+        lowercaseBtn.addEventListener('click', convertToLowerCase);
+        propercaseBtn.addEventListener('click', convertToProperCase);
+        sentencecaseBtn.addEventListener('click', convertToSentenceCase);
+        titlecaseBtn.addEventListener('click', convertToTitleCase);
+        clearBtn.addEventListener('click', clearText);
+        copyBtn.addEventListener('click', copyToClipboard);
+        swapBtn.addEventListener('click', swapText);
+        
+        // Update statistics when input changes
+        inputText.addEventListener('input', updateStatistics);
+        
+        // Auto-convert on input for better UX
+        inputText.addEventListener('input', () => {
+            // Keep the current conversion when user types
+            if (uppercaseBtn.classList.contains('active')) {
+                convertToUpperCase();
+            } else if (lowercaseBtn.classList.contains('active')) {
+                convertToLowerCase();
+            } else if (sentencecaseBtn.classList.contains('active')) {
+                convertToSentenceCase();
+            } else if (titlecaseBtn.classList.contains('active')) {
+                convertToTitleCase();
+            } else {
+                // Default to proper case
+                convertToProperCase();
+            }
+        });
+        
+        // Add active state to buttons
+        document.querySelectorAll('.control-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.control-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+            });
+        });
+        
+        // Set proper case as active by default
+        propercaseBtn.classList.add('active');
+        
+        // AdMob Policy Compliance
+        // Ensure ads don't interfere with user experience
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if ads are blocking content
+            const checkAdOverlap = () => {
+                const ads = document.querySelectorAll('.adsbygoogle');
+                ads.forEach(ad => {
+                    const rect = ad.getBoundingClientRect();
+                    // If ad is too large or overlapping, adjust
+                    if (rect.height > 800) {
+                        ad.style.maxHeight = '600px';
+                    }
+                });
+            };
+            
+            // Check periodically
+            setInterval(checkAdOverlap, 5000);
+            
+            // Ensure mobile compatibility
+            if (window.innerWidth < 768) {
+                // On mobile, ensure ads don't take too much space
+                document.querySelectorAll('.ad-container').forEach(container => {
+                    container.style.maxHeight = '250px';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

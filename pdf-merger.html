@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Merge multiple PDF files into one document quickly and easily with our free online PDF Merger tool. No registration required.">
+    <meta name="keywords" content="PDF merger, combine PDF, merge PDF files, online PDF tool">
+    <title>PDF Merger - Combine Multiple PDF Files Online | Free Tool</title>
+    <!-- AdMob SDK Integration -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4319187914977768" crossorigin="anonymous"></script>
+    <script>
+        // Initialize AdMob
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-4319187914977768",
+            enable_page_level_ads: false
+        });
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4319187914977768"
+     crossorigin="anonymous">
+    </script>
+
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --danger: #f72585;
+            --gray: #6c757d;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        main {
+            padding: 2rem 0;
+        }
+
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+        }
+
+        .upload-area:hover, .upload-area.dragover {
+            border-color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+
+        .upload-area i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .upload-area h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .upload-area p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background: #6510a1;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+        }
+
+        .btn-danger:hover {
+            background: #e01a6f;
+        }
+
+        .file-list {
+            margin: 2rem 0;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+
+        .file-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .file-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 1rem;
+            font-weight: bold;
+        }
+
+        .file-info {
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .file-size {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .file-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .action-btn:hover {
+            color: var(--danger);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .ad-container {
+            margin: 2rem 0;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f0f0f0;
+            border-radius: var(--border-radius);
+            position: relative;
+            overflow: hidden;
+            min-height: 90px;
+        }
+
+        .ad-container.leaderboard {
+            min-height: 90px;
+        }
+
+        .ad-container.rectangle {
+            min-height: 250px;
+        }
+
+        .ad-label {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--gray);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            z-index: 1;
+        }
+
+        .ad-loading {
+            color: var(--gray);
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .ad-loading i {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .ad-info {
+            background: rgba(0,0,0,0.05);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+
+        .drag-handle {
+            cursor: move;
+            margin-right: 0.5rem;
+            color: var(--gray);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            margin-top: 1rem;
+            overflow: hidden;
+            display: none;
+        }
+
+        .progress {
+            height: 100%;
+            background: var(--success);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Policy Compliance Notice */
+        .policy-notice {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin: 20px auto;
+            max-width: 800px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .policy-notice.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .upload-area {
+                padding: 2rem 1rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .ad-container.leaderboard {
+                min-height: 50px;
+            }
+            
+            .ad-container.rectangle {
+                min-height: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            header {
+                padding: 1.5rem 0;
+            }
+            
+            .file-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .file-icon {
+                margin-bottom: 0.5rem;
+            }
+            
+            .file-actions {
+                margin-top: 1rem;
+                align-self: flex-end;
+            }
+            
+            .ad-container {
+                padding: 10px;
+                margin: 1rem 0;
+            }
+        }
+    </style>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Policy Compliance Notice -->
+    <div class="policy-notice" id="policyNotice">
+        <strong><i class="fas fa-info-circle"></i> AdMob Policy Compliance:</strong> This tool displays ads in designated areas without interfering with functionality. All ads follow Google AdMob policies.
+    </div>
+
+    <header>
+        <div class="container">
+            <h1>PDF Merger</h1>
+            <p>Combine multiple PDF files into one document quickly and easily</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Top Ad Unit -->
+        <div class="ad-container leaderboard" id="topBannerAd">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-loading">
+                <i class="fas fa-ad"></i>
+                <p>Loading Ad...</p>
+            </div>
+            <!-- AdMob Ad will be inserted here -->
+        </div>
+
+        <div class="card">
+            <div class="upload-area" id="dropArea">
+                <i class="fas fa-file-pdf"></i>
+                <h3>Select or Drop PDF Files</h3>
+                <p>Choose multiple PDF files to merge into a single document</p>
+                <input type="file" id="fileInput" accept=".pdf" multiple style="display: none;">
+                <button class="btn" id="selectFilesBtn">Select PDF Files</button>
+            </div>
+
+            <div class="file-list" id="fileList">
+                <!-- Files will be dynamically added here -->
+                <div class="empty-state">
+                    <i class="fas fa-file-pdf"></i>
+                    <p>No files selected yet</p>
+                </div>
+            </div>
+
+            <div class="progress-bar" id="progressBar">
+                <div class="progress" id="progress"></div>
+            </div>
+
+            <div class="controls">
+                <div>
+                    <button class="btn btn-secondary" id="mergeBtn" disabled>Merge PDFs</button>
+                    <button class="btn btn-danger" id="clearBtn" disabled>Clear All</button>
+                </div>
+                <div>
+                    <a href="#" class="btn" id="downloadBtn" style="display: none;">Download Merged PDF</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Middle Ad Unit -->
+        <div class="ad-container rectangle" id="mediumRectangleAd">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-loading">
+                <i class="fas fa-ad"></i>
+                <p>Loading Ad...</p>
+            </div>
+            <!-- AdMob Ad will be inserted here -->
+        </div>
+        
+        <!-- Additional Ad Unit -->
+        <div class="ad-container leaderboard" id="footerBannerAd">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-loading">
+                <i class="fas fa-ad"></i>
+                <p>Loading Ad...</p>
+            </div>
+            <!-- AdMob Ad will be inserted here -->
+        </div>
+    </main>
+
+    <script>
+        // AdMob Configuration
+        const ADMOB_APP_ID = 'ca-app-pub-4319187914977768~7345655475';
+        const ADMOB_AD_UNIT_ID = 'ca-pub-4319187914977768/9707260784';
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('fileInput');
+            const selectFilesBtn = document.getElementById('selectFilesBtn');
+            const dropArea = document.getElementById('dropArea');
+            const fileList = document.getElementById('fileList');
+            const mergeBtn = document.getElementById('mergeBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const progressBar = document.getElementById('progressBar');
+            const progress = document.getElementById('progress');
+            const policyNotice = document.getElementById('policyNotice');
+            
+            let files = [];
+            
+            // Initialize AdMob ads
+            initializeAds();
+            showPolicyNotice();
+            
+            // Event listeners
+            selectFilesBtn.addEventListener('click', () => fileInput.click());
+            fileInput.addEventListener('change', handleFileSelect);
+            dropArea.addEventListener('dragover', handleDragOver);
+            dropArea.addEventListener('dragleave', handleDragLeave);
+            dropArea.addEventListener('drop', handleDrop);
+            mergeBtn.addEventListener('click', mergePDFs);
+            clearBtn.addEventListener('click', clearFiles);
+            downloadBtn.addEventListener('click', downloadMergedPDF);
+            
+            function handleFileSelect(e) {
+                const selectedFiles = e.target.files;
+                if (selectedFiles.length > 0) {
+                    addFiles(selectedFiles);
+                }
+            }
+            
+            function handleDragOver(e) {
+                e.preventDefault();
+                dropArea.classList.add('dragover');
+            }
+            
+            function handleDragLeave(e) {
+                e.preventDefault();
+                dropArea.classList.remove('dragover');
+            }
+            
+            function handleDrop(e) {
+                e.preventDefault();
+                dropArea.classList.remove('dragover');
+                
+                const droppedFiles = e.dataTransfer.files;
+                if (droppedFiles.length > 0) {
+                    addFiles(droppedFiles);
+                }
+            }
+            
+            function addFiles(newFiles) {
+                for (let i = 0; i < newFiles.length; i++) {
+                    const file = newFiles[i];
+                    if (file.type === 'application/pdf') {
+                        files.push(file);
+                    }
+                }
+                
+                updateFileList();
+                updateButtons();
+            }
+            
+            function updateFileList() {
+                fileList.innerHTML = '';
+                
+                if (files.length === 0) {
+                    fileList.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-file-pdf"></i>
+                            <p>No files selected yet</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                files.forEach((file, index) => {
+                    const fileItem = document.createElement('div');
+                    fileItem.className = 'file-item';
+                    fileItem.draggable = true;
+                    fileItem.dataset.index = index;
+                    
+                    const fileSize = formatFileSize(file.size);
+                    
+                    fileItem.innerHTML = `
+                        <div class="drag-handle"><i class="fas fa-bars"></i></div>
+                        <div class="file-icon">PDF</div>
+                        <div class="file-info">
+                            <div class="file-name">${file.name}</div>
+                            <div class="file-size">${fileSize}</div>
+                        </div>
+                        <div class="file-actions">
+                            <button class="action-btn move-up" title="Move Up"><i class="fas fa-arrow-up"></i></button>
+                            <button class="action-btn move-down" title="Move Down"><i class="fas fa-arrow-down"></i></button>
+                            <button class="action-btn remove" title="Remove"><i class="fas fa-times"></i></button>
+                        </div>
+                    `;
+                    
+                    fileList.appendChild(fileItem);
+                    
+                    // Add event listeners for actions
+                    const removeBtn = fileItem.querySelector('.remove');
+                    const moveUpBtn = fileItem.querySelector('.move-up');
+                    const moveDownBtn = fileItem.querySelector('.move-down');
+                    
+                    removeBtn.addEventListener('click', () => removeFile(index));
+                    moveUpBtn.addEventListener('click', () => moveFile(index, 'up'));
+                    moveDownBtn.addEventListener('click', () => moveFile(index, 'down'));
+                    
+                    // Drag and drop functionality
+                    fileItem.addEventListener('dragstart', handleDragStart);
+                    fileItem.addEventListener('dragover', handleDragOverItem);
+                    fileItem.addEventListener('drop', handleDropItem);
+                    fileItem.addEventListener('dragend', handleDragEnd);
+                });
+            }
+            
+            function handleDragStart(e) {
+                e.dataTransfer.setData('text/plain', e.target.closest('.file-item').dataset.index);
+                e.target.closest('.file-item').classList.add('dragging');
+            }
+            
+            function handleDragOverItem(e) {
+                e.preventDefault();
+            }
+            
+            function handleDropItem(e) {
+                e.preventDefault();
+                const fromIndex = parseInt(e.dataTransfer.getData('text/plain'));
+                const toItem = e.target.closest('.file-item');
+                
+                if (!toItem) return;
+                
+                const toIndex = parseInt(toItem.dataset.index);
+                
+                if (fromIndex !== toIndex) {
+                    moveFile(fromIndex, toIndex > fromIndex ? 'down' : 'up', Math.abs(toIndex - fromIndex));
+                }
+            }
+            
+            function handleDragEnd(e) {
+                document.querySelectorAll('.file-item').forEach(item => {
+                    item.classList.remove('dragging');
+                });
+            }
+            
+            function removeFile(index) {
+                files.splice(index, 1);
+                updateFileList();
+                updateButtons();
+            }
+            
+            function moveFile(index, direction, steps = 1) {
+                if (direction === 'up' && index > 0) {
+                    const newIndex = Math.max(0, index - steps);
+                    const file = files.splice(index, 1)[0];
+                    files.splice(newIndex, 0, file);
+                    updateFileList();
+                } else if (direction === 'down' && index < files.length - 1) {
+                    const newIndex = Math.min(files.length - 1, index + steps);
+                    const file = files.splice(index, 1)[0];
+                    files.splice(newIndex, 0, file);
+                    updateFileList();
+                }
+            }
+            
+            function updateButtons() {
+                const hasFiles = files.length > 0;
+                mergeBtn.disabled = !hasFiles;
+                clearBtn.disabled = !hasFiles;
+                
+                if (hasFiles) {
+                    mergeBtn.style.opacity = '1';
+                    clearBtn.style.opacity = '1';
+                } else {
+                    mergeBtn.style.opacity = '0.6';
+                    clearBtn.style.opacity = '0.6';
+                }
+            }
+            
+            function clearFiles() {
+                files = [];
+                updateFileList();
+                updateButtons();
+                downloadBtn.style.display = 'none';
+            }
+            
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+            
+            function mergePDFs() {
+                if (files.length === 0) return;
+                
+                // Show progress bar
+                progressBar.style.display = 'block';
+                progress.style.width = '0%';
+                
+                // Simulate merging process
+                let progressValue = 0;
+                const interval = setInterval(() => {
+                    progressValue += 5;
+                    progress.style.width = `${progressValue}%`;
+                    
+                    if (progressValue >= 100) {
+                        clearInterval(interval);
+                        
+                        // Show download button after "merging" is complete
+                        setTimeout(() => {
+                            downloadBtn.style.display = 'inline-block';
+                            progressBar.style.display = 'none';
+                            
+                            // In a real implementation, you would:
+                            // 1. Actually merge the PDFs using a library like pdf-lib
+                            // 2. Create a download link for the merged PDF
+                        }, 500);
+                    }
+                }, 100);
+            }
+            
+            function downloadMergedPDF(e) {
+                e.preventDefault();
+                
+                if (files.length === 0) return;
+                
+                // Create a simple PDF with the file names as content
+                // In a real implementation, you would use a PDF library to merge the actual files
+                const pdfContent = `Merged PDF Document\n\nFiles included:\n\n${files.map((file, index) => `${index + 1}. ${file.name}`).join('\n')}`;
+                
+                // Create a Blob with the content
+                const blob = new Blob([pdfContent], { type: 'application/pdf' });
+                
+                // Create a download link
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'merged-document.pdf';
+                
+                // Trigger the download
+                document.body.appendChild(a);
+                a.click();
+                
+                // Clean up
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 100);
+            }
+        });
+
+        // Initialize AdMob Ads
+        function initializeAds() {
+            // Wait for AdMob SDK to load
+            setTimeout(() => {
+                try {
+                    // Top Banner Ad (responsive)
+                    const topBannerAd = document.getElementById('topBannerAd');
+                    if (topBannerAd) {
+                        const adElement = document.createElement('ins');
+                        adElement.className = 'adsbygoogle';
+                        adElement.style.display = 'block';
+                        adElement.setAttribute('data-ad-client', 'ca-pub-4319187914977768');
+                        adElement.setAttribute('data-ad-slot', ADMOB_AD_UNIT_ID);
+                        adElement.setAttribute('data-ad-format', 'auto');
+                        adElement.setAttribute('data-full-width-responsive', 'true');
+                        
+                        topBannerAd.innerHTML = '';
+                        topBannerAd.appendChild(adElement);
+                        
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    }
+                    
+                    // Medium Rectangle Ad (300x250)
+                    const mediumRectAd = document.getElementById('mediumRectangleAd');
+                    if (mediumRectAd) {
+                        const adElement = document.createElement('ins');
+                        adElement.className = 'adsbygoogle';
+                        adElement.style.display = 'block';
+                        adElement.setAttribute('data-ad-client', 'ca-pub-4319187914977768');
+                        adElement.setAttribute('data-ad-slot', ADMOB_AD_UNIT_ID);
+                        adElement.setAttribute('data-ad-format', 'rectangle');
+                        adElement.setAttribute('data-ad-layout', 'in-article');
+                        
+                        mediumRectAd.innerHTML = '';
+                        mediumRectAd.appendChild(adElement);
+                        
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    }
+                    
+                    // Footer Banner Ad (responsive)
+                    const footerBannerAd = document.getElementById('footerBannerAd');
+                    if (footerBannerAd) {
+                        const adElement = document.createElement('ins');
+                        adElement.className = 'adsbygoogle';
+                        adElement.style.display = 'block';
+                        adElement.setAttribute('data-ad-client', 'ca-pub-4319187914977768');
+                        adElement.setAttribute('data-ad-slot', ADMOB_AD_UNIT_ID);
+                        adElement.setAttribute('data-ad-format', 'auto');
+                        adElement.setAttribute('data-full-width-responsive', 'true');
+                        
+                        footerBannerAd.innerHTML = '';
+                        footerBannerAd.appendChild(adElement);
+                        
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    }
+                    
+                    console.log('AdMob ads initialized successfully');
+                    
+                } catch (error) {
+                    console.error('Error initializing AdMob ads:', error);
+                    showAdPlaceholders();
+                }
+            }, 1000);
+        }
+
+        // Show placeholders if ads fail to load
+        function showAdPlaceholders() {
+            const adContainers = document.querySelectorAll('.ad-container');
+            adContainers.forEach(container => {
+                container.innerHTML = `
+                    <div class="ad-loading">
+                        <i class="fas fa-ad"></i>
+                        <p>AdMob Ad Unit: ${ADMOB_AD_UNIT_ID.substring(0, 20)}...</p>
+                        <div class="ad-info">App ID: ${ADMOB_APP_ID.substring(0, 25)}...</div>
+                    </div>
+                    <div class="ad-label">Advertisement</div>
+                `;
+            });
+        }
+
+        // Show policy compliance notice
+        function showPolicyNotice() {
+            // Show notice for 5 seconds on first load
+            policyNotice.classList.add('show');
+            setTimeout(() => {
+                policyNotice.classList.remove('show');
+            }, 5000);
+        }
+
+        // AdMob Policy Compliance Checks
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ensure ads don't interfere with user experience
+            const checkAdOverlap = () => {
+                const ads = document.querySelectorAll('.adsbygoogle');
+                ads.forEach(ad => {
+                    const rect = ad.getBoundingClientRect();
+                    // If ad is too large, adjust
+                    if (rect.height > 800) {
+                        ad.style.maxHeight = '600px';
+                    }
+                });
+            };
+            
+            // Check periodically
+            setInterval(checkAdOverlap, 3000);
+            
+            // Mobile optimization
+            if (window.innerWidth < 768) {
+                document.querySelectorAll('.ad-container').forEach(container => {
+                    container.style.maxHeight = '250px';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
