@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Online Tools Hub - Free web-based tools including unit converter, budget planner, image compression, PDF tools, and text utilities.">
-    <meta name="keywords" content="online tools, unit converter, budget planner, image compression, PDF tools, PDF to Word, PDF to Excel, PDF merger, PDF splitter, text case converter">
-    <title>Online Tools Hub - Free Web-Based Utilities</title>
+    <meta name="description" content="Ultimate Tools Hub - Free web-based utilities including currency converter, scientific calculator, unit converter, PDF tools, and more.">
+    <meta name="keywords" content="online tools, currency converter, scientific calculator, unit converter, budget planner, PDF tools, image compression, text case converter">
+
+    <title>Ultimate Tools Hub - Free Web-Based Utilities</title>
+    <link rel="icon" type="image/png" href="https://sursagars.github.io/favicon.png"/>
+    <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4319187914977768"
-     crossorigin="anonymous">
-     </script>  
     
     <style>
         :root {
@@ -258,26 +256,32 @@
         #unit-converter-card .tool-header { 
             background: linear-gradient(135deg, #4361ee, #3a56d4);
         }
-        #budget-planner-card .tool-header { 
-            background: linear-gradient(135deg, #7209b7, #5a08a3);
+        #currency-converter-card .tool-header { 
+            background: linear-gradient(135deg, #4CAF50, #388E3C);
         }
-        #image-compressor-card .tool-header { 
-            background: linear-gradient(135deg, #f72585, #e01e75);
+        #scientific-calculator-card .tool-header { 
+            background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+        }
+        #budget-planner-card .tool-header { 
+            background: linear-gradient(135deg, #FF9800, #F57C00);
         }
         #daily-planner-card .tool-header { 
-            background: linear-gradient(135deg, #f8961e, #d32f2f);  
+            background: linear-gradient(135deg, #f72585, #e01e75);
         }
-        #pdf-to-word-card .tool-header { 
-            background: linear-gradient(135deg, #4cc9f0, #2fb8e5);
-        }
-        #pdf-to-excel-card .tool-header { 
-            background: linear-gradient(135deg, #4CAF50, #3d8b40);
+        #image-compressor-card .tool-header { 
+            background: linear-gradient(135deg, #00BCD4, #0097A7);
         }
         #pdf-merger-card .tool-header { 
-            background: linear-gradient(135deg, #f8961e, #e08615);
+            background: linear-gradient(135deg, #795548, #5D4037);
         }
         #pdf-splitter-card .tool-header { 
-            background: linear-gradient(135deg, #e63946, #d32f2f);
+            background: linear-gradient(135deg, #F44336, #D32F2F);
+        }
+        #pdf-to-word-card .tool-header { 
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+        }
+        #pdf-to-excel-card .tool-header { 
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
         }
         #text-case-converter-card .tool-header { 
             background: linear-gradient(135deg, #9d4edd, #8a3bc4);
@@ -320,7 +324,6 @@
 
         .open-btn {
             display: inline-block;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             padding: 14px 40px;
             border-radius: 50px;
@@ -333,10 +336,10 @@
             cursor: pointer;
             font-family: 'Poppins', sans-serif;
             letter-spacing: 0.5px;
-            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
             position: relative;
             overflow: hidden;
             z-index: 1;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .open-btn::before {
@@ -346,7 +349,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            background: rgba(255, 255, 255, 0.1);
             opacity: 0;
             transition: var(--transition);
             z-index: -1;
@@ -354,7 +357,7 @@
 
         .open-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
         .open-btn:hover::before {
@@ -364,74 +367,36 @@
         /* Different button colors for each tool */
         #unit-converter-card .open-btn { 
             background: linear-gradient(135deg, #4361ee, #3a56d4);
-            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
         }
-        #unit-converter-card .open-btn::before { 
-            background: linear-gradient(135deg, #3a56d4, #4361ee);
+        #currency-converter-card .open-btn { 
+            background: linear-gradient(135deg, #4CAF50, #388E3C);
         }
-        
+        #scientific-calculator-card .open-btn { 
+            background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+        }
         #budget-planner-card .open-btn { 
-            background: linear-gradient(135deg, #7209b7, #5a08a3);
-            box-shadow: 0 5px 15px rgba(114, 9, 183, 0.3);
+            background: linear-gradient(135deg, #FF9800, #F57C00);
         }
-        #budget-planner-card .open-btn::before { 
-            background: linear-gradient(135deg, #5a08a3, #7209b7);
-        }
-        
-        #image-compressor-card .open-btn { 
-            background: linear-gradient(135deg, #f72585, #e01e75);
-            box-shadow: 0 5px 15px rgba(247, 37, 133, 0.3);
-        }
-        #image-compressor-card .open-btn::before { 
-            background: linear-gradient(135deg, #e01e75, #f72585);
-        }
-
         #daily-planner-card .open-btn { 
             background: linear-gradient(135deg, #f72585, #e01e75);
-            box-shadow: 0 5px 15px rgba(247, 37, 133, 0.3);
         }
-        #daily-planner-card .open-btn::before { 
-            background: linear-gradient(135deg, #e01e75, #f72585);
+        #image-compressor-card .open-btn { 
+            background: linear-gradient(135deg, #00BCD4, #0097A7);
         }
-
-        #pdf-to-word-card .open-btn { 
-            background: linear-gradient(135deg, #4cc9f0, #2fb8e5);
-            box-shadow: 0 5px 15px rgba(76, 201, 240, 0.3);
-        }
-        #pdf-to-word-card .open-btn::before { 
-            background: linear-gradient(135deg, #2fb8e5, #4cc9f0);
-        }
-        
-        #pdf-to-excel-card .open-btn { 
-            background: linear-gradient(135deg, #4CAF50, #3d8b40);
-            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
-        }
-        #pdf-to-excel-card .open-btn::before { 
-            background: linear-gradient(135deg, #3d8b40, #4CAF50);
-        }
-        
         #pdf-merger-card .open-btn { 
-            background: linear-gradient(135deg, #f8961e, #e08615);
-            box-shadow: 0 5px 15px rgba(248, 150, 30, 0.3);
+            background: linear-gradient(135deg, #795548, #5D4037);
         }
-        #pdf-merger-card .open-btn::before { 
-            background: linear-gradient(135deg, #e08615, #f8961e);
-        }
-        
         #pdf-splitter-card .open-btn { 
-            background: linear-gradient(135deg, #e63946, #d32f2f);
-            box-shadow: 0 5px 15px rgba(230, 57, 70, 0.3);
+            background: linear-gradient(135deg, #F44336, #D32F2F);
         }
-        #pdf-splitter-card .open-btn::before { 
-            background: linear-gradient(135deg, #d32f2f, #e63946);
+        #pdf-to-word-card .open-btn { 
+            background: linear-gradient(135deg, #2196F3, #1976D2);
         }
-        
+        #pdf-to-excel-card .open-btn { 
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        }
         #text-case-converter-card .open-btn { 
             background: linear-gradient(135deg, #9d4edd, #8a3bc4);
-            box-shadow: 0 5px 15px rgba(157, 78, 221, 0.3);
-        }
-        #text-case-converter-card .open-btn::before { 
-            background: linear-gradient(135deg, #8a3bc4, #9d4edd);
         }
 
         /* Responsive Styles */
@@ -565,6 +530,7 @@
         .floating {
             animation: float 5s ease-in-out infinite;
         }
+
     </style>
 </head>
 <body>
@@ -572,15 +538,15 @@
     <section class="hero">
         <div class="container">
             <div class="headline-container floating">
-                <h1 class="main-headline">Online Tools Hub</h1>
+                <h1 class="main-headline">Ultimate Tools Hub</h1>
                 <div class="headline-accent"></div>
             </div>
             
-            <p class="hero-tagline">Discover a powerful collection of free web-based utilities designed to simplify your daily tasks. </p>
+            <p class="hero-tagline">Access 11 powerful, free web-based utilities designed to simplify your daily tasks. No registration required.</p>
             
             <div class="hero-stats">
                 <div class="stat-item">
-                    <span class="stat-number">9+</span>
+                    <span class="stat-number">11</span>
                     <span class="stat-text">Premium Tools</span>
                 </div>
                 <div class="stat-item">
@@ -589,7 +555,7 @@
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">Zero</span>
-                    <span class="stat-text">Registration Required</span>
+                    <span class="stat-text">Registration</span>
                 </div>
             </div>
         </div>
@@ -601,8 +567,8 @@
             <div class="section-title">
                 <h2>Our Complete Tool Collection</h2>
             </div>
-            
-            <div class="tools-grid">
+
+            <div class="tools-grid" id="toolsGrid">
                 <!-- Unit Converter -->
                 <div class="tool-card" id="unit-converter-card">
                     <div class="tool-header">
@@ -612,7 +578,33 @@
                         <h3>Unit Converter</h3>
                     </div>
                     <div class="tool-body">
-                        <a href="unit.html" class="open-btn">Open</a>
+                        <a href="unit.html" class="open-btn">Open Tool</a>
+                    </div>
+                </div>
+                
+                <!-- Currency Converter -->
+                <div class="tool-card" id="currency-converter-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <h3>Currency Converter</h3>
+                    </div>
+                    <div class="tool-body">
+                        <a href="currency.html" class="open-btn">Open Tool</a>
+                    </div>
+                </div>
+                
+                <!-- Scientific Calculator -->
+                <div class="tool-card" id="scientific-calculator-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h3>Scientific Calculator</h3>
+                    </div>
+                    <div class="tool-body">
+                        <a href="calculator.html" class="open-btn">Open Tool</a>
                     </div>
                 </div>
                 
@@ -625,7 +617,20 @@
                         <h3>Budget Planner</h3>
                     </div>
                     <div class="tool-body">
-                        <a href="budget.html" class="open-btn">Open</a>
+                        <a href="budget.html" class="open-btn">Open Tool</a>
+                    </div>
+                </div>
+                
+                <!-- Daily Planner -->
+                <div class="tool-card" id="daily-planner-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3>Daily Planner</h3>
+                    </div>
+                    <div class="tool-body">
+                        <a href="planner.html" class="open-btn">Open Tool</a>
                     </div>
                 </div>
                 
@@ -638,46 +643,7 @@
                         <h3>Image Compression</h3>
                     </div>
                     <div class="tool-body">
-                        <a href="img-compress.html" class="open-btn">Open</a>
-                    </div>
-                </div>
-                
-                 <!-- Daily-Planner --> 
-                <div class="tool-card" id="daily-planner-card">
-                    <div class="tool-header">
-                        <div class="tool-icon">
-                            <i class="fas fa-file-planner"></i>
-                        </div>
-                        <h3>Daily Planner</h3>
-                    </div>
-                    <div class="tool-body">
-                        <a href="planner.html" class="open-btn">Open</a>
-                    </div>
-                </div>
-               
-                <!-- PDF to Word -->
-                <div class="tool-card" id="pdf-to-word-card">
-                    <div class="tool-header">
-                        <div class="tool-icon">
-                            <i class="fas fa-file-word"></i>
-                        </div>
-                        <h3>PDF to Word</h3>
-                    </div>
-                    <div class="tool-body">
-                        <a href="pdf-word.html" class="open-btn">Open</a>
-                    </div>
-                </div>
-                
-                <!-- PDF to Excel -->
-                <div class="tool-card" id="pdf-to-excel-card">
-                    <div class="tool-header">
-                        <div class="tool-icon">
-                            <i class="fas fa-file-excel"></i>
-                        </div>
-                        <h3>PDF to Excel</h3>
-                    </div>
-                    <div class="tool-body">
-                        <a href="pdf-excel.html" class="open-btn">Open</a>
+                        <a href="img-compress.html" class="open-btn">Open Tool</a>
                     </div>
                 </div>
                 
@@ -690,7 +656,7 @@
                         <h3>PDF Merger</h3>
                     </div>
                     <div class="tool-body">
-                        <a href="pdf-merger.html" class="open-btn">Open</a>
+                        <a href="pdf-merger.html" class="open-btn">Open Tool</a>
                     </div>
                 </div>
                 
@@ -703,7 +669,33 @@
                         <h3>PDF Splitter</h3>
                     </div>
                     <div class="tool-body">
-                        <a href="pdf-splitter.html" class="open-btn">Open</a>
+                        <a href="pdf-splitter.html" class="open-btn">Open Tool</a>
+                    </div>
+                </div>
+                
+                <!-- PDF to Word -->
+                <div class="tool-card" id="pdf-to-word-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-file-word"></i>
+                        </div>
+                        <h3>PDF to Word</h3>
+                    </div>
+                    <div class="tool-body">
+                        <a href="pdf-word.html" class="open-btn">Open Tool</a>
+                    </div>
+                </div>
+                
+                <!-- PDF to Excel -->
+                <div class="tool-card" id="pdf-to-excel-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-file-excel"></i>
+                        </div>
+                        <h3>PDF to Excel</h3>
+                    </div>
+                    <div class="tool-body">
+                        <a href="pdf-excel.html" class="open-btn">Open Tool</a>
                     </div>
                 </div>
                 
@@ -716,7 +708,7 @@
                         <h3>Text Case Converter</h3>
                     </div>
                     <div class="tool-body">
-                        <a href="case-converter.html" class="open-btn">Open</a>
+                        <a href="case-converter.html" class="open-btn">Open Tool</a>
                     </div>
                 </div>
             </div>
@@ -727,7 +719,54 @@
         // Enhanced hover effects and animations
         document.addEventListener('DOMContentLoaded', function() {
             const toolCards = document.querySelectorAll('.tool-card');
+            const toolSearch = document.getElementById('toolSearch');
+            const toolsGrid = document.getElementById('toolsGrid');
             
+            // Tool search functionality
+            toolSearch.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                const allCards = document.querySelectorAll('.tool-card');
+                
+                // Show/hide cards based on search
+                allCards.forEach(card => {
+                    const toolName = card.querySelector('h3').textContent.toLowerCase();
+                    if (toolName.includes(searchTerm) || searchTerm === '') {
+                        card.style.display = 'flex';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+                
+                // If no results found, show message
+                const visibleCards = document.querySelectorAll('.tool-card[style*="display: flex"]');
+                if (visibleCards.length === 0 && searchTerm !== '') {
+                    if (!document.getElementById('noResults')) {
+                        const noResults = document.createElement('div');
+                        noResults.id = 'noResults';
+                        noResults.innerHTML = `
+                            <div style="text-align: center; padding: 40px; grid-column: 1 / -1;">
+                                <i class="fas fa-search" style="font-size: 3rem; color: #ccc; margin-bottom: 20px;"></i>
+                                <h3 style="color: #666; margin-bottom: 10px;">No tools found</h3>
+                                <p style="color: #999;">Try searching for a different tool</p>
+                            </div>
+                        `;
+                        toolsGrid.appendChild(noResults);
+                    }
+                } else {
+                    const noResults = document.getElementById('noResults');
+                    if (noResults) {
+                        noResults.remove();
+                    }
+                }
+            });
+            
+            // Enhanced hover effects for tool cards
             toolCards.forEach(card => {
                 card.addEventListener('mouseenter', function() {
                     this.style.transform = 'translateY(-10px)';
@@ -752,6 +791,17 @@
                         icon.style.backgroundColor = '';
                     }
                 });
+                
+                // Add click animation
+                card.addEventListener('click', function(e) {
+                    if (!e.target.classList.contains('open-btn')) {
+                        const btn = this.querySelector('.open-btn');
+                        btn.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            btn.style.transform = '';
+                        }, 150);
+                    }
+                });
             });
             
             // Add floating animation to stats cards
@@ -759,9 +809,28 @@
             statItems.forEach((item, index) => {
                 // Stagger the animation delay
                 item.style.animationDelay = `${index * 0.2}s`;
+                item.style.animation = 'float 4s ease-in-out infinite';
+            });
+            
+            // Add keyboard shortcut for search
+            document.addEventListener('keydown', function(e) {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                    e.preventDefault();
+                    toolSearch.focus();
+                }
+                
+                // Escape clears search
+                if (e.key === 'Escape' && document.activeElement === toolSearch) {
+                    toolSearch.value = '';
+                    toolSearch.dispatchEvent(new Event('input'));
+                }
+            });
+            
+            // Add search icon click to focus
+            document.querySelector('.search-icon').addEventListener('click', function() {
+                toolSearch.focus();
             });
         });
     </script>
 </body>
-
 </html>
