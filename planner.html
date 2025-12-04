@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online daily planner tool to organize your tasks, schedule, and boost productivity. Plan your day efficiently with our responsive planner.">
+    <meta name="keywords" content="daily planner, task management, schedule, productivity, time management, organize tasks, daily schedule">
+    <meta name="author" content="Daily Planner Pro">
+    <title>Daily Planner Pro - Organize Your Day Efficiently | Free Online Tool</title>
+    
+    <link rel="icon" type="image/png" href="https://sursagars.github.io/favicon.png"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AdMob/AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-4319187914977768" crossorigin="anonymous"></script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4319187914977768"
+     crossorigin="anonymous">
+    </script>
+
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --accent-color: #4cc9f0;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4bb543;
+            --warning-color: #ffcc00;
+            --danger-color: #dc3545;
+            --gray-color: #6c757d;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            color: var(--dark-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .date-display {
+            text-align: center;
+            margin-top: 5px;
+            font-size: 1.1rem;
+        }
+
+        /* Main Content */
+        main {
+            padding: 2rem 0;
+            flex: 1;
+        }
+
+        .planner-container {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 20px;
+        }
+
+        @media (max-width: 992px) {
+            .planner-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Planner Styles */
+        .planner {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .planner-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .planner-header h2 {
+            font-size: 1.3rem;
+        }
+
+        .time-slots {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .time-slot {
+            display: grid;
+            grid-template-columns: 100px 1fr 80px;
+            border-bottom: 1px solid #e9ecef;
+            padding: 0.8rem;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .time-slot:hover {
+            background-color: #f8f9fa;
+        }
+
+        .time-label {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .task-input {
+            border: none;
+            padding: 0.5rem;
+            font-size: 1rem;
+            background: transparent;
+            width: 100%;
+            outline: none;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 5px;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            padding: 0.4rem 0.8rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .btn-save {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .btn-delete {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .btn-edit {
+            background-color: var(--warning-color);
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .stats-card, .quick-actions, .ad-space {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+        }
+
+        .stats-card h3, .quick-actions h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 0.5rem;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+        }
+
+        .stat-value {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .quick-action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .quick-action-btn {
+            background-color: var(--light-color);
+            border: 1px solid #dee2e6;
+            padding: 0.8rem;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .quick-action-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Ad Space Styles */
+        .ad-space {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f8f9fa;
+            border: 1px dashed #dee2e6;
+            overflow: hidden;
+            min-height: 250px;
+        }
+
+        .ad-space.leaderboard {
+            min-height: 100px;
+            margin-bottom: 20px;
+        }
+
+        .ad-label {
+            font-size: 0.8rem;
+            color: var(--gray-color);
+            margin-bottom: 10px;
+        }
+
+        .ad-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .time-slot {
+                grid-template-columns: 80px 1fr;
+                gap: 10px;
+            }
+            
+            .task-actions {
+                grid-column: 1 / -1;
+                justify-content: flex-start;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .logo h1 {
+                font-size: 1.3rem;
+            }
+            
+            .ad-space.leaderboard {
+                min-height: 70px;
+            }
+            
+            .ad-space {
+                min-height: 200px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .quick-action-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .planner-header {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .ad-space, .quick-actions {
+                display: none;
+            }
+            
+            .planner-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h1>Daily Planner Pro</h1>
+                </div>
+                <div class="date-display" id="currentDate">Monday, January 1, 2023</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Top Ad Banner -->
+            <div class="ad-space leaderboard" style="margin-bottom: 20px;">
+                <div class="ad-label">Advertisement</div>
+                <div class="ad-container" id="topBannerAd">
+                    <!-- Top banner ad will be loaded here -->
+                </div>
+            </div>
+
+            <div class="planner-container">
+                <!-- Main Planner -->
+                <div class="planner">
+                    <div class="planner-header">
+                        <h2><i class="fas fa-tasks"></i> Today's Schedule</h2>
+                        <button class="btn btn-save" id="saveAllBtn">Save All Changes</button>
+                    </div>
+                    <div class="time-slots" id="timeSlots">
+                        <!-- Time slots will be generated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <!-- Statistics Card -->
+                    <div class="stats-card">
+                        <h3><i class="fas fa-chart-pie"></i> Today's Progress</h3>
+                        <div class="stat-item">
+                            <span>Total Tasks:</span>
+                            <span class="stat-value" id="totalTasks">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Completed:</span>
+                            <span class="stat-value" id="completedTasks">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Remaining:</span>
+                            <span class="stat-value" id="remainingTasks">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Completion:</span>
+                            <span class="stat-value" id="completionRate">0%</span>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="quick-actions">
+                        <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+                        <div class="quick-action-buttons">
+                            <div class="quick-action-btn" id="clearAllBtn">
+                                <i class="fas fa-trash"></i> Clear All
+                            </div>
+                            <div class="quick-action-btn" id="addTaskBtn">
+                                <i class="fas fa-plus"></i> Add Task
+                            </div>
+                            <div class="quick-action-btn" id="exportBtn">
+                                <i class="fas fa-download"></i> Export
+                            </div>
+                            <div class="quick-action-btn" id="printBtn">
+                                <i class="fas fa-print"></i> Print
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar Ad 1 -->
+                    <div class="ad-space">
+                        <div class="ad-label">Advertisement</div>
+                        <div class="ad-container" id="sidebarAd1">
+                            <!-- Sidebar ad 1 will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- Sidebar Ad 2 -->
+                    <div class="ad-space">
+                        <div class="ad-label">Advertisement</div>
+                        <div class="ad-container" id="sidebarAd2">
+                            <!-- Sidebar ad 2 will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script>
+        // AdMob/AdSense Configuration
+        const AD_UNIT_ID = '9707260784'; // Your ad unit ID
+        const PUBLISHER_ID = 'ca-app-pub-4319187914977768'; // Your publisher ID
+        
+        // Initialize ads
+        function initializeAds() {
+            // Initialize top banner ad
+            initializeTopBannerAd();
+            
+            // Initialize sidebar ads
+            initializeSidebarAds();
+            
+            // Refresh ads periodically (every 60 seconds)
+            setInterval(refreshAds, 60000);
+        }
+        
+        // Initialize top banner ad
+        function initializeTopBannerAd() {
+            const topAdContainer = document.getElementById('topBannerAd');
+            const isMobile = window.innerWidth <= 768;
+            
+            // Clear container
+            topAdContainer.innerHTML = '';
+            
+            // Create ad element
+            const adElement = document.createElement('ins');
+            adElement.className = 'adsbygoogle';
+            adElement.style.display = 'block';
+            adElement.style.width = isMobile ? '320px' : '728px';
+            adElement.style.height = isMobile ? '100px' : '90px';
+            adElement.setAttribute('data-ad-client', PUBLISHER_ID);
+            adElement.setAttribute('data-ad-slot', AD_UNIT_ID);
+            adElement.setAttribute('data-ad-format', 'auto');
+            adElement.setAttribute('data-full-width-responsive', 'true');
+            
+            topAdContainer.appendChild(adElement);
+            
+            // Push ad to Google
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        }
+        
+        // Initialize sidebar ads
+        function initializeSidebarAds() {
+            const sidebarAd1 = document.getElementById('sidebarAd1');
+            const sidebarAd2 = document.getElementById('sidebarAd2');
+            
+            // Clear containers
+            sidebarAd1.innerHTML = '';
+            sidebarAd2.innerHTML = '';
+            
+            // Create first sidebar ad
+            const adElement1 = document.createElement('ins');
+            adElement1.className = 'adsbygoogle';
+            adElement1.style.display = 'inline-block';
+            adElement1.style.width = '300px';
+            adElement1.style.height = '250px';
+            adElement1.setAttribute('data-ad-client', PUBLISHER_ID);
+            adElement1.setAttribute('data-ad-slot', AD_UNIT_ID);
+            
+            sidebarAd1.appendChild(adElement1);
+            
+            // Create second sidebar ad
+            const adElement2 = document.createElement('ins');
+            adElement2.className = 'adsbygoogle';
+            adElement2.style.display = 'inline-block';
+            adElement2.style.width = '300px';
+            adElement2.style.height = '250px';
+            adElement2.setAttribute('data-ad-client', PUBLISHER_ID);
+            adElement2.setAttribute('data-ad-slot', AD_UNIT_ID);
+            
+            sidebarAd2.appendChild(adElement2);
+            
+            // Push ads to Google with delay between them
+            setTimeout(() => {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            }, 1000);
+            
+            setTimeout(() => {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            }, 2000);
+        }
+        
+        // Refresh ads
+        function refreshAds() {
+            console.log('Refreshing ads...');
+            initializeAds();
+        }
+        
+        // Set current date
+        function updateCurrentDate() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', options);
+        }
+
+        // Generate time slots
+        function generateTimeSlots() {
+            const timeSlotsContainer = document.getElementById('timeSlots');
+            timeSlotsContainer.innerHTML = '';
+
+            // Create time slots from 6:00 AM to 10:00 PM
+            for (let hour = 6; hour <= 22; hour++) {
+                const timeSlot = document.createElement('div');
+                timeSlot.className = 'time-slot';
+                
+                // Format time label
+                const period = hour >= 12 ? 'PM' : 'AM';
+                const displayHour = hour > 12 ? hour - 12 : hour;
+                const timeLabel = `${displayHour}:00 ${period}`;
+                
+                timeSlot.innerHTML = `
+                    <div class="time-label">${timeLabel}</div>
+                    <input type="text" class="task-input" placeholder="Add a task for ${timeLabel}" data-hour="${hour}">
+                    <div class="task-actions">
+                        <button class="btn btn-save save-btn">Save</button>
+                        <button class="btn btn-delete delete-btn">Delete</button>
+                    </div>
+                `;
+                
+                timeSlotsContainer.appendChild(timeSlot);
+            }
+            
+            // Load saved tasks
+            loadTasks();
+            updateStats();
+        }
+
+        // Load tasks from localStorage
+        function loadTasks() {
+            const savedTasks = JSON.parse(localStorage.getItem('dailyPlannerTasks')) || {};
+            const taskInputs = document.querySelectorAll('.task-input');
+            
+            taskInputs.forEach(input => {
+                const hour = input.getAttribute('data-hour');
+                if (savedTasks[hour]) {
+                    input.value = savedTasks[hour];
+                }
+            });
+        }
+
+        // Save tasks to localStorage
+        function saveTasks() {
+            const taskInputs = document.querySelectorAll('.task-input');
+            const tasks = {};
+            
+            taskInputs.forEach(input => {
+                const hour = input.getAttribute('data-hour');
+                tasks[hour] = input.value;
+            });
+            
+            localStorage.setItem('dailyPlannerTasks', JSON.stringify(tasks));
+            updateStats();
+            alert('All tasks saved successfully!');
+        }
+
+        // Update statistics
+        function updateStats() {
+            const taskInputs = document.querySelectorAll('.task-input');
+            let totalTasks = 0;
+            let completedTasks = 0;
+            
+            taskInputs.forEach(input => {
+                if (input.value.trim() !== '') {
+                    totalTasks++;
+                    // Simple check for completion
+                    if (input.value.includes('✓') || input.value.includes('(done)') || input.value.includes('✅')) {
+                        completedTasks++;
+                    }
+                }
+            });
+            
+            document.getElementById('totalTasks').textContent = totalTasks;
+            document.getElementById('completedTasks').textContent = completedTasks;
+            document.getElementById('remainingTasks').textContent = totalTasks - completedTasks;
+            
+            const completionRate = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+            document.getElementById('completionRate').textContent = `${completionRate}%`;
+        }
+
+        // Handle responsive ads on resize
+        function handleResponsiveAds() {
+            initializeTopBannerAd();
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCurrentDate();
+            generateTimeSlots();
+            
+            // Initialize ads after a short delay
+            setTimeout(() => {
+                initializeAds();
+            }, 1500);
+            
+            // Handle responsive ads on resize
+            window.addEventListener('resize', handleResponsiveAds);
+            
+            // Save All button
+            document.getElementById('saveAllBtn').addEventListener('click', saveTasks);
+            
+            // Individual save buttons
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('save-btn')) {
+                    const input = e.target.closest('.time-slot').querySelector('.task-input');
+                    const hour = input.getAttribute('data-hour');
+                    const tasks = JSON.parse(localStorage.getItem('dailyPlannerTasks')) || {};
+                    tasks[hour] = input.value;
+                    localStorage.setItem('dailyPlannerTasks', JSON.stringify(tasks));
+                    updateStats();
+                    alert('Task saved!');
+                }
+                
+                // Delete buttons
+                if (e.target.classList.contains('delete-btn')) {
+                    const input = e.target.closest('.time-slot').querySelector('.task-input');
+                    input.value = '';
+                    const hour = input.getAttribute('data-hour');
+                    const tasks = JSON.parse(localStorage.getItem('dailyPlannerTasks')) || {};
+                    delete tasks[hour];
+                    localStorage.setItem('dailyPlannerTasks', JSON.stringify(tasks));
+                    updateStats();
+                }
+            });
+            
+            // Clear All button
+            document.getElementById('clearAllBtn').addEventListener('click', function() {
+                if (confirm('Are you sure you want to clear all tasks?')) {
+                    localStorage.removeItem('dailyPlannerTasks');
+                    generateTimeSlots();
+                }
+            });
+            
+            // Add Task button
+            document.getElementById('addTaskBtn').addEventListener('click', function() {
+                const emptySlots = Array.from(document.querySelectorAll('.task-input'))
+                    .filter(input => input.value === '');
+                
+                if (emptySlots.length > 0) {
+                    emptySlots[0].focus();
+                } else {
+                    alert('All time slots are filled!');
+                }
+            });
+            
+            // Export button
+            document.getElementById('exportBtn').addEventListener('click', function() {
+                const tasks = [];
+                document.querySelectorAll('.time-slot').forEach(slot => {
+                    const time = slot.querySelector('.time-label').textContent;
+                    const task = slot.querySelector('.task-input').value;
+                    if (task.trim()) {
+                        tasks.push(`${time}: ${task}`);
+                    }
+                });
+                
+                const blob = new Blob([tasks.join('\n')], { type: 'text/plain' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'daily-planner-tasks.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            });
+            
+            // Print button
+            document.getElementById('printBtn').addEventListener('click', function() {
+                window.print();
+            });
+        });
+
+        // Additional feature: Mark task as complete with Enter key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.target.classList.contains('task-input')) {
+                const input = e.target;
+                if (!input.value.includes('✓') && !input.value.includes('✅')) {
+                    input.value = input.value + ' ✓';
+                    const hour = input.getAttribute('data-hour');
+                    const tasks = JSON.parse(localStorage.getItem('dailyPlannerTasks')) || {};
+                    tasks[hour] = input.value;
+                    localStorage.setItem('dailyPlannerTasks', JSON.stringify(tasks));
+                    updateStats();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
