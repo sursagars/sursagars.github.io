@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free monthly financial budget tool to track income, expenses, and savings. Create personalized budgets and achieve your financial goals.">
+    <meta name="keywords" content="budget, finance, money, savings, expenses, income, financial planning">
+    <title>Monthly Financial Budget Tool | Free Budget Planner</title>
+
+    <link rel="icon" type="image/png" href="https://sursagars.github.io/favicon.png"/>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4319187914977768"
+     crossorigin="anonymous">
+     </script>
+     
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .download-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .budget-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        h2 {
+            color: var(--dark-color);
+            font-size: 1.4rem;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-danger {
+            background-color: var(--danger-color);
+        }
+
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+
+        .btn-success {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-success:hover {
+            background-color: #27ae60;
+        }
+
+        .btn-warning {
+            background-color: var(--warning-color);
+        }
+
+        .btn-warning:hover {
+            background-color: #e67e22;
+        }
+
+        .item-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: var(--light-color);
+            margin-bottom: 10px;
+            border-radius: var(--border-radius);
+            transition: transform 0.2s;
+        }
+
+        .item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .item-income {
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .item-expense {
+            border-left: 4px solid var(--danger-color);
+        }
+
+        .item-details {
+            flex-grow: 1;
+        }
+
+        .item-name {
+            font-weight: 600;
+        }
+
+        .item-amount {
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .item-income .item-amount {
+            color: var(--secondary-color);
+        }
+
+        .item-expense .item-amount {
+            color: var(--danger-color);
+        }
+
+        .item-actions button {
+            padding: 5px 10px;
+            margin-left: 5px;
+            font-size: 0.9rem;
+        }
+
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .card-income {
+            border-top: 4px solid var(--secondary-color);
+        }
+
+        .card-expense {
+            border-top: 4px solid var(--danger-color);
+        }
+
+        .card-balance {
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .card-title {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+
+        .card-amount {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .card-income .card-amount {
+            color: var(--secondary-color);
+        }
+
+        .card-expense .card-amount {
+            color: var(--danger-color);
+        }
+
+        .card-balance .card-amount {
+            color: var(--primary-color);
+        }
+
+        .ad-space {
+            background: #f8f9fa;
+            border: 1px dashed #ccc;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ad-label {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+
+        .progress-container {
+            margin-top: 20px;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: #eee;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-color);
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+
+        .chart-container {
+            margin-top: 30px;
+            height: 200px;
+            position: relative;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Footer Styles */
+        .site-footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        .copyright {
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .item-actions {
+                margin-top: 10px;
+                width: 100%;
+                display: flex;
+                justify-content: flex-end;
+            }
+            
+            .summary-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .download-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .download-actions button {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="tool-header">
+            <h1>Monthly Financial Budget Tool</h1>
+            <p class="subtitle">Track your income, expenses, and savings to achieve your financial goals</p>
+            <div class="download-actions">
+                <button id="download-excel" class="btn-success">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14,2 14,8 20,8"></polyline>
+                        <path d="M16 13H8"></path>
+                        <path d="M16 17H8"></path>
+                        <path d="M10 9H8"></path>
+                    </svg>
+                    Export to Excel
+                </button>
+                <button id="download-csv" class="btn-warning">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14,2 14,8 20,8"></polyline>
+                        <path d="M16 13H8"></path>
+                        <path d="M16 17H8"></path>
+                        <path d="M10 9H8"></path>
+                    </svg>
+                    Export to CSV
+                </button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="content-primary">
+                <div class="budget-section">
+                    <div class="section-title">
+                        <h2>Income</h2>
+                        <button id="add-income" class="btn-success">Add Income</button>
+                    </div>
+                    <form id="income-form" class="hidden">
+                        <div class="form-group">
+                            <label for="income-name">Income Source</label>
+                            <input type="text" id="income-name" placeholder="e.g., Salary, Freelance" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="income-amount">Amount ($)</label>
+                            <input type="number" id="income-amount" min="0" step="0.01" placeholder="0.00" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn-success">Add Income</button>
+                            <button type="button" id="cancel-income" class="btn-danger">Cancel</button>
+                        </div>
+                    </form>
+                    <ul id="income-list" class="item-list"></ul>
+                </div>
+
+                <div class="budget-section">
+                    <div class="section-title">
+                        <h2>Expenses</h2>
+                        <button id="add-expense" class="btn-success">Add Expense</button>
+                    </div>
+                    <form id="expense-form" class="hidden">
+                        <div class="form-group">
+                            <label for="expense-name">Expense Category</label>
+                            <input type="text" id="expense-name" placeholder="e.g., Rent, Groceries" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="expense-amount">Amount ($)</label>
+                            <input type="number" id="expense-amount" min="0" step="0.01" placeholder="0.00" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn-success">Add Expense</button>
+                            <button type="button" id="cancel-expense" class="btn-danger">Cancel</button>
+                        </div>
+                    </form>
+                    <ul id="expense-list" class="item-list"></ul>
+                </div>
+
+                <div class="summary-cards">
+                    <div class="card card-income">
+                        <div class="card-title">Total Income</div>
+                        <div class="card-amount" id="total-income">$0.00</div>
+                    </div>
+                    <div class="card card-expense">
+                        <div class="card-title">Total Expenses</div>
+                        <div class="card-amount" id="total-expenses">$0.00</div>
+                    </div>
+                    <div class="card card-balance">
+                        <div class="card-title">Remaining Balance</div>
+                        <div class="card-amount" id="remaining-balance">$0.00</div>
+                    </div>
+                </div>
+
+                <div class="progress-container">
+                    <div class="section-title">
+                        <h2>Savings Progress</h2>
+                        <span id="savings-percentage">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="savings-progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-secondary">
+                <div class="ad-space">
+                    <div class="ad-label">Advertisement</div>
+                    <!-- Google AdSense Ad Unit -->
+                    <!-- Replace with your Ad Unit ID -->
+                    <div id="ad-unit-sidebar">
+                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-4319187914977768~7345655475"
+                         crossorigin="anonymous"></script>
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-app-pub-4319187914977768/9707260784"
+                             data-ad-slot="4319187914977768/9707260784"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                        <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                </div>
+
+                <div class="budget-section">
+                    <h2>Budget Tips</h2>
+                    <ul style="padding-left: 20px; margin-top: 15px;">
+                        <li style="margin-bottom: 10px;">Track every expense, no matter how small</li>
+                        <li style="margin-bottom: 10px;">Set aside 20% of income for savings</li>
+                        <li style="margin-bottom: 10px;">Review your budget weekly</li>
+                        <li style="margin-bottom: 10px;">Adjust categories as needed</li>
+                    </ul>
+                </div>
+
+                <div class="ad-space">
+                    <div class="ad-label">Advertisement</div>
+                    <!-- Google AdSense Ad Unit -->
+                    <!-- Replace with your Ad Unit ID -->
+                    <div id="ad-unit-bottom">
+                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=4319187914977768/9707260784" 
+                        crossorigin="anonymous"></script>
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="4319187914977768/9707260784"
+                             data-ad-slot="4319187914977768/9707260784"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                        <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-links">
+
+                <a href="legal.html#about">About this Site </a>
+                <a href="legal.html#privacy">Privacy Policy</a>
+                <a href="legal.html#terms">Terms of Use</a>
+            </div>
+            <div class="copyright">
+                &copy; <span id="currentYear"></span> Monthly Financial Budget Tool. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const incomeForm = document.getElementById('income-form');
+        const expenseForm = document.getElementById('expense-form');
+        const incomeList = document.getElementById('income-list');
+        const expenseList = document.getElementById('expense-list');
+        const totalIncomeEl = document.getElementById('total-income');
+        const totalExpensesEl = document.getElementById('total-expenses');
+        const remainingBalanceEl = document.getElementById('remaining-balance');
+        const savingsPercentageEl = document.getElementById('savings-percentage');
+        const savingsProgressEl = document.getElementById('savings-progress');
+        const downloadExcelBtn = document.getElementById('download-excel');
+        const downloadCsvBtn = document.getElementById('download-csv');
+
+        // Data storage
+        let incomes = [];
+        let expenses = [];
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            loadData();
+            updateUI();
+            
+            // Event listeners for buttons
+            document.getElementById('add-income').addEventListener('click', function() {
+                incomeForm.classList.remove('hidden');
+                this.style.display = 'none';
+            });
+            
+            document.getElementById('cancel-income').addEventListener('click', function() {
+                incomeForm.classList.add('hidden');
+                document.getElementById('add-income').style.display = 'block';
+                incomeForm.reset();
+            });
+            
+            document.getElementById('add-expense').addEventListener('click', function() {
+                expenseForm.classList.remove('hidden');
+                this.style.display = 'none';
+            });
+            
+            document.getElementById('cancel-expense').addEventListener('click', function() {
+                expenseForm.classList.add('hidden');
+                document.getElementById('add-expense').style.display = 'block';
+                expenseForm.reset();
+            });
+            
+            // Form submissions
+            incomeForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                addIncome();
+            });
+            
+            expenseForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                addExpense();
+            });
+            
+            // Download buttons
+            downloadExcelBtn.addEventListener('click', downloadExcel);
+            downloadCsvBtn.addEventListener('click', downloadCSV);
+        });
+
+        // Add income
+        function addIncome() {
+            const name = document.getElementById('income-name').value;
+            const amount = parseFloat(document.getElementById('income-amount').value);
+            
+            if (name && amount) {
+                const income = {
+                    id: Date.now(),
+                    name,
+                    amount
+                };
+                
+                incomes.push(income);
+                saveData();
+                updateUI();
+                incomeForm.reset();
+                incomeForm.classList.add('hidden');
+                document.getElementById('add-income').style.display = 'block';
+            }
+        }
+
+        // Add expense
+        function addExpense() {
+            const name = document.getElementById('expense-name').value;
+            const amount = parseFloat(document.getElementById('expense-amount').value);
+            
+            if (name && amount) {
+                const expense = {
+                    id: Date.now(),
+                    name,
+                    amount
+                };
+                
+                expenses.push(expense);
+                saveData();
+                updateUI();
+                expenseForm.reset();
+                expenseForm.classList.add('hidden');
+                document.getElementById('add-expense').style.display = 'block';
+            }
+        }
+
+        // Remove income
+        function removeIncome(id) {
+            incomes = incomes.filter(income => income.id !== id);
+            saveData();
+            updateUI();
+        }
+
+        // Remove expense
+        function removeExpense(id) {
+            expenses = expenses.filter(expense => expense.id !== id);
+            saveData();
+            updateUI();
+        }
+
+        // Update UI
+        function updateUI() {
+            // Calculate totals
+            const totalIncome = incomes.reduce((sum, income) => sum + income.amount, 0);
+            const totalExpenses = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+            const remainingBalance = totalIncome - totalExpenses;
+            
+            // Update summary cards
+            totalIncomeEl.textContent = `$${totalIncome.toFixed(2)}`;
+            totalExpensesEl.textContent = `$${totalExpenses.toFixed(2)}`;
+            remainingBalanceEl.textContent = `$${remainingBalance.toFixed(2)}`;
+            
+            // Update savings progress
+            const savingsPercentage = totalIncome > 0 ? Math.min(100, (remainingBalance / totalIncome) * 100) : 0;
+            savingsPercentageEl.textContent = `${savingsPercentage.toFixed(1)}%`;
+            savingsProgressEl.style.width = `${savingsPercentage}%`;
+            
+            // Update income list
+            incomeList.innerHTML = '';
+            incomes.forEach(income => {
+                const li = document.createElement('li');
+                li.className = 'item item-income';
+                li.innerHTML = `
+                    <div class="item-details">
+                        <div class="item-name">${income.name}</div>
+                    </div>
+                    <div class="item-amount">$${income.amount.toFixed(2)}</div>
+                    <div class="item-actions">
+                        <button class="btn-danger" onclick="removeIncome(${income.id})">Delete</button>
+                    </div>
+                `;
+                incomeList.appendChild(li);
+            });
+            
+            // Update expense list
+            expenseList.innerHTML = '';
+            expenses.forEach(expense => {
+                const li = document.createElement('li');
+                li.className = 'item item-expense';
+                li.innerHTML = `
+                    <div class="item-details">
+                        <div class="item-name">${expense.name}</div>
+                    </div>
+                    <div class="item-amount">$${expense.amount.toFixed(2)}</div>
+                    <div class="item-actions">
+                        <button class="btn-danger" onclick="removeExpense(${expense.id})">Delete</button>
+                    </div>
+                `;
+                expenseList.appendChild(li);
+            });
+        }
+
+        // Save data to localStorage
+        function saveData() {
+            localStorage.setItem('budgetIncomes', JSON.stringify(incomes));
+            localStorage.setItem('budgetExpenses', JSON.stringify(expenses));
+        }
+
+        // Load data from localStorage
+        function loadData() {
+            const savedIncomes = localStorage.getItem('budgetIncomes');
+            const savedExpenses = localStorage.getItem('budgetExpenses');
+            
+            if (savedIncomes) {
+                incomes = JSON.parse(savedIncomes);
+            }
+            
+            if (savedExpenses) {
+                expenses = JSON.parse(savedExpenses);
+            }
+        }
+
+        // Download as Excel (XLSX)
+        function downloadExcel() {
+            const data = prepareExportData();
+            const worksheet = XLSX.utils.json_to_sheet(data);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Budget");
+            XLSX.writeFile(workbook, "monthly_budget.xlsx");
+        }
+
+        // Download as CSV
+        function downloadCSV() {
+            const data = prepareExportData();
+            const csvContent = convertToCSV(data);
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement("a");
+            
+            if (link.download !== undefined) {
+                const url = URL.createObjectURL(blob);
+                link.setAttribute("href", url);
+                link.setAttribute("download", "monthly_budget.csv");
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+
+        // Prepare data for export
+        function prepareExportData() {
+            const totalIncome = incomes.reduce((sum, income) => sum + income.amount, 0);
+            const totalExpenses = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+            const remainingBalance = totalIncome - totalExpenses;
+            
+            const data = [];
+            
+            // Add headers
+            data.push({ Type: "INCOME", Category: "", Amount: "" });
+            
+            // Add income items
+            incomes.forEach(income => {
+                data.push({ 
+                    Type: "Income", 
+                    Category: income.name, 
+                    Amount: `$${income.amount.toFixed(2)}` 
+                });
+            });
+            
+            // Add income total
+            data.push({ 
+                Type: "Total Income", 
+                Category: "", 
+                Amount: `$${totalIncome.toFixed(2)}` 
+            });
+            
+            // Add empty row
+            data.push({ Type: "", Category: "", Amount: "" });
+            
+            // Add expense header
+            data.push({ Type: "EXPENSES", Category: "", Amount: "" });
+            
+            // Add expense items
+            expenses.forEach(expense => {
+                data.push({ 
+                    Type: "Expense", 
+                    Category: expense.name, 
+                    Amount: `$${expense.amount.toFixed(2)}` 
+                });
+            });
+            
+            // Add expense total
+            data.push({ 
+                Type: "Total Expenses", 
+                Category: "", 
+                Amount: `$${totalExpenses.toFixed(2)}` 
+            });
+            
+            // Add empty row
+            data.push({ Type: "", Category: "", Amount: "" });
+            
+            // Add summary
+            data.push({ Type: "SUMMARY", Category: "", Amount: "" });
+            data.push({ 
+                Type: "Remaining Balance", 
+                Category: "", 
+                Amount: `$${remainingBalance.toFixed(2)}` 
+            });
+            
+            const savingsPercentage = totalIncome > 0 ? (remainingBalance / totalIncome) * 100 : 0;
+            data.push({ 
+                Type: "Savings Rate", 
+                Category: "", 
+                Amount: `${savingsPercentage.toFixed(1)}%` 
+            });
+            
+            return data;
+        }
+
+        // Convert data to CSV format
+        function convertToCSV(data) {
+            const headers = Object.keys(data[0]);
+            const csvRows = [];
+            
+            // Add header row
+            csvRows.push(headers.join(','));
+            
+            // Add data rows
+            for (const row of data) {
+                const values = headers.map(header => {
+                    const escaped = ('' + row[header]).replace(/"/g, '\\"');
+                    return `"${escaped}"`;
+                });
+                csvRows.push(values.join(','));
+            }
+            
+            return csvRows.join('\n');
+        }
+    </script>
+    <!-- SheetJS library for Excel export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</body>
+</html>

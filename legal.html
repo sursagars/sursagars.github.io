@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal & About - sursagars.github.io</title>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4319187914977768"
+     crossorigin="anonymous">
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-bottom: 40px;
+        }
+        
+        .legal-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        .legal-header {
+            background: linear-gradient(135deg, #2c3e50 0%, #4a6491 100%);
+            color: white;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .legal-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .legal-header p {
+            font-size: 1.1rem;
+            text-align: center;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Navigation */
+        .legal-nav {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+        }
+        
+        .legal-nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            list-style: none;
+            gap: 10px;
+        }
+        
+        .legal-nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            background: #f1f5f9;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: block;
+            border: 1px solid transparent;
+        }
+        
+        .legal-nav a:hover {
+            background: #4a6491;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .legal-nav a.active {
+            background: #2c3e50;
+            color: white;
+        }
+        
+        /* Content Sections */
+        .legal-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            scroll-margin-top: 100px;
+        }
+        
+        .legal-section h2 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f1f5f9;
+            position: relative;
+        }
+        
+        .legal-section h2:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background: #4a6491;
+        }
+        
+        .legal-section h3 {
+            color: #2c3e50;
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+        }
+        
+        .legal-section h4 {
+            color: #4a6491;
+            font-size: 1.2rem;
+            margin: 20px 0 10px;
+        }
+        
+        .legal-section p {
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+        }
+        
+        .legal-section ul, .legal-section ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .legal-section li {
+            margin-bottom: 10px;
+        }
+        
+        .highlight-box {
+            background: #f8f9fa;
+            border-left: 4px solid #4a6491;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .highlight-box p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Warning Boxes */
+        .warning-box {
+            background: #fff8e1;
+            border: 2px solid #ffd54f;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            position: relative;
+        }
+        
+        .warning-box:before {
+            content: "⚠️";
+            position: absolute;
+            left: -15px;
+            top: -15px;
+            background: white;
+            border-radius: 50%;
+            padding: 8px;
+            font-size: 1.5rem;
+            border: 2px solid #ffd54f;
+        }
+        
+        .critical-warning {
+            background: #ffe6e6;
+            border: 2px solid #ff4444;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        
+        .critical-warning h4 {
+            color: #d32f2f;
+            margin-top: 0;
+        }
+        
+        /* API Attribution */
+        .api-attribution {
+            background: #e8f4fd;
+            border: 1px solid #2196f3;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
+        
+        /* Meta Info */
+        .meta-info {
+            display: flex;
+            justify-content: space-between;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #666;
+            border-top: 1px solid #eee;
+        }
+        
+        /* Footer */
+        .legal-footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .legal-footer a {
+            color: #4a6491;
+            text-decoration: none;
+        }
+        
+        .legal-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .legal-header {
+                padding: 30px 15px;
+            }
+            
+            .legal-header h1 {
+                font-size: 2rem;
+            }
+            
+            .legal-section {
+                padding: 25px;
+            }
+            
+            .legal-nav ul {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .legal-nav a {
+                padding: 12px 20px;
+                text-align: center;
+            }
+            
+            .meta-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .legal-section {
+                padding: 20px 15px;
+            }
+            
+            .legal-section h2 {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="legal-container">
+        <!-- Header -->
+        <header class="legal-header">
+            <h1>Legal Information & Policies</h1>
+            <p>Important information about using sursagars.github.io, our privacy practices, and terms of service</p>
+        </header>
+        
+        <!-- Navigation -->
+        <nav class="legal-nav">
+            <ul>
+                <li><a href="#about" class="active">About this Site</a></li>
+                <li><a href="#privacy">Privacy Policy</a></li>
+                <li><a href="#terms">Terms of Use</a></li>
+            </ul>
+        </nav>
+        
+        <!-- About This Site Section -->
+        <section id="about" class="legal-section">
+            <h2>About This Site</h2>
+            
+            <div class="warning-box">
+                <p><strong>⚠️ CURRENT STATUS - DEVELOPMENT PHASE</strong></p>
+                <p>This website (<code>https://sursagars.github.io</code>) is currently in <strong>development and testing phase</strong>, hosted temporarily on GitHub Pages. It showcases a collection of unit conversion tools and utilities that are being refined before final deployment.</p>
+                <p><strong>Future Plans:</strong> Once development and testing are complete, this site will be migrated to a professional hosting service (such as Hostinger or GoDaddy) with a dedicated domain name. The current GitHub Pages URL is temporary.</p>
+            </div>
+            
+            <h3>Purpose & Mission</h3>
+            <p>This website aims to provide a comprehensive collection of free online unit converters for public use. Our mission is to create accurate, easy-to-use tools that help students, professionals, and everyday users convert between various measurement units quickly and reliably.</p>
+            
+            <h3>Technology & Data Sources</h3>
+            <p>This site combines in-house development with trusted third-party services:</p>
+            <ul>
+                <li><strong>Core Conversion Tools:</strong> Developed internally using standard conversion formulas and algorithms</li>
+                <li><strong>Currency Conversion:</strong> Powered by third-party APIs for real-time exchange rate data</li>
+                <li><strong>Future Enhancements:</strong> We plan to implement more robust, multi-source data verification in the final version</li>
+            </ul>
+            
+            <div class="api-attribution">
+                <p><strong>API Usage Note:</strong> Some tools, particularly the currency converter, rely on free third-party APIs. These services have rate limits and may not provide real-time data. Please see our Terms of Use for important limitations.</p>
+            </div>
+            
+            <h3>History & Development</h3>
+            <p>The project was initiated as a personal endeavor to create quality free tools on the internet. Development began with the goal of building a user-friendly platform that offers conversions across multiple categories including length, weight, temperature, volume, and more specialized units.</p>
+            
+            <p>All tools and content on this site were developed in-house. We take pride in creating our own conversion algorithms and user interfaces rather than relying on third-party solutions. This allows us to maintain quality control and quickly implement improvements based on user feedback.</p>
+            
+            <h3>Advertising & Support</h3>
+            <p>This site displays advertisements via Google AdSense and AdMob. The revenue generated helps support the costs of development, testing, and future hosting. We strive to keep ads unobtrusive while maintaining a free service for all users.</p>
+            
+            <h3>Contact Information</h3>
+            <p>During this testing phase, we welcome feedback on tools or functionality through the GitHub repository associated with this site. For the final hosted version, a proper contact form will be provided.</p>
+            
+            <div class="meta-info">
+                <div><strong>Site Version:</strong> Development/Testing 1.0</div>
+                <div><strong>Last Updated:</strong> <span id="currentDate"></span></div>
+                <div><strong>Hosting:</strong> GitHub Pages (Temporary)</div>
+            </div>
+        </section>
+        
+        <!-- Privacy Policy Section -->
+        <section id="privacy" class="legal-section">
+            <h2>Privacy Policy</h2>
+            
+            <div class="highlight-box">
+                <p><strong>Effective Date:</strong> <span id="privacyDate"></span><br>
+                <strong>Note:</strong> This policy applies to the current testing site and will be updated upon migration to the final hosted version.</p>
+            </div>
+            
+            <h3>1. Information Collection</h3>
+            <p>As a static site currently hosted on GitHub Pages, this site has minimal direct data collection:</p>
+            
+            <h4>GitHub Pages Logs</h4>
+            <p>GitHub, as the temporary hosting provider, collects standard server logs (IP address, browser type, pages visited, timestamps) for operational and security purposes. See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank">GitHub's Privacy Statement</a>.</p>
+            
+            <h4>Advertising Cookies</h4>
+            <p>During testing, Google AdSense and AdMob are implemented. These third-party services use cookies and similar technologies to serve non-personalized or personalized ads and to measure ad performance. They collect non-personally identifiable information (e.g., device type, browser information, general location).</p>
+            
+            <h4>Third-Party API Usage</h4>
+            <p>Some tools on this site, particularly the currency converter, use third-party APIs:</p>
+            <ul>
+                <li>When you use the currency converter, your conversion request (currency pair and amount) is sent to the API provider</li>
+                <li>Depending on implementation, your IP address may be visible to the API provider</li>
+                <li>We do not send personal identifiers (name, email, etc.) to these API providers</li>
+                <li>API providers have their own privacy policies governing data collection</li>
+            </ul>
+            
+            <h4>No Direct Forms</h4>
+            <p>Currently, no personal information is collected via forms on this test site. This may change in the final hosted version.</p>
+            
+            <h3>2. Use of Information</h3>
+            <p>Information is used to:</p>
+            <ul>
+                <li>Monitor site performance and usage during testing</li>
+                <li>Serve advertisements to support project development</li>
+                <li>Troubleshoot and improve tools before final launch</li>
+                <li>Understand user behavior to enhance the user experience</li>
+                <li>Fetch real-time data for specific tools (like currency conversion)</li>
+            </ul>
+            
+            <h3>3. Third-Party Services & Your Choices</h3>
+            
+            <h4>Google Advertising</h4>
+            <p>You can opt out of personalized advertising from Google by visiting <a href="https://adssettings.google.com/" target="_blank">Google's Ads Settings</a>. For general opt-out from third-party vendors, visit <a href="http://www.aboutads.info/choices/" target="_blank">www.aboutads.info</a>.</p>
+            
+            <h4>Currency & Data APIs</h4>
+            <p>We use third-party APIs for certain functionalities. These services may collect limited data as described above. You can avoid this data sharing by not using the tools that rely on external APIs.</p>
+            
+            <h4>External Links</h4>
+            <p>This site may contain links to external resources. We are not responsible for their privacy practices.</p>
+            
+            <h3>4. Data Security (Current Phase)</h3>
+            <p>This test site, as a GitHub Pages static site, inherits the security model of GitHub. No sensitive user databases are maintained here. The final hosted version will implement additional security measures as appropriate.</p>
+            
+            <h3>5. Children's Privacy</h3>
+            <p>Our Services do not address anyone under the age of 13. We do not knowingly collect personal information from children under 13.</p>
+            
+            <h3>6. Policy Updates</h3>
+            <p>This privacy policy is subject to change, especially upon migration from GitHub Pages to the final hosted environment. Any major changes will be communicated via an update notice on the site.</p>
+            
+            <div class="meta-info">
+                <div><strong>Policy Version:</strong> Development Phase 1.1</div>
+                <div><strong>Next Review:</strong> Upon site migration</div>
+                <div><strong>API Disclosure:</strong> Included</div>
+            </div>
+        </section>
+        
+        <!-- Terms of Use Section -->
+        <section id="terms" class="legal-section">
+            <h2>Terms of Use</h2>
+            
+            <div class="warning-box">
+                <p><strong>⚠️ TESTING PHASE ACKNOWLEDGEMENT</strong></p>
+                <p>By accessing this development/test site, you acknowledge it is a work in progress and agree to the following terms. These terms will be superseded by a new agreement upon official launch.</p>
+            </div>
+            
+            <h3>1. Nature of the Site</h3>
+            <p>You understand and agree that:</p>
+            <ul>
+                <li>This is a <strong>testing/pre-release version</strong> of the website</li>
+                <li>Tools, content, and layout may contain errors, bugs, or incomplete features</li>
+                <li>The site may be taken offline, reset, or modified without notice during this phase</li>
+                <li>The final, stable version will be launched at a different domain on professional hosting</li>
+                <li>Some features rely on free third-party services that may have limitations</li>
+            </ul>
+            
+            <h3>2. Third-Party Services & APIs</h3>
+            <p>This site utilizes third-party services and APIs to provide certain functionality:</p>
+            
+            <h4>Currency Conversion API</h4>
+            <p>The currency conversion tool on this site is powered by a <strong>free third-party API</strong>. By using our currency converter:</p>
+            <ul>
+                <li>You acknowledge that exchange rate data is provided by a third party, not by us</li>
+                <li>Exchange rates are provided "as is" and may be delayed, incomplete, or inaccurate</li>
+                <li>The API provider may have its own terms of service that apply to the data usage</li>
+                <li>We cannot guarantee the availability, accuracy, or timeliness of currency data</li>
+                <li>Free APIs have rate limits; during high traffic, currency conversions may be temporarily unavailable</li>
+            </ul>
+            
+            <div class="critical-warning">
+                <h4>⚠️ CRITICAL CURRENCY CONVERSION DISCLAIMER</h4>
+                <p><strong>Currency conversions are for informational purposes only and should NOT be used for:</strong></p>
+                <ul>
+                    <li>Financial transactions, trading, or wire transfers</li>
+                    <li>Business accounting or tax calculations</li>
+                    <li>Legal documentation requiring certified exchange rates</li>
+                    <li>Forex trading decisions</li>
+                    <li>Any situation where inaccurate rates could cause financial loss</li>
+                </ul>
+                <p><strong>Due to using a free API:</strong></p>
+                <ul>
+                    <li>Exchange rates may not be real-time (often 24+ hour delays)</li>
+                    <li>Rates may be less accurate than commercial/banking services</li>
+                    <li>We cannot update rates more frequently than the API allows</li>
+                    <li>The API service may change, limit, or discontinue access without notice</li>
+                </ul>
+            </div>
+            
+            <div class="highlight-box">
+                <p><strong>Financial Advice Disclaimer:</strong> This site does NOT provide financial advice. Currency exchange rates fluctuate constantly. For actual currency exchange, consult a licensed financial institution or use certified financial data sources. Always verify rates with official sources before making any financial decisions.</p>
+            </div>
+            
+            <h3>3. Use of Tools & Content</h3>
+            <p>All tools and content are provided <strong>"AS IS"</strong> for testing and evaluation purposes only. While efforts are made for accuracy, <strong>no guarantees are made regarding the correctness of conversion results or information during this test phase.</strong> Do not use results from this test site for critical, financial, or safety-related decisions.</p>
+            
+            <h3>4. Acceptable Use</h3>
+            <p>You agree not to:</p>
+            <ul>
+                <li>Use the site in any way that could damage, disable, or impair its functionality</li>
+                <li>Attempt to interfere with the proper working of the site or its advertisements</li>
+                <li>Use any automated system (e.g., "bots") to access the site without permission</li>
+                <li>Copy, scrape, or republish substantial portions of the site's content without authorization</li>
+                <li>Attempt to bypass API rate limits or abuse third-party services</li>
+            </ul>
+            
+            <h3>5. Advertising</h3>
+            <p>Advertisements (Google AdSense/AdMob) are displayed on this test site. Interactions with ads are subject to Google's terms. The presence of ads does not constitute an endorsement of any advertised product or service.</p>
+            
+            <h3>6. Intellectual Property</h3>
+            <p>The underlying code, design concepts, and original content are the intellectual property of the site owner. The unit conversion logic and tools are developed in-house. You may not scrape, republish, or commercially exploit the site's core functionality without permission.</p>
+            
+            <h3>7. Accuracy Disclaimer</h3>
+            <p>In addition to the general accuracy disclaimers, specifically regarding currency conversion:</p>
+            <ul>
+                <li>Currency rates are indicative only and not intended as "official" rates</li>
+                <li>We do not warrant the accuracy, completeness, or timeliness of currency data</li>
+                <li>Actual exchange rates at banks or exchange services may differ significantly</li>
+                <li>We are not liable for any financial loss, misunderstanding, or damages resulting from reliance on currency conversion results</li>
+                <li>Other conversion tools use standard formulas but may have rounding differences from other sources</li>
+            </ul>
+            
+            <h3>8. Limitation of Liability</h3>
+            <p>To the fullest extent permitted by law, the site owner shall not be liable for any direct, indirect, incidental, or consequential damages arising from the use or inability to use this test site, including but not limited to damages from inaccurate conversion results, site downtime, interactions with advertisements, or reliance on third-party API data.</p>
+            
+            <h3>9. Future Migration</h3>
+            <p>These terms will be superseded by a new Terms of Use agreement upon the official launch of the site on its final hosting platform and domain.</p>
+            
+            <h3>10. Governing Law</h3>
+            <p>These terms are governed by the laws of the site owner's jurisdiction.</p>
+            
+            <div class="meta-info">
+                <div><strong>Terms Version:</strong> Testing Phase 1.2</div>
+                <div><strong>Effective:</strong> Until site migration</div>
+                <div><strong>API Terms:</strong> Included</div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="legal-footer">
+            <p>&copy; <span id="currentYear"></span> sursagars.github.io | This is a development/test version. Final version coming soon.</p>
+            <p><strong>Important:</strong> Currency conversions use free third-party APIs and are for informational purposes only. Not for financial use.</p>
+            <p><a href="#about">About</a> | <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Use</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // Set current dates
+        document.addEventListener('DOMContentLoaded', function() {
+            const now = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = now.toLocaleDateString('en-US', options);
+            
+            // Set current date in various places
+            document.getElementById('currentDate').textContent = formattedDate;
+            document.getElementById('privacyDate').textContent = formattedDate;
+            document.getElementById('currentYear').textContent = now.getFullYear();
+            
+            // Navigation active state
+            const navLinks = document.querySelectorAll('.legal-nav a');
+            const sections = document.querySelectorAll('.legal-section');
+            
+            // Set initial active state
+            setActiveNav();
+            
+            // Update active state on scroll
+            window.addEventListener('scroll', setActiveNav);
+            
+            function setActiveNav() {
+                let current = '';
+                const scrollPosition = window.scrollY + 150;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            // Smooth scrolling for navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update active state
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // AdSense initialization
+            console.log('AdSense configured for legal pages');
+            
+            // Add currency warning to footer on page load
+            const footer = document.querySelector('.legal-footer');
+            const currencyWarning = document.createElement('div');
+            currencyWarning.className = 'api-attribution';
+            currencyWarning.style.marginTop = '15px';
+            currencyWarning.style.fontSize = '0.8rem';
+            currencyWarning.innerHTML = '<p><strong>API Note:</strong> Currency data sourced from third-party APIs. Rates may be delayed and are for informational purposes only. Not for financial transactions.</p>';
+            footer.insertBefore(currencyWarning, footer.lastElementChild);
+        });
+    </script>
+</body>
+</html>

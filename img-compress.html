@@ -375,23 +375,37 @@
                 padding: 15px;
             }
         }
-        /* Footer */
-        footer {
+        /* Footer - Added professional footer matching currency.html */
+        .footer {
             text-align: center;
-            padding: 30px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
             margin-top: 50px;
-            border-radius: 16px 16px 0 0;
+            padding: 30px 20px;
+            color: #6c757d;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            background-color: #f8f9fa;
         }
-        footer a {
-            color: #fff;
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: #333;
             text-decoration: none;
-            border-bottom: 1px solid rgba(255,255,255,0.3);
-            transition: border-color 0.3s;
+            transition: all 0.3s ease;
+            font-weight: 500;
         }
-        footer a:hover {
-            border-color: #fff;
+        .footer-links a:hover {
+            color: #667eea;
+            text-decoration: underline;
+        }
+        .copyright {
+            color: #6c757d;
+            font-size: 0.85rem;
+            margin-top: 15px;
         }
     </style>
 </head>
@@ -486,11 +500,22 @@
         </main>
     </div>
 
-    <footer>
-        <p>&copy; 2025 Image Compressor Tool. All rights reserved. | <a href="/privacy">Privacy Policy</a></p>
-    </footer>
+    <!-- Updated Professional Footer matching currency.html -->
+    <div class="footer">
+        <div class="footer-links">
+            <a href="legal.html#about">About this Site</a>
+            <a href="legal.html#privacy">Privacy Policy</a>
+            <a href="legal.html#terms">Terms of Use</a>
+        </div>
+        <div class="copyright">
+            &copy; <span id="currentYear"></span> Image Compressor Tool. All rights reserved.
+        </div>
+    </div>
 
     <script>
+        // Set current year in footer (matching currency.html functionality)
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
         // AdMob Configuration
         const ADMOB_APP_ID = 'ca-app-pub-4319187914977768~7345655475';
         const ADMOB_AD_UNIT_ID = 'ca-pub-4319187914977768/9707260784';

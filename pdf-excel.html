@@ -390,6 +390,43 @@
             font-weight: bold;
             color: var(--primary);
         }
+
+        /* Footer styles from currency.html */
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px 20px;
+            color: #6c757d;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            background-color: #f8f9fa;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--dark);
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            color: #6c757d;
+            font-size: 0.85rem;
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body>
@@ -527,7 +564,22 @@
         </div>
     </div>
 
+    <!-- Footer from currency.html -->
+    <div class="footer">
+        <div class="footer-links">
+            <a href="legal.html#about">About this Site</a>
+            <a href="legal.html#privacy">Privacy Policy</a>
+            <a href="legal.html#terms">Terms of Use</a>
+        </div>
+        <div class="copyright">
+            &copy; <span id="currentYear"></span> PDFtoExcel Pro. All rights reserved.
+        </div>
+    </div>
+
     <script>
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
         // AdMob Configuration
         const ADMOB_APP_ID = 'ca-app-pub-4319187914977768~7345655475';
         const ADMOB_AD_UNIT_ID = 'ca-pub-4319187914977768/9707260784';

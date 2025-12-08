@@ -375,17 +375,41 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Footer Styles */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 1.5rem 0;
+        /* Footer styles from pdf-excel.html */
+        .footer {
             text-align: center;
+            margin-top: 50px;
+            padding: 30px 20px;
+            color: #6c757d;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            background-color: #f8f9fa;
         }
-
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--dark);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        
         .copyright {
-            color: #adb5bd;
-            font-size: 0.9rem;
+            color: #6c757d;
+            font-size: 0.85rem;
+            margin-top: 15px;
         }
 
         /* Responsive Styles */
@@ -548,14 +572,17 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="copyright">
-                <p>&copy; 2025 PDF to Word Converter. All rights reserved.</p>
-            </div>
+    <!-- Footer from pdf-excel.html -->
+    <div class="footer">
+        <div class="footer-links">
+            <a href="legal.html#about">About this Site</a>
+            <a href="legal.html#privacy">Privacy Policy</a>
+            <a href="legal.html#terms">Terms of Use</a>
         </div>
-    </footer>
+        <div class="copyright">
+            &copy; <span id="currentYear"></span> PDF to Word Converter. All rights reserved.
+        </div>
+    </div>
 
     <script>
         // AdMob Configuration
@@ -574,6 +601,9 @@
         const downloadBtn = document.getElementById('downloadBtn');
         const loading = document.getElementById('loading');
         const policyNotice = document.getElementById('policyNotice');
+
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
 
         // Initialize on page load
         window.addEventListener('DOMContentLoaded', () => {

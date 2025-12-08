@@ -704,24 +704,41 @@
             display: block;
         }
         
-        /* Footer */
+        /* Footer - Added professional styles */
         .footer {
             text-align: center;
             margin-top: 50px;
-            padding: 25px;
-            color: var(--gray-color);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--border-color);
+            padding: 30px 20px;
+            color: #6c757d;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            background-color: #f8f9fa;
         }
         
-        .footer a {
-            color: var(--primary-color);
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--dark-color);
             text-decoration: none;
-            font-weight: 600;
+            transition: var(--transition);
+            font-weight: 500;
         }
         
-        .footer a:hover {
+        .footer-links a:hover {
+            color: var(--primary-color);
             text-decoration: underline;
+        }
+        
+        .copyright {
+            color: #6c757d;
+            font-size: 0.85rem;
+            margin-top: 15px;
         }
         
         /* Currency Dropdown */
@@ -1019,15 +1036,23 @@
             </div>
         </div>
         
-        <!-- Footer -->
+        <!-- Updated Professional Footer -->
         <div class="footer">
-            <p>Live Currency Converter &copy; 2023 | Powered by <a href="https://www.exchangerate-api.com" target="_blank">ExchangeRate-API</a> | 
-            <a href="https://github.com/Alkaison/Currency-Converter" target="_blank">View on GitHub</a></p>
-            <p style="font-size: 0.8rem; margin-top: 10px; color: #94a3b8;">Disclaimer: Exchange rates are provided for informational purposes only and may differ from actual transaction rates. Rates update every 60 seconds.</p>
+            <div class="footer-links">
+                <a href="legal.html#about">About this Site</a>
+                <a href="legal.html#privacy">Privacy Policy</a>
+                <a href="legal.html#terms">Terms of Use</a>
+            </div>
+            <div class="copyright">
+                &copy; <span id="currentYear"></span> Live Currency Converter. All rights reserved.
+            </div>
         </div>
     </div>
 
     <script>
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
         // API Configuration
         const API_KEY = 'a883b51e68130ad390aefdcf';
         const API_BASE_URL = 'https://v6.exchangerate-api.com/v6';

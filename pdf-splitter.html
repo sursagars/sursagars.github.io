@@ -3,1388 +3,780 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO Meta Tags -->
-    <title>Free Online PDF Splitter Tool - Split PDF Files Easily</title>
+    <meta name="description" content="Free online daily planner tool to organize your tasks, schedule, and boost productivity. Plan your day efficiently with our responsive planner.">
+    <meta name="keywords" content="daily planner, task management, schedule, productivity, time management, organize tasks, daily schedule">
+    <meta name="author" content="Daily Planner Pro">
+    <title>Daily Planner Pro - Organize Your Day Efficiently | Free Online Tool</title>
     
     <link rel="icon" type="image/png" href="https://sursagars.github.io/favicon.png"/>
-    <meta name="description" content="Free online PDF splitter tool. Split PDF documents by page ranges or extract specific pages. No registration required. Mobile-friendly and secure.">
-    <meta name="keywords" content="PDF splitter, split PDF, PDF tools, online PDF editor, extract PDF pages, PDF management">
-    <meta name="author" content="PDF Tools">
-    <meta property="og:title" content="Free Online PDF Splitter Tool">
-    <meta property="og:description" content="Split PDF documents by page ranges or extract specific pages easily.">
-    <meta property="og:type" content="website">
-    
-    <!-- Structured Data for SEO -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "PDF Splitter Tool",
-        "description": "Free online tool to split PDF documents by page ranges or extract specific pages",
-        "url": "https://pdf-splitter-tool.com",
-        "applicationCategory": "UtilityApplication",
-        "operatingSystem": "Any",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-        },
-        "author": {
-            "@type": "Organization",
-            "name": "PDF Tools"
-        }
-    }
-    </script>
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AdMob/AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-4319187914977768" crossorigin="anonymous"></script>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4319187914977768"
      crossorigin="anonymous">
     </script>
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📄</text></svg>">
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- AdMob Implementation with your provided IDs -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-4319187914977768" crossorigin="anonymous"></script>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-app-pub-4319187914977768",
-            enable_page_level_ads: true
-        });
-    </script>
-    
     <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --accent-color: #4cc9f0;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4bb543;
+            --warning-color: #ffcc00;
+            --danger-color: #dc3545;
+            --gray-color: #6c757d;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
-            color: #334155;
+            background-color: #f5f7fb;
+            color: var(--dark-color);
             line-height: 1.6;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
-        
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
         /* Header Styles */
         header {
-            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 1.5rem 1rem;
-            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
-            position: relative;
-            overflow: hidden;
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        
+
         .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
-            z-index: 2;
         }
-        
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
+
         .logo {
-            font-size: 2.2rem;
-            background: rgba(255, 255, 255, 0.15);
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(4px);
+            gap: 10px;
         }
-        
-        .logo-text h1 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.6rem;
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
             font-weight: 700;
-            line-height: 1.2;
         }
-        
-        .logo-text p {
-            font-size: 0.85rem;
-            opacity: 0.9;
-            margin-top: 2px;
+
+        .date-display {
+            text-align: center;
+            margin-top: 5px;
+            font-size: 1.1rem;
         }
-        
-        .header-bg-shapes {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            overflow: hidden;
-        }
-        
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-        }
-        
-        .shape-1 {
-            width: 300px;
-            height: 300px;
-            top: -150px;
-            right: -100px;
-        }
-        
-        .shape-2 {
-            width: 200px;
-            height: 200px;
-            bottom: -80px;
-            left: -50px;
-        }
-        
-        /* Main Container */
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
+
+        /* Main Content */
+        main {
+            padding: 2rem 0;
             flex: 1;
         }
-        
-        .content-wrapper {
+
+        .planner-container {
             display: grid;
             grid-template-columns: 1fr 300px;
-            gap: 2rem;
+            gap: 20px;
         }
-        
-        /* Tool Container */
-        .tool-container {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
-            padding: 2rem;
-            transition: transform 0.3s ease;
+
+        @media (max-width: 992px) {
+            .planner-container {
+                grid-template-columns: 1fr;
+            }
         }
-        
-        .tool-container:hover {
-            transform: translateY(-4px);
+
+        /* Planner Styles */
+        .planner {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
         }
-        
-        .tool-header {
-            margin-bottom: 2rem;
-        }
-        
-        .tool-header h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 0.5rem;
-        }
-        
-        .tool-header p {
-            color: #64748b;
-            font-size: 1rem;
-        }
-        
-        /* Upload Area */
-        .upload-area {
-            border: 2px dashed #cbd5e1;
-            border-radius: 12px;
-            padding: 3rem 2rem;
-            text-align: center;
-            margin-bottom: 2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background-color: #f8fafc;
-        }
-        
-        .upload-area:hover {
-            border-color: #4f46e5;
-            background-color: #f1f5f9;
-        }
-        
-        .upload-area i {
-            font-size: 3.5rem;
-            color: #4f46e5;
-            margin-bottom: 1rem;
-        }
-        
-        .upload-area h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            color: #1e293b;
-        }
-        
-        .upload-area p {
-            color: #64748b;
-            margin-bottom: 1rem;
-        }
-        
-        .upload-btn {
-            background-color: #4f46e5;
+
+        .planner-header {
+            background-color: var(--primary-color);
             color: white;
-            border: none;
-            padding: 0.8rem 1.8rem;
-            border-radius: 8px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .upload-btn:hover {
-            background-color: #4338ca;
-        }
-        
-        /* Split Options */
-        .split-options {
-            margin-bottom: 2rem;
-        }
-        
-        .split-options h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 500;
-            margin-bottom: 1.2rem;
-            color: #1e293b;
-        }
-        
-        .option-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .option-btn {
-            flex: 1;
-            min-width: 120px;
             padding: 1rem;
-            background: #f1f5f9;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-        }
-        
-        .option-btn:hover {
-            border-color: #4f46e5;
-            background: #eef2ff;
-        }
-        
-        .option-btn.active {
-            border-color: #4f46e5;
-            background: #eef2ff;
-            color: #4f46e5;
-            font-weight: 500;
-        }
-        
-        .option-btn i {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-        
-        /* Range Input */
-        .range-input-container {
-            background: #f8fafc;
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin-top: 1rem;
-            display: none;
-        }
-        
-        .range-input-container.active {
-            display: block;
-        }
-        
-        .range-input-container h4 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 1rem;
-            color: #1e293b;
-        }
-        
-        .range-input {
-            width: 100%;
-            margin: 1rem 0;
-        }
-        
-        .range-labels {
             display: flex;
             justify-content: space-between;
-            margin-top: 0.5rem;
-            color: #64748b;
-            font-size: 0.9rem;
-        }
-        
-        /* Pages Preview */
-        .pages-preview {
-            background: #f8fafc;
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .pages-preview h4 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 1rem;
-            color: #1e293b;
-        }
-        
-        .pages-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-        }
-        
-        .page-thumb {
-            width: 60px;
-            height: 80px;
-            background: white;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #e2e8f0;
-            font-weight: 500;
-            color: #475569;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
-        
-        .page-thumb.selected {
-            background-color: #eef2ff;
-            border-color: #4f46e5;
-            color: #4f46e5;
-        }
-        
-        /* Action Buttons */
-        .action-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .action-btn {
-            flex: 1;
-            min-width: 160px;
-            padding: 1rem;
-            border-radius: 10px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-size: 1rem;
-        }
-        
-        .split-btn {
-            background-color: #4f46e5;
-            color: white;
-            border: none;
-        }
-        
-        .split-btn:hover {
-            background-color: #4338ca;
-        }
-        
-        .reset-btn {
-            background-color: #f1f5f9;
-            color: #475569;
-            border: 2px solid #e2e8f0;
-        }
-        
-        .reset-btn:hover {
-            background-color: #e2e8f0;
-        }
-        
-        /* Ad Container */
-        .ad-container {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        
-        .ad-slot {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            padding: 1.5rem;
-            text-align: center;
-            min-height: 280px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
         }
-        
-        .ad-label {
-            font-size: 0.8rem;
-            color: #94a3b8;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        /* AdMob Ad Styles */
-        .admob-ad {
-            width: 100%;
-            overflow: hidden;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .admob-ad ins {
-            display: block !important;
-            margin: 0 auto;
-        }
-        
-        /* File Info */
-        .file-info {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-            display: none;
-        }
-        
-        .file-info.active {
-            display: block;
-        }
-        
-        .file-info h3 {
-            font-family: 'Poppins', sans-serif;
+
+        .planner-header h2 {
             font-size: 1.3rem;
-            font-weight: 500;
-            margin-bottom: 1rem;
-            color: #1e293b;
         }
-        
-        .file-details {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #e2e8f0;
+
+        .time-slots {
+            max-height: 600px;
+            overflow-y: auto;
         }
-        
-        .file-icon {
-            font-size: 2.5rem;
-            color: #4f46e5;
-        }
-        
-        .file-name {
-            font-weight: 500;
-            color: #1e293b;
-        }
-        
-        .file-size {
-            color: #64748b;
-            font-size: 0.9rem;
-        }
-        
-        /* Results Section */
-        .results-section {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-            display: none;
-        }
-        
-        .results-section.active {
-            display: block;
-        }
-        
-        .results-section h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 500;
-            margin-bottom: 1rem;
-            color: #1e293b;
-        }
-        
-        .result-files {
+
+        .time-slot {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
+            grid-template-columns: 100px 1fr 80px;
+            border-bottom: 1px solid #e9ecef;
+            padding: 0.8rem;
+            align-items: center;
+            transition: var(--transition);
         }
-        
-        .result-file {
-            background: #f8fafc;
-            border-radius: 10px;
-            padding: 1.2rem;
+
+        .time-slot:hover {
+            background-color: #f8f9fa;
+        }
+
+        .time-label {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .task-input {
+            border: none;
+            padding: 0.5rem;
+            font-size: 1rem;
+            background: transparent;
+            width: 100%;
+            outline: none;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 5px;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            padding: 0.4rem 0.8rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .btn-save {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .btn-delete {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .btn-edit {
+            background-color: var(--warning-color);
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-align: center;
+            gap: 20px;
         }
-        
-        .result-file i {
-            font-size: 2rem;
-            color: #4f46e5;
+
+        .stats-card, .quick-actions, .ad-space {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+        }
+
+        .stats-card h3, .quick-actions h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 0.5rem;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
             margin-bottom: 0.8rem;
         }
-        
-        .result-file .file-name {
-            font-weight: 500;
-            margin-bottom: 0.5rem;
+
+        .stat-value {
+            font-weight: 600;
+            color: var(--primary-color);
         }
-        
-        .result-file .file-size {
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
+
+        .quick-action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
         }
-        
-        .download-btn {
-            background-color: #10b981;
-            color: white;
-            border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 6px;
-            font-weight: 500;
+
+        .quick-action-btn {
+            background-color: var(--light-color);
+            border: 1px solid #dee2e6;
+            padding: 0.8rem;
+            border-radius: 8px;
+            text-align: center;
             cursor: pointer;
-            transition: background-color 0.3s;
-            width: 100%;
+            transition: var(--transition);
         }
-        
-        .download-btn:hover {
-            background-color: #0da271;
+
+        .quick-action-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
         }
-        
-        /* Mobile Ad Container */
-        .mobile-ad-container {
-            display: none;
-            margin-top: 1.5rem;
-        }
-        
-        /* AdMob Ad Styles */
-        .admob-ad {
-            width: 100%;
+
+        /* Ad Space Styles */
+        .ad-space {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f8f9fa;
+            border: 1px dashed #dee2e6;
             overflow: hidden;
-            margin: 0 auto;
+            min-height: 250px;
+        }
+
+        .ad-space.leaderboard {
+            min-height: 100px;
+            margin-bottom: 20px;
+        }
+
+        .ad-label {
+            font-size: 0.8rem;
+            color: var(--gray-color);
+            margin-bottom: 10px;
+        }
+
+        .ad-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Footer Styles (from pdf-excel.html) */
+        .footer {
             text-align: center;
+            margin-top: 50px;
+            padding: 30px 20px;
+            color: #6c757d;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            background-color: #f8f9fa;
         }
         
-        .admob-ad iframe {
-            border: none;
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
         }
         
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .content-wrapper {
-                grid-template-columns: 1fr;
-            }
-            
-            .ad-container {
-                display: none;
-            }
-            
-            .mobile-ad-container {
-                display: block;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
-            }
-            
-            .logo-container {
-                justify-content: center;
-            }
-            
-            .option-group {
-                flex-direction: column;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-            }
-            
-            .action-btn {
-                min-width: 100%;
-            }
-            
-            .result-files {
-                grid-template-columns: 1fr;
-            }
-            
-            /* Adjust ad sizes for mobile */
-            .ad-slot {
-                min-height: 200px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .tool-container {
-                padding: 1.5rem;
-            }
-            
-            .upload-area {
-                padding: 2rem 1rem;
-            }
-            
-            .upload-area i {
-                font-size: 2.5rem;
-            }
-            
-            .tool-header h2 {
-                font-size: 1.5rem;
-            }
-        }
-        
-        /* Animation for file upload */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .uploading {
-            animation: pulse 1.5s infinite;
-        }
-        
-        /* Privacy Policy Link */
-        .privacy-link {
-            text-align: center;
-            margin-top: 2rem;
-            font-size: 0.9rem;
-            color: #64748b;
-        }
-        
-        .privacy-link a {
-            color: #4f46e5;
+        .footer-links a {
+            color: var(--dark-color);
             text-decoration: none;
+            transition: var(--transition);
+            font-weight: 500;
         }
         
-        .privacy-link a:hover {
+        .footer-links a:hover {
+            color: var(--primary-color);
             text-decoration: underline;
         }
         
-        /* Admin Information Panel */
-        .admin-info {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            background: #1e293b;
-            color: white;
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            z-index: 1000;
-            display: none;
+        .copyright {
+            color: #6c757d;
+            font-size: 0.85rem;
+            margin-top: 15px;
         }
-        
-        .admin-info-btn {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            background: #4f46e5;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(79, 70, 229, 0.3);
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .time-slot {
+                grid-template-columns: 80px 1fr;
+                gap: 10px;
+            }
+            
+            .task-actions {
+                grid-column: 1 / -1;
+                justify-content: flex-start;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .logo h1 {
+                font-size: 1.3rem;
+            }
+            
+            .ad-space.leaderboard {
+                min-height: 70px;
+            }
+            
+            .ad-space {
+                min-height: 200px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .quick-action-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .planner-header {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .ad-space, .quick-actions {
+                display: none;
+            }
+            
+            .planner-container {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header Section -->
     <header>
-        <div class="header-content">
-            <div class="logo-container">
+        <div class="container">
+            <div class="header-content">
                 <div class="logo">
-                    <i class="fas fa-file-pdf"></i>
+                    <i class="fas fa-calendar-alt"></i>
+                    <h1>Daily Planner Pro</h1>
                 </div>
-                <div class="logo-text">
-                    <h1>PDF Splitter Tool</h1>
-                    <p>Split PDF files quickly and easily</p>
-                </div>
+                <div class="date-display" id="currentDate">Monday, January 1, 2023</div>
             </div>
-        </div>
-        <div class="header-bg-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
         </div>
     </header>
-    
-    <!-- Main Container -->
-    <div class="container">
-        <div class="content-wrapper">
-            <!-- Main Tool Container -->
-            <main class="tool-container">
-                <div class="tool-header">
-                    <h2>Split PDF Files Online</h2>
-                    <p>Upload your PDF file and choose how you want to split it. Extract specific pages or split by page ranges.</p>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Top Ad Banner -->
+            <div class="ad-space leaderboard" style="margin-bottom: 20px;">
+                <div class="ad-label">Advertisement</div>
+                <div class="ad-container" id="topBannerAd">
+                    <!-- Top banner ad will be loaded here -->
                 </div>
-                
-                <!-- Upload Area -->
-                <div class="upload-area" id="uploadArea">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <h3>Upload PDF File</h3>
-                    <p>Drag and drop your PDF file here or click to browse</p>
-                    <p><strong>Max file size: 50MB</strong></p>
-                    <button class="upload-btn" id="uploadBtn">
-                        <i class="fas fa-folder-open"></i> Choose File
-                    </button>
-                    <input type="file" id="fileInput" accept=".pdf" style="display: none;">
-                </div>
-                
-                <!-- File Info -->
-                <div class="file-info" id="fileInfo">
-                    <h3>Selected File</h3>
-                    <div class="file-details">
-                        <div class="file-icon">
-                            <i class="fas fa-file-pdf"></i>
-                        </div>
-                        <div>
-                            <div class="file-name" id="fileName">sample-document.pdf</div>
-                            <div class="file-size" id="fileSize">2.4 MB • 12 pages</div>
-                        </div>
+            </div>
+
+            <div class="planner-container">
+                <!-- Main Planner -->
+                <div class="planner">
+                    <div class="planner-header">
+                        <h2><i class="fas fa-tasks"></i> Today's Schedule</h2>
+                        <button class="btn btn-save" id="saveAllBtn">Save All Changes</button>
+                    </div>
+                    <div class="time-slots" id="timeSlots">
+                        <!-- Time slots will be generated by JavaScript -->
                     </div>
                 </div>
-                
-                <!-- Split Options -->
-                <div class="split-options">
-                    <h3>Choose Split Option</h3>
-                    <div class="option-group">
-                        <div class="option-btn active" data-option="range">
-                            <i class="fas fa-sliders-h"></i>
-                            Split by Range
+
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <!-- Statistics Card -->
+                    <div class="stats-card">
+                        <h3><i class="fas fa-chart-pie"></i> Today's Progress</h3>
+                        <div class="stat-item">
+                            <span>Total Tasks:</span>
+                            <span class="stat-value" id="totalTasks">0</span>
                         </div>
-                        <div class="option-btn" data-option="pages">
-                            <i class="fas fa-copy"></i>
-                            Extract Pages
+                        <div class="stat-item">
+                            <span>Completed:</span>
+                            <span class="stat-value" id="completedTasks">0</span>
                         </div>
-                        <div class="option-btn" data-option="single">
-                            <i class="fas fa-file-export"></i>
-                            Single Pages
+                        <div class="stat-item">
+                            <span>Remaining:</span>
+                            <span class="stat-value" id="remainingTasks">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Completion:</span>
+                            <span class="stat-value" id="completionRate">0%</span>
                         </div>
                     </div>
-                    
-                    <!-- Range Input -->
-                    <div class="range-input-container active" id="rangeOption">
-                        <h4>Select Page Range</h4>
-                        <input type="range" class="range-input" id="pageRange" min="1" max="12" value="6">
-                        <div class="range-labels">
-                            <span id="rangeStart">1</span>
-                            <span id="rangeEnd">12</span>
+
+                    <!-- Quick Actions -->
+                    <div class="quick-actions">
+                        <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+                        <div class="quick-action-buttons">
+                            <div class="quick-action-btn" id="clearAllBtn">
+                                <i class="fas fa-trash"></i> Clear All
+                            </div>
+                            <div class="quick-action-btn" id="addTaskBtn">
+                                <i class="fas fa-plus"></i> Add Task
+                            </div>
+                            <div class="quick-action-btn" id="exportBtn">
+                                <i class="fas fa-download"></i> Export
+                            </div>
+                            <div class="quick-action-btn" id="printBtn">
+                                <i class="fas fa-print"></i> Print
+                            </div>
                         </div>
-                        <p>Split PDF into two parts: pages <span id="rangeResult1">1-6</span> and <span id="rangeResult2">7-12</span></p>
                     </div>
-                    
-                    <!-- Pages Selection -->
-                    <div class="range-input-container" id="pagesOption">
-                        <h4>Select Pages to Extract</h4>
-                        <p>Click on page thumbnails below to select individual pages</p>
+
+                    <!-- Sidebar Ad 1 -->
+                    <div class="ad-space">
+                        <div class="ad-label">Advertisement</div>
+                        <div class="ad-container" id="sidebarAd1">
+                            <!-- Sidebar ad 1 will be loaded here -->
+                        </div>
                     </div>
-                    
-                    <!-- Single Pages Option -->
-                    <div class="range-input-container" id="singleOption">
-                        <h4>Split into Single Pages</h4>
-                        <p>Each page will be saved as a separate PDF file</p>
+
+                    <!-- Sidebar Ad 2 -->
+                    <div class="ad-space">
+                        <div class="ad-label">Advertisement</div>
+                        <div class="ad-container" id="sidebarAd2">
+                            <!-- Sidebar ad 2 will be loaded here -->
+                        </div>
                     </div>
-                </div>
-                
-                <!-- Pages Preview -->
-                <div class="pages-preview" id="pagesPreview">
-                    <h4>Document Pages</h4>
-                    <div class="pages-container" id="pagesContainer">
-                        <!-- Pages will be dynamically added here -->
-                    </div>
-                </div>
-                
-                <!-- Action Buttons -->
-                <div class="action-buttons">
-                    <button class="action-btn split-btn" id="splitBtn">
-                        <i class="fas fa-cut"></i> Split PDF
-                    </button>
-                    <button class="action-btn reset-btn" id="resetBtn">
-                        <i class="fas fa-redo"></i> Reset
-                    </button>
-                </div>
-                
-                <!-- Results Section -->
-                <div class="results-section" id="resultsSection">
-                    <h3>Split Results</h3>
-                    <p>Your PDF has been successfully split. Download the files below:</p>
-                    <div class="result-files" id="resultFiles">
-                        <!-- Result files will be dynamically added here -->
-                    </div>
-                </div>
-                
-                <!-- Privacy Policy Link (Required for AdMob) -->
-                <div class="privacy-link">
-                    <p>By using this tool, you agree to our <a href="#" id="privacyLink">Privacy Policy</a></p>
-                </div>
-            </main>
-            
-            <!-- Desktop Ad Container -->
-            <aside class="ad-container">
-                <!-- AdMob Banner Ad 1 -->
-                <div class="ad-slot">
-                    <div class="ad-label">
-                        <i class="fas fa-ad"></i> Advertisement
-                    </div>
-                    <div class="admob-ad" id="desktopAd1">
-                        <!-- AdMob Banner Ad with your provided Ad Unit ID -->
-                        <ins class="adsbygoogle"
-                             style="display:block"
-                             data-ad-client="ca-app-pub-4319187914977768"
-                             data-ad-slot="9707260784"
-                             data-ad-format="auto"
-                             data-full-width-responsive="true"></ins>
-                        <script>
-                             (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                    </div>
-                </div>
-                
-                <!-- AdMob Banner Ad 2 -->
-                <div class="ad-slot">
-                    <div class="ad-label">
-                        <i class="fas fa-ad"></i> Advertisement
-                    </div>
-                    <div class="admob-ad" id="desktopAd2">
-                        <!-- AdMob Banner Ad with your provided Ad Unit ID -->
-                        <ins class="adsbygoogle"
-                             style="display:block"
-                             data-ad-client="ca-app-pub-4319187914977768"
-                             data-ad-slot="9707260784"
-                             data-ad-format="auto"
-                             data-full-width-responsive="true"></ins>
-                        <script>
-                             (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                    </div>
-                </div>
-            </aside>
-        </div>
-        
-        <!-- Mobile Ad Container -->
-        <div class="mobile-ad-container">
-            <div class="ad-slot">
-                <div class="ad-label">
-                    <i class="fas fa-ad"></i> Advertisement
-                </div>
-                <div class="admob-ad" id="mobileAd">
-                    <!-- AdMob Banner Ad with your provided Ad Unit ID -->
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-app-pub-4319187914977768"
-                         data-ad-slot="9707260784"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
                 </div>
             </div>
         </div>
+    </main>
+
+    <!-- Footer from pdf-excel.html -->
+    <div class="footer">
+        <div class="footer-links">
+            <a href="legal.html#about">About this Site</a>
+            <a href="legal.html#privacy">Privacy Policy</a>
+            <a href="legal.html#terms">Terms of Use</a>
+        </div>
+        <div class="copyright">
+            &copy; <span id="currentYear"></span> Daily Planner Pro. All rights reserved.
+        </div>
     </div>
 
-    <!-- Admin Information Button -->
-    <div class="admin-info-btn" id="adminInfoBtn">
-        <i class="fas fa-info"></i>
-    </div>
-    
-    <!-- Admin Information Panel -->
-    <div class="admin-info" id="adminInfo">
-        <h5>AdMob Implementation Status</h5>
-        <p><strong>Your AdMob App ID:</strong> ca-app-pub-4319187914977768~7345655475</p>
-        <p><strong>Your AdMob Ad Unit ID:</strong> ca-app-pub-4319187914977768/9707260784</p>
-        <p><strong>Implementation:</strong> Active and running</p>
-        <button onclick="hideAdminInfo()" style="background: none; border: none; color: #94a3b8; cursor: pointer; margin-top: 5px;">Close</button>
-    </div>
-
+    <!-- JavaScript -->
     <script>
-        // DOM Elements
-        const uploadArea = document.getElementById('uploadArea');
-        const uploadBtn = document.getElementById('uploadBtn');
-        const fileInput = document.getElementById('fileInput');
-        const fileInfo = document.getElementById('fileInfo');
-        const fileName = document.getElementById('fileName');
-        const fileSize = document.getElementById('fileSize');
-        const optionBtns = document.querySelectorAll('.option-btn');
-        const rangeOption = document.getElementById('rangeOption');
-        const pagesOption = document.getElementById('pagesOption');
-        const singleOption = document.getElementById('singleOption');
-        const pageRange = document.getElementById('pageRange');
-        const rangeStart = document.getElementById('rangeStart');
-        const rangeEnd = document.getElementById('rangeEnd');
-        const rangeResult1 = document.getElementById('rangeResult1');
-        const rangeResult2 = document.getElementById('rangeResult2');
-        const pagesContainer = document.getElementById('pagesContainer');
-        const splitBtn = document.getElementById('splitBtn');
-        const resetBtn = document.getElementById('resetBtn');
-        const resultsSection = document.getElementById('resultsSection');
-        const resultFiles = document.getElementById('resultFiles');
-        const pagesPreview = document.getElementById('pagesPreview');
-        const privacyLink = document.getElementById('privacyLink');
-        const adminInfoBtn = document.getElementById('adminInfoBtn');
-        const adminInfo = document.getElementById('adminInfo');
+        // AdMob/AdSense Configuration
+        const AD_UNIT_ID = '9707260784'; // Your ad unit ID
+        const PUBLISHER_ID = 'ca-app-pub-4319187914977768'; // Your publisher ID
         
-        // State variables
-        let selectedPages = new Set([1, 2, 3, 4]);
-        let totalPages = 12;
-        let currentOption = 'range';
-        let selectedFile = null;
-        
-        // Initialize the page
-        function init() {
-            generatePageThumbnails();
-            updateRangeDisplay();
-            setupEventListeners();
+        // Initialize ads
+        function initializeAds() {
+            // Initialize top banner ad
+            initializeTopBannerAd();
             
-            // Initialize AdMob ads
-            initializeAdMob();
+            // Initialize sidebar ads
+            initializeSidebarAds();
             
-            // Initialize admin info panel
-            setupAdminInfo();
+            // Refresh ads periodically (every 60 seconds)
+            setInterval(refreshAds, 60000);
         }
         
-        // Initialize AdMob with your provided IDs
-        function initializeAdMob() {
-            console.log('AdMob Initialized Successfully');
-            console.log('App ID: ca-app-pub-4319187914977768~7345655475');
-            console.log('Ad Unit ID: ca-app-pub-4319187914977768/9707260784');
+        // Initialize top banner ad
+        function initializeTopBannerAd() {
+            const topAdContainer = document.getElementById('topBannerAd');
+            const isMobile = window.innerWidth <= 768;
             
-            // Ads are already loaded in the HTML
-            // We just need to refresh them occasionally
-            setTimeout(refreshAds, 2000);
+            // Clear container
+            topAdContainer.innerHTML = '';
+            
+            // Create ad element
+            const adElement = document.createElement('ins');
+            adElement.className = 'adsbygoogle';
+            adElement.style.display = 'block';
+            adElement.style.width = isMobile ? '320px' : '728px';
+            adElement.style.height = isMobile ? '100px' : '90px';
+            adElement.setAttribute('data-ad-client', PUBLISHER_ID);
+            adElement.setAttribute('data-ad-slot', AD_UNIT_ID);
+            adElement.setAttribute('data-ad-format', 'auto');
+            adElement.setAttribute('data-full-width-responsive', 'true');
+            
+            topAdContainer.appendChild(adElement);
+            
+            // Push ad to Google
+            (adsbygoogle = window.adsbygoogle || []).push({});
         }
         
-        // Refresh AdMob ads
-        function refreshAds() {
-            if (typeof adsbygoogle !== 'undefined') {
-                try {
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                    console.log('AdMob ads refreshed');
-                } catch (e) {
-                    console.log('Ad refresh error:', e);
-                }
-            }
-        }
-        
-        // Setup admin information panel
-        function setupAdminInfo() {
-            adminInfoBtn.addEventListener('click', function() {
-                adminInfo.style.display = adminInfo.style.display === 'block' ? 'none' : 'block';
-            });
-        }
-        
-        function hideAdminInfo() {
-            adminInfo.style.display = 'none';
-        }
-        
-        // Generate page thumbnails
-        function generatePageThumbnails() {
-            pagesContainer.innerHTML = '';
+        // Initialize sidebar ads
+        function initializeSidebarAds() {
+            const sidebarAd1 = document.getElementById('sidebarAd1');
+            const sidebarAd2 = document.getElementById('sidebarAd2');
             
-            for (let i = 1; i <= totalPages; i++) {
-                const pageThumb = document.createElement('div');
-                pageThumb.className = selectedPages.has(i) ? 'page-thumb selected' : 'page-thumb';
-                pageThumb.textContent = i;
-                pageThumb.dataset.page = i;
-                
-                pageThumb.addEventListener('click', () => {
-                    if (currentOption === 'pages') {
-                        if (selectedPages.has(i)) {
-                            selectedPages.delete(i);
-                            pageThumb.classList.remove('selected');
-                        } else {
-                            selectedPages.add(i);
-                            pageThumb.classList.add('selected');
-                        }
-                    }
-                });
-                
-                pagesContainer.appendChild(pageThumb);
-            }
-        }
-        
-        // Update range display
-        function updateRangeDisplay() {
-            const splitPoint = parseInt(pageRange.value);
-            rangeStart.textContent = '1';
-            rangeEnd.textContent = totalPages;
-            rangeResult1.textContent = `1-${splitPoint}`;
-            rangeResult2.textContent = `${splitPoint + 1}-${totalPages}`;
-        }
-        
-        // Setup event listeners
-        function setupEventListeners() {
-            // File upload
-            uploadArea.addEventListener('click', () => fileInput.click());
-            uploadBtn.addEventListener('click', () => fileInput.click());
+            // Clear containers
+            sidebarAd1.innerHTML = '';
+            sidebarAd2.innerHTML = '';
             
-            fileInput.addEventListener('change', function(e) {
-                if (this.files && this.files[0]) {
-                    handleFileUpload(this.files[0]);
-                }
-            });
+            // Create first sidebar ad
+            const adElement1 = document.createElement('ins');
+            adElement1.className = 'adsbygoogle';
+            adElement1.style.display = 'inline-block';
+            adElement1.style.width = '300px';
+            adElement1.style.height = '250px';
+            adElement1.setAttribute('data-ad-client', PUBLISHER_ID);
+            adElement1.setAttribute('data-ad-slot', AD_UNIT_ID);
             
-            // Drag and drop
-            uploadArea.addEventListener('dragover', function(e) {
-                e.preventDefault();
-                this.style.borderColor = '#4f46e5';
-                this.style.backgroundColor = '#f1f5f9';
-            });
+            sidebarAd1.appendChild(adElement1);
             
-            uploadArea.addEventListener('dragleave', function(e) {
-                this.style.borderColor = '#cbd5e1';
-                this.style.backgroundColor = '#f8fafc';
-            });
+            // Create second sidebar ad
+            const adElement2 = document.createElement('ins');
+            adElement2.className = 'adsbygoogle';
+            adElement2.style.display = 'inline-block';
+            adElement2.style.width = '300px';
+            adElement2.style.height = '250px';
+            adElement2.setAttribute('data-ad-client', PUBLISHER_ID);
+            adElement2.setAttribute('data-ad-slot', AD_UNIT_ID);
             
-            uploadArea.addEventListener('drop', function(e) {
-                e.preventDefault();
-                this.style.borderColor = '#cbd5e1';
-                this.style.backgroundColor = '#f8fafc';
-                
-                if (e.dataTransfer.files.length) {
-                    handleFileUpload(e.dataTransfer.files[0]);
-                }
-            });
+            sidebarAd2.appendChild(adElement2);
             
-            // Option buttons
-            optionBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    // Remove active class from all options
-                    optionBtns.forEach(b => b.classList.remove('active'));
-                    // Add active class to clicked option
-                    this.classList.add('active');
-                    
-                    // Get the option type
-                    currentOption = this.dataset.option;
-                    
-                    // Show/hide appropriate containers
-                    rangeOption.classList.remove('active');
-                    pagesOption.classList.remove('active');
-                    singleOption.classList.remove('active');
-                    
-                    // Show selected option
-                    document.getElementById(`${currentOption}Option`).classList.add('active');
-                    
-                    // Update pages preview visibility
-                    if (currentOption === 'pages') {
-                        pagesPreview.style.display = 'block';
-                        // Select first 4 pages by default
-                        selectedPages = new Set([1, 2, 3, 4]);
-                        generatePageThumbnails();
-                    } else if (currentOption === 'single') {
-                        pagesPreview.style.display = 'block';
-                        // Select all pages for single page split
-                        selectedPages = new Set();
-                        for (let i = 1; i <= totalPages; i++) {
-                            selectedPages.add(i);
-                        }
-                        generatePageThumbnails();
-                    } else {
-                        pagesPreview.style.display = 'block';
-                        // For range option, select all pages
-                        selectedPages = new Set();
-                        for (let i = 1; i <= totalPages; i++) {
-                            selectedPages.add(i);
-                        }
-                        generatePageThumbnails();
-                    }
-                    
-                    // Refresh ads on user interaction
-                    refreshAds();
-                });
-            });
-            
-            // Range slider
-            pageRange.addEventListener('input', updateRangeDisplay);
-            
-            // Split button
-            splitBtn.addEventListener('click', splitPDF);
-            
-            // Reset button
-            resetBtn.addEventListener('click', resetTool);
-            
-            // Privacy policy link
-            privacyLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                showPrivacyPolicy();
-            });
-        }
-        
-        // Handle file upload
-        function handleFileUpload(file) {
-            // Validate file type
-            if (file.type !== 'application/pdf') {
-                alert('Please upload a PDF file.');
-                return;
-            }
-            
-            // Validate file size (max 50MB)
-            if (file.size > 50 * 1024 * 1024) {
-                alert('File size should not exceed 50MB.');
-                return;
-            }
-            
-            // Update UI
-            selectedFile = file;
-            fileName.textContent = file.name;
-            fileSize.textContent = formatFileSize(file.size) + ' • 12 pages'; // Simulating 12 pages
-            
-            // Show file info
-            fileInfo.classList.add('active');
-            
-            // Add uploading animation
-            uploadArea.classList.add('uploading');
-            uploadArea.innerHTML = `
-                <i class="fas fa-spinner fa-spin"></i>
-                <h3>Processing PDF...</h3>
-                <p>Reading document pages...</p>
-            `;
-            
-            // Simulate processing delay
+            // Push ads to Google with delay between them
             setTimeout(() => {
-                uploadArea.classList.remove('uploading');
-                uploadArea.innerHTML = `
-                    <i class="fas fa-check-circle"></i>
-                    <h3>Upload Successful!</h3>
-                    <p>Your PDF file is ready for splitting.</p>
-                    <p><strong>${file.name}</strong></p>
-                `;
-                
-                // Reset any previous results
-                resultsSection.classList.remove('active');
-                
-                // Refresh ads after file upload
-                refreshAds();
-            }, 1500);
-        }
-        
-        // Format file size
-        function formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-        }
-        
-        // Split PDF function
-        function splitPDF() {
-            // Check if file is uploaded
-            if (!selectedFile) {
-                alert('Please upload a PDF file first.');
-                return;
-            }
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            }, 1000);
             
-            // Show processing animation
-            splitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-            splitBtn.disabled = true;
-            
-            // Simulate processing delay
             setTimeout(() => {
-                // Generate results based on selected option
-                resultFiles.innerHTML = '';
-                
-                if (currentOption === 'range') {
-                    const splitPoint = parseInt(pageRange.value);
-                    
-                    // First part
-                    const firstPart = createResultFile(`part-1.pdf`, splitPoint);
-                    resultFiles.appendChild(firstPart);
-                    
-                    // Second part
-                    const secondPart = createResultFile(`part-2.pdf`, totalPages - splitPoint);
-                    resultFiles.appendChild(secondPart);
-                    
-                } else if (currentOption === 'pages') {
-                    // Create a file for each selected page
-                    const pagesArray = Array.from(selectedPages).sort((a, b) => a - b);
-                    
-                    if (pagesArray.length === 0) {
-                        alert('Please select at least one page to extract.');
-                        splitBtn.innerHTML = '<i class="fas fa-cut"></i> Split PDF';
-                        splitBtn.disabled = false;
-                        return;
-                    }
-                    
-                    // Create a single file with all selected pages
-                    const extractedFile = createResultFile(`extracted-pages.pdf`, pagesArray.length);
-                    resultFiles.appendChild(extractedFile);
-                    
-                } else if (currentOption === 'single') {
-                    // Create a file for each page
-                    for (let i = 1; i <= totalPages; i++) {
-                        const singlePage = createResultFile(`page-${i}.pdf`, 1);
-                        resultFiles.appendChild(singlePage);
-                    }
-                }
-                
-                // Show results section
-                resultsSection.classList.add('active');
-                
-                // Reset split button
-                splitBtn.innerHTML = '<i class="fas fa-cut"></i> Split PDF';
-                splitBtn.disabled = false;
-                
-                // Scroll to results
-                resultsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                
-                // Refresh ads after split operation
-                refreshAds();
+                (adsbygoogle = window.adsbygoogle || []).push({});
             }, 2000);
         }
         
-        // Create a result file element
-        function createResultFile(name, pageCount) {
-            const fileSize = Math.floor(Math.random() * 500) + 100; // Random size between 100-600KB
-            
-            const resultFile = document.createElement('div');
-            resultFile.className = 'result-file';
-            resultFile.innerHTML = `
-                <i class="fas fa-file-pdf"></i>
-                <div class="file-name">${name}</div>
-                <div class="file-size">${formatFileSize(fileSize * 1024)} • ${pageCount} page${pageCount !== 1 ? 's' : ''}</div>
-                <button class="download-btn">
-                    <i class="fas fa-download"></i> Download
-                </button>
-            `;
-            
-            // Add download functionality
-            const downloadBtn = resultFile.querySelector('.download-btn');
-            downloadBtn.addEventListener('click', function() {
-                // Simulate download
-                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Downloading...';
-                this.disabled = true;
+        // Refresh ads
+        function refreshAds() {
+            console.log('Refreshing ads...');
+            initializeAds();
+        }
+        
+        // Set current date
+        function updateCurrentDate() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', options);
+        }
+
+        // Generate time slots
+        function generateTimeSlots() {
+            const timeSlotsContainer = document.getElementById('timeSlots');
+            timeSlotsContainer.innerHTML = '';
+
+            // Create time slots from 6:00 AM to 10:00 PM
+            for (let hour = 6; hour <= 22; hour++) {
+                const timeSlot = document.createElement('div');
+                timeSlot.className = 'time-slot';
                 
-                setTimeout(() => {
-                    alert(`File "${name}" would be downloaded in a real application.`);
-                    this.innerHTML = '<i class="fas fa-download"></i> Download';
-                    this.disabled = false;
-                }, 1000);
+                // Format time label
+                const period = hour >= 12 ? 'PM' : 'AM';
+                const displayHour = hour > 12 ? hour - 12 : hour;
+                const timeLabel = `${displayHour}:00 ${period}`;
+                
+                timeSlot.innerHTML = `
+                    <div class="time-label">${timeLabel}</div>
+                    <input type="text" class="task-input" placeholder="Add a task for ${timeLabel}" data-hour="${hour}">
+                    <div class="task-actions">
+                        <button class="btn btn-save save-btn">Save</button>
+                        <button class="btn btn-delete delete-btn">Delete</button>
+                    </div>
+                `;
+                
+                timeSlotsContainer.appendChild(timeSlot);
+            }
+            
+            // Load saved tasks
+            loadTasks();
+            updateStats();
+        }
+
+        // Load tasks from localStorage
+        function loadTasks() {
+            const savedTasks = JSON.parse(localStorage.getItem('dailyPlannerTasks')) || {};
+            const taskInputs = document.querySelectorAll('.task-input');
+            
+            taskInputs.forEach(input => {
+                const hour = input.getAttribute('data-hour');
+                if (savedTasks[hour]) {
+                    input.value = savedTasks[hour];
+                }
+            });
+        }
+
+        // Save tasks to localStorage
+        function saveTasks() {
+            const taskInputs = document.querySelectorAll('.task-input');
+            const tasks = {};
+            
+            taskInputs.forEach(input => {
+                const hour = input.getAttribute('data-hour');
+                tasks[hour] = input.value;
             });
             
-            return resultFile;
+            localStorage.setItem('dailyPlannerTasks', JSON.stringify(tasks));
+            updateStats();
+            alert('All tasks saved successfully!');
         }
-        
-        // Reset tool
-        function resetTool() {
-            // Reset file input
-            fileInput.value = '';
-            selectedFile = null;
+
+        // Update statistics
+        function updateStats() {
+            const taskInputs = document.querySelectorAll('.task-input');
+            let totalTasks = 0;
+            let completedTasks = 0;
             
-            // Reset UI
-            fileInfo.classList.remove('active');
-            resultsSection.classList.remove('active');
+            taskInputs.forEach(input => {
+                if (input.value.trim() !== '') {
+                    totalTasks++;
+                    // Simple check for completion
+                    if (input.value.includes('✓') || input.value.includes('(done)') || input.value.includes('✅')) {
+                        completedTasks++;
+                    }
+                }
+            });
             
-            // Reset upload area
-            uploadArea.innerHTML = `
-                <i class="fas fa-cloud-upload-alt"></i>
-                <h3>Upload PDF File</h3>
-                <p>Drag and drop your PDF file here or click to browse</p>
-                <p><strong>Max file size: 50MB</strong></p>
-                <button class="upload-btn" id="uploadBtn">
-                    <i class="fas fa-folder-open"></i> Choose File
-                </button>
-            `;
+            document.getElementById('totalTasks').textContent = totalTasks;
+            document.getElementById('completedTasks').textContent = completedTasks;
+            document.getElementById('remainingTasks').textContent = totalTasks - completedTasks;
             
-            // Re-attach event listener to the new upload button
-            document.getElementById('uploadBtn').addEventListener('click', () => fileInput.click());
-            
-            // Reset split option to range
-            optionBtns.forEach(btn => btn.classList.remove('active'));
-            document.querySelector('[data-option="range"]').classList.add('active');
-            
-            rangeOption.classList.remove('active');
-            pagesOption.classList.remove('active');
-            singleOption.classList.remove('active');
-            rangeOption.classList.add('active');
-            
-            currentOption = 'range';
-            
-            // Reset range slider
-            pageRange.value = 6;
-            updateRangeDisplay();
-            
-            // Reset page selection
-            selectedPages = new Set([1, 2, 3, 4]);
-            generatePageThumbnails();
-            
-            // Refresh ads after reset
-            refreshAds();
+            const completionRate = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+            document.getElementById('completionRate').textContent = `${completionRate}%`;
         }
-        
-        // Show privacy policy (required for AdMob)
-        function showPrivacyPolicy() {
-            const privacyHTML = `
-                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 1000;">
-                    <div style="background: white; padding: 2rem; border-radius: 12px; max-width: 600px; max-height: 80vh; overflow-y: auto;">
-                        <h2 style="margin-bottom: 1rem; color: #1e293b;">Privacy Policy</h2>
-                        <p style="margin-bottom: 1rem;">This PDF Splitter Tool respects your privacy. We do not collect or store any personal information from users.</p>
-                        <h3 style="margin-bottom: 0.5rem; color: #1e293b;">Information Collection</h3>
-                        <p style="margin-bottom: 1rem;">All PDF processing is done locally in your browser. We do not upload your files to any server.</p>
-                        <h3 style="margin-bottom: 0.5rem; color: #1e293b;">Third-Party Services</h3>
-                        <p style="margin-bottom: 1rem;">We use Google AdMob to display advertisements. AdMob may collect information to provide personalized ads. Please refer to Google's Privacy Policy for more information.</p>
-                        <h3 style="margin-bottom: 0.5rem; color: #1e293b;">AdMob Information</h3>
-                        <p style="margin-bottom: 1rem;">This tool uses Google AdMob with App ID: ca-app-pub-4319187914977768~7345655475</p>
-                        <h3 style="margin-bottom: 0.5rem; color: #1e293b;">Cookies</h3>
-                        <p style="margin-bottom: 1rem;">We do not use cookies for tracking. However, AdMob may use cookies for ad personalization.</p>
-                        <button onclick="this.parentElement.parentElement.remove()" style="background: #4f46e5; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; cursor: pointer; margin-top: 1rem;">Close</button>
-                    </div>
-                </div>
-            `;
-            
-            const div = document.createElement('div');
-            div.innerHTML = privacyHTML;
-            document.body.appendChild(div);
+
+        // Handle responsive ads on resize
+        function handleResponsiveAds() {
+            initializeTopBannerAd();
         }
-        
-        // Initialize the application
-        document.addEventListener('DOMContentLoaded', init);
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCurrentDate();
+            generateTimeSlots();
+            
+            // Initialize ads after a short delay
+            setTimeout(() => {
+                initializeAds();
+            }, 1500);
+            
+            // Handle responsive ads on resize
+            window.addEventListener('resize', handleResponsiveAds);
+            
+            // Save All button
+            document.getElementById('saveAllBtn').addEventListener('click', saveTasks);
+            
+            // Individual save buttons
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('save-btn')) {
+                    const input = e.target.closest('.time-slot').querySelector('.task-input');
+                    const hour = input.getAttribute('data-hour');
+                    const tasks = JSON.parse(localStorage.getItem('dailyPlannerTasks')) || {};
+                    tasks[hour] = input.value;
+                    localStorage.setItem('dailyPlannerTasks', JSON.stringify(tasks));
+                    updateStats();
+                    alert('Task saved!');
+                }
+                
+                // Delete buttons
+                if (e.target.classList.contains('delete-btn')) {
+                    const input = e.target.closest('.time-slot').querySelector('.task-input');
+                    input.value = '';
+                    const hour = input.getAttribute('data-hour');
+                    const tasks = JSON.parse(localStorage.getItem('dailyPlannerTasks')) || {};
+                    delete tasks[hour];
+                    localStorage.setItem('dailyPlannerTasks', JSON.stringify(tasks));
+                    updateStats();
+                }
+            });
+            
+            // Clear All button
+            document.getElementById('clearAllBtn').addEventListener('click', function() {
+                if (confirm('Are you sure you want to clear all tasks?')) {
+                    localStorage.removeItem('dailyPlannerTasks');
+                    generateTimeSlots();
+                }
+            });
+            
+            // Add Task button
+            document.getElementById('addTaskBtn').addEventListener('click', function() {
+                const emptySlots = Array.from(document.querySelectorAll('.task-input'))
+                    .filter(input => input.value === '');
+                
+                if (emptySlots.length > 0) {
+                    emptySlots[0].focus();
+                } else {
+                    alert('All time slots are filled!');
+                }
+            });
+            
+            // Export button
+            document.getElementById('exportBtn').addEventListener('click', function() {
+                const tasks = [];
+                document.querySelectorAll('.time-slot').forEach(slot => {
+                    const time = slot.querySelector('.time-label').textContent;
+                    const task = slot.querySelector('.task-input').value;
+                    if (task.trim()) {
+                        tasks.push(`${time}: ${task}`);
+                    }
+                });
+                
+                const blob = new Blob([tasks.join('\n')], { type: 'text/plain' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'daily-planner-tasks.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            });
+            
+            // Print button
+            document.getElementById('printBtn').addEventListener('click', function() {
+                window.print();
+            });
+            
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+        });
+
+        // Additional feature: Mark task as complete with Enter key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.target.classList.contains('task-input')) {
+                const input = e.target;
+                if (!input.value.includes('✓') && !input.value.includes('✅')) {
+                    input.value = input.value + ' ✓';
+                    const hour = input.getAttribute('data-hour');
+                    const tasks = JSON.parse(localStorage.getItem('dailyPlannerTasks')) || {};
+                    tasks[hour] = input.value;
+                    localStorage.setItem('dailyPlannerTasks', JSON.stringify(tasks));
+                    updateStats();
+                }
+            }
+        });
     </script>
 </body>
 </html>

@@ -1,0 +1,9 @@
+
+Follow these instructions:
+Complete the instructions in the Google Mobile Ads SDK guide using this app ID:
+All in one Online Tool 
+ca-app-pub-4319187914977768~7345655475
+Follow the banner implementation guide to integrate the SDK. You'll specify ad type, size, and placement when you integrate the code using this ad unit ID:
+All in one Online Tool
+ca-app-pub-4319187914977768/9707260784
+Review the AdMob policies to ensure your implementation complies.

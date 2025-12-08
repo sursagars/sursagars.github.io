@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator | Create Free QR Codes Instantly</title>
+    <meta name="description" content="Generate QR codes for URLs, text, contact info, WiFi credentials and more. Free, fast, and no registration required.">
+    <meta name="keywords" content="QR code generator, create QR code, free QR code, QR code maker, online QR code">
+    <meta name="author" content="QR Code Generator Tool">
+    
+    <!-- SEO Meta Tags -->
+    <meta property="og:title" content="QR Code Generator | Create Free QR Codes Instantly">
+    <meta property="og:description" content="Generate QR codes for URLs, text, contact info, WiFi credentials and more. Free, fast, and no registration required.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://qrcode-generator.example.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔳</text></svg>">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4319187914977768" crossorigin="anonymous"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 100%;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            padding: 25px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-bottom: 5px solid #3a56a4;
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+        
+        .tagline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Ad Container Styles */
+        .ad-container {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 25px auto;
+            text-align: center;
+            border: 1px dashed #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100px;
+        }
+        
+        .ad-label {
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        /* Main Content Layout */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 900px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Form Styles */
+        .form-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: #4b6cb7;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(75, 108, 183, 0.1);
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        /* QR Display Styles */
+        .qr-display-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .qr-code-container {
+            width: 250px;
+            height: 250px;
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0 30px;
+            border: 1px solid #eee;
+            overflow: hidden;
+        }
+        
+        #qrCode {
+            max-width: 100%;
+            max-height: 100%;
+            padding: 10px;
+        }
+        
+        /* Button Styles */
+        .btn {
+            background: linear-gradient(to right, #4b6cb7, #3a56a4);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(to right, #3a56a4, #2d437c);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(75, 108, 183, 0.2);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-download {
+            background: linear-gradient(to right, #00b09b, #96c93d);
+            margin-top: 15px;
+        }
+        
+        .btn-download:hover {
+            background: linear-gradient(to right, #009688, #7cb342);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+        }
+        
+        /* Footer styles from pdf-excel.html */
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px 20px;
+            color: #6c757d;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            background-color: #f8f9fa;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #212529;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .footer-links a:hover {
+            color: #4361ee;
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            color: #6c757d;
+            font-size: 0.85rem;
+            margin-top: 15px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .form-section, .qr-display-section {
+                padding: 20px;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .ad-container {
+                margin: 15px auto;
+                padding: 10px;
+            }
+            
+            .footer-links {
+                gap: 15px;
+            }
+        }
+        
+        /* QR Code Type Specific Styles */
+        .qr-type-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .qr-type-option {
+            border: 2px solid #eee;
+            border-radius: 8px;
+            padding: 12px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+        
+        .qr-type-option:hover {
+            border-color: #4b6cb7;
+            background-color: #f0f4ff;
+        }
+        
+        .qr-type-option.active {
+            border-color: #4b6cb7;
+            background-color: #e8edff;
+            font-weight: 600;
+        }
+        
+        .type-icon {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            display: block;
+        }
+        
+        /* Hidden fields for different QR types */
+        .qr-type-fields {
+            display: none;
+        }
+        
+        .qr-type-fields.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Instructions */
+        .instructions {
+            background-color: #f0f7ff;
+            border-left: 4px solid #4b6cb7;
+            padding: 15px;
+            margin-top: 25px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+        }
+        
+        .instructions h4 {
+            margin-bottom: 8px;
+            color: #4b6cb7;
+        }
+        
+        /* AdSense responsive adjustments */
+        .adsbygoogle {
+            display: block;
+            margin: 0 auto;
+        }
+        
+        /* Loading animation */
+        .loading {
+            display: none;
+            font-style: italic;
+            color: #666;
+            text-align: center;
+            margin: 10px 0;
+        }
+        
+        .spinner {
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 3px solid #4b6cb7;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>QR Code Generator</h1>
+                <p class="tagline">Create custom QR codes for URLs, text, contact information, WiFi credentials, and more. Free, fast, and no registration required.</p>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Top Ad Banner -->
+        <div class="ad-container">
+            <div>
+                <span class="ad-label">Advertisement</span>
+                <!-- AdSense Ad Unit -->
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-4319187914977768"
+                    data-ad-slot="9707260784"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+        
+        <!-- QR Type Selection -->
+        <div class="form-section">
+            <h2 style="margin-bottom: 20px; color: #182848;">Select QR Code Type</h2>
+            <div class="qr-type-options">
+                <div class="qr-type-option active" data-type="url">
+                    <span class="type-icon">🌐</span>
+                    Website URL
+                </div>
+                <div class="qr-type-option" data-type="text">
+                    <span class="type-icon">📝</span>
+                    Plain Text
+                </div>
+                <div class="qr-type-option" data-type="wifi">
+                    <span class="type-icon">📶</span>
+                    WiFi Network
+                </div>
+                <div class="qr-type-option" data-type="contact">
+                    <span class="type-icon">👤</span>
+                    Contact Info
+                </div>
+                <div class="qr-type-option" data-type="email">
+                    <span class="type-icon">✉️</span>
+                    Email
+                </div>
+                <div class="qr-type-option" data-type="sms">
+                    <span class="type-icon">💬</span>
+                    SMS
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Column: Form -->
+            <div class="form-section">
+                <h2 style="margin-bottom: 25px; color: #182848;">Generate QR Code</h2>
+                
+                <!-- URL QR Code Fields -->
+                <div id="url-fields" class="qr-type-fields active">
+                    <div class="form-group">
+                        <label for="urlInput">Website URL</label>
+                        <input type="url" id="urlInput" placeholder="https://example.com" value="https://example.com">
+                    </div>
+                </div>
+                
+                <!-- Text QR Code Fields -->
+                <div id="text-fields" class="qr-type-fields">
+                    <div class="form-group">
+                        <label for="textInput">Text Content</label>
+                        <textarea id="textInput" placeholder="Enter any text you want to encode in the QR code...">Sample text for QR code generation.</textarea>
+                    </div>
+                </div>
+                
+                <!-- WiFi QR Code Fields -->
+                <div id="wifi-fields" class="qr-type-fields">
+                    <div class="form-group">
+                        <label for="wifiSsid">Network Name (SSID)</label>
+                        <input type="text" id="wifiSsid" placeholder="MyWiFiNetwork">
+                    </div>
+                    <div class="form-group">
+                        <label for="wifiPassword">Password</label>
+                        <input type="text" id="wifiPassword" placeholder="WiFiPassword123">
+                    </div>
+                    <div class="form-group">
+                        <label for="wifiEncryption">Encryption Type</label>
+                        <select id="wifiEncryption">
+                            <option value="WPA">WPA/WPA2</option>
+                            <option value="WEP">WEP</option>
+                            <option value="nopass">No Encryption</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Contact QR Code Fields -->
+                <div id="contact-fields" class="qr-type-fields">
+                    <div class="form-group">
+                        <label for="contactName">Full Name</label>
+                        <input type="text" id="contactName" placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactPhone">Phone Number</label>
+                        <input type="tel" id="contactPhone" placeholder="+1 (123) 456-7890">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Email Address</label>
+                        <input type="email" id="contactEmail" placeholder="john@example.com">
+                    </div>
+                </div>
+                
+                <!-- Email QR Code Fields -->
+                <div id="email-fields" class="qr-type-fields">
+                    <div class="form-group">
+                        <label for="emailTo">Recipient Email</label>
+                        <input type="email" id="emailTo" placeholder="recipient@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="emailSubject">Subject</label>
+                        <input type="text" id="emailSubject" placeholder="Email Subject">
+                    </div>
+                    <div class="form-group">
+                        <label for="emailBody">Message Body</label>
+                        <textarea id="emailBody" placeholder="Email message content...">This is a sample email message.</textarea>
+                    </div>
+                </div>
+                
+                <!-- SMS QR Code Fields -->
+                <div id="sms-fields" class="qr-type-fields">
+                    <div class="form-group">
+                        <label for="smsNumber">Phone Number</label>
+                        <input type="tel" id="smsNumber" placeholder="+1 (123) 456-7890">
+                    </div>
+                    <div class="form-group">
+                        <label for="smsMessage">Message</label>
+                        <textarea id="smsMessage" placeholder="SMS message content...">Sample SMS message.</textarea>
+                    </div>
+                </div>
+                
+                <!-- QR Code Color Options -->
+                <div class="form-group">
+                    <label for="qrColor">QR Code Color</label>
+                    <input type="color" id="qrColor" value="#000000">
+                </div>
+                
+                <!-- Generate Button -->
+                <div class="button-group">
+                    <button id="generateBtn" class="btn">
+                        <span>Generate QR Code</span>
+                    </button>
+                </div>
+                
+                <!-- Loading Indicator -->
+                <div id="loading" class="loading">
+                    <div class="spinner"></div>
+                    <div>Generating QR Code...</div>
+                </div>
+                
+                <!-- Instructions -->
+                <div class="instructions">
+                    <h4>How to use:</h4>
+                    <p>1. Select the type of QR code you want to create<br>
+                    2. Fill in the required information<br>
+                    3. Click "Generate QR Code" to create your QR code<br>
+                    4. Download the QR code image for your use</p>
+                </div>
+            </div>
+            
+            <!-- Right Column: QR Code Display -->
+            <div class="qr-display-section">
+                <h2 style="margin-bottom: 10px; color: #182848;">Your QR Code</h2>
+                <p style="text-align: center; margin-bottom: 20px; color: #666; font-size: 0.95rem;">Scan this QR code with any smartphone camera</p>
+                
+                <!-- QR Code Display Area -->
+                <div class="qr-code-container">
+                    <img id="qrCode" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://example.com&color=000000" alt="Generated QR Code">
+                </div>
+                
+                <!-- Download Button -->
+                <button id="downloadBtn" class="btn btn-download">
+                    <span>Download QR Code</span>
+                </button>
+                
+                <!-- Ad Container in QR Display Section -->
+                <div class="ad-container" style="margin-top: 30px; width: 100%;">
+                    <div>
+                        <span class="ad-label">Advertisement</span>
+                        <!-- AdSense Ad Unit -->
+                        <ins class="adsbygoogle"
+                            style="display:block"
+                            data-ad-client="ca-pub-4319187914977768"
+                            data-ad-slot="9707260784"
+                            data-ad-format="auto"
+                            data-full-width-responsive="true"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Middle Ad Banner -->
+        <div class="ad-container">
+            <div>
+                <span class="ad-label">Advertisement</span>
+                <!-- AdSense Ad Unit -->
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-4319187914977768"
+                    data-ad-slot="9707260784"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer from pdf-excel.html -->
+    <div class="footer">
+        <div class="footer-links">
+            <a href="legal.html#about">About this Site</a>
+            <a href="legal.html#privacy">Privacy Policy</a>
+            <a href="legal.html#terms">Terms of Use</a>
+        </div>
+        <div class="copyright">
+            &copy; <span id="currentYear"></span> QR Code Generator. All rights reserved.
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const qrTypeOptions = document.querySelectorAll('.qr-type-option');
+        const qrTypeFields = document.querySelectorAll('.qr-type-fields');
+        const generateBtn = document.getElementById('generateBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const qrCodeImg = document.getElementById('qrCode');
+        const loadingElement = document.getElementById('loading');
+        
+        // QR Code Data Inputs
+        const urlInput = document.getElementById('urlInput');
+        const textInput = document.getElementById('textInput');
+        const wifiSsid = document.getElementById('wifiSsid');
+        const wifiPassword = document.getElementById('wifiPassword');
+        const wifiEncryption = document.getElementById('wifiEncryption');
+        const contactName = document.getElementById('contactName');
+        const contactPhone = document.getElementById('contactPhone');
+        const contactEmail = document.getElementById('contactEmail');
+        const emailTo = document.getElementById('emailTo');
+        const emailSubject = document.getElementById('emailSubject');
+        const emailBody = document.getElementById('emailBody');
+        const smsNumber = document.getElementById('smsNumber');
+        const smsMessage = document.getElementById('smsMessage');
+        const qrColor = document.getElementById('qrColor');
+        
+        // Current QR type
+        let currentType = 'url';
+        
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // QR Type Selection
+        qrTypeOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove active class from all options
+                qrTypeOptions.forEach(opt => opt.classList.remove('active'));
+                // Add active class to clicked option
+                option.classList.add('active');
+                
+                // Get selected type
+                currentType = option.getAttribute('data-type');
+                
+                // Hide all fields
+                qrTypeFields.forEach(field => field.classList.remove('active'));
+                
+                // Show fields for selected type
+                document.getElementById(`${currentType}-fields`).classList.add('active');
+                
+                // Generate QR code for new type with sample data
+                setTimeout(generateQRCode, 100);
+            });
+        });
+        
+        // Generate QR Code
+        generateBtn.addEventListener('click', generateQRCode);
+        
+        // Function to generate QR code
+        function generateQRCode() {
+            // Show loading
+            loadingElement.style.display = 'block';
+            
+            // Get data based on current type
+            let qrData = '';
+            const color = qrColor.value.replace('#', '');
+            
+            switch(currentType) {
+                case 'url':
+                    qrData = urlInput.value.trim() || 'https://example.com';
+                    break;
+                case 'text':
+                    qrData = textInput.value.trim() || 'Sample text for QR code generation.';
+                    break;
+                case 'wifi':
+                    const ssid = wifiSsid.value.trim() || 'MyWiFiNetwork';
+                    const password = wifiPassword.value.trim() || 'WiFiPassword123';
+                    const encryption = wifiEncryption.value;
+                    qrData = `WIFI:S:${ssid};T:${encryption};P:${password};;`;
+                    break;
+                case 'contact':
+                    const name = contactName.value.trim() || 'John Doe';
+                    const phone = contactPhone.value.trim() || '+1 (123) 456-7890';
+                    const email = contactEmail.value.trim() || 'john@example.com';
+                    qrData = `BEGIN:VCARD\nVERSION:3.0\nFN:${name}\nTEL:${phone}\nEMAIL:${email}\nEND:VCARD`;
+                    break;
+                case 'email':
+                    const to = emailTo.value.trim() || 'recipient@example.com';
+                    const subject = emailSubject.value.trim() || 'Email Subject';
+                    const body = emailBody.value.trim() || 'This is a sample email message.';
+                    qrData = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                    break;
+                case 'sms':
+                    const number = smsNumber.value.trim() || '+1 (123) 456-7890';
+                    const message = smsMessage.value.trim() || 'Sample SMS message.';
+                    qrData = `SMSTO:${number}:${message}`;
+                    break;
+            }
+            
+            // Encode data for URL
+            const encodedData = encodeURIComponent(qrData);
+            
+            // Generate QR code using QRServer API
+            const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodedData}&color=${color}`;
+            
+            // Update QR code image with a small delay to show loading
+            setTimeout(() => {
+                qrCodeImg.src = qrCodeUrl;
+                loadingElement.style.display = 'none';
+                
+                // Update download button data
+                downloadBtn.setAttribute('data-qr-url', qrCodeUrl);
+            }, 500);
+        }
+        
+        // Download QR Code
+        downloadBtn.addEventListener('click', function() {
+            const qrUrl = this.getAttribute('data-qr-url');
+            if (!qrUrl) return;
+            
+            // Create a temporary link to download the image
+            const link = document.createElement('a');
+            link.href = qrUrl;
+            link.download = `qr-code-${currentType}-${Date.now()}.png`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+        
+        // Initialize with default QR code
+        window.addEventListener('DOMContentLoaded', () => {
+            generateQRCode();
+            
+            // Initialize AdSense ads
+            if (window.adsbygoogle) {
+                // Push ads again to ensure they load
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            }
+        });
+        
+        // Auto-generate QR code when inputs change (with debounce)
+        let debounceTimer;
+        const inputs = document.querySelectorAll('input, textarea, select');
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(generateQRCode, 800);
+            });
+        });
+        
+        // Color change triggers QR code update
+        qrColor.addEventListener('input', generateQRCode);
+    </script>
+</body>
+</html>

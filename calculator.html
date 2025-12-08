@@ -671,24 +671,39 @@
             margin-top: 3px;
         }
         
-        /* Footer (minimal as requested) */
+        /* Footer Styles */
         .footer {
             text-align: center;
             margin-top: 50px;
-            padding: 20px;
+            padding: 30px 20px;
             color: #94a3b8;
             font-size: 0.9rem;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
         
-        .footer a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
         }
         
-        .footer a:hover {
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
             text-decoration: underline;
+        }
+        
+        .copyright {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 15px;
         }
         
         /* Animations */
@@ -719,6 +734,12 @@
             
             .calc-btn.scientific.hide-on-mobile {
                 display: none;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
             }
         }
         
@@ -1005,15 +1026,23 @@
             </div>
         </div>
         
-        <!-- Minimal Footer -->
+        <!-- Updated Footer with Legal Links -->
         <div class="footer">
-            <p>Scientific Calculator &copy; 2023 | <a href="https://github.com/Alkaison/Currency-Converter" target="_blank">View Other Tools</a> | 
-            <a href="#" id="privacyLink">Privacy</a> | <a href="#" id="termsLink">Terms</a></p>
-            <p style="font-size: 0.8rem; margin-top: 10px; color: #64748b;">Disclaimer: This calculator provides mathematical computations for educational and informational purposes only.</p>
+            <div class="footer-links">
+                <a href="legal.html#about">About this Site </a>
+                <a href="legal.html#privacy">Privacy Policy</a>
+                <a href="legal.html#terms">Terms of Use</a>
+            </div>
+            <div class="copyright">
+                &copy; <span id="currentYear"></span> Scientific Calculator Tool. All rights reserved.
+            </div>
         </div>
     </div>
 
     <script>
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
         // Calculator State
         let currentInput = '0';
         let previousInput = '';
@@ -1577,44 +1606,6 @@
             // History buttons
             clearHistoryBtn.addEventListener('click', clearHistory);
             exportHistoryBtn.addEventListener('click', exportHistory);
-            
-            // Privacy and terms links
-            document.getElementById('privacyLink').addEventListener('click', (e) => {
-                e.preventDefault();
-                alert("Privacy Policy: We do not collect or store any personal data. All calculations are performed locally in your browser. History is stored only in your browser's local storage.");
-            });
-            
-            document.getElementById('termsLink').addEventListener('click', (e) => {
-                e.preventDefault();
-                alert("Terms of Use: This calculator is provided for educational and informational purposes only. Results should be verified for critical applications.");
-            });
-            
-            // Keyboard support
-            document.addEventListener('keydown', (e) => {
-                if (e.key >= '0' && e.key <= '9') {
-                    appendNumber(e.key);
-                } else if (e.key === '.') {
-                    appendNumber('.');
-                } else if (e.key === '+') {
-                    chooseOperation('add');
-                } else if (e.key === '-') {
-                    chooseOperation('subtract');
-                } else if (e.key === '*') {
-                    chooseOperation('multiply');
-                } else if (e.key === '/') {
-                    e.preventDefault();
-                    chooseOperation('divide');
-                } else if (e.key === 'Enter' || e.key === '=') {
-                    e.preventDefault();
-                    calculate();
-                } else if (e.key === 'Escape' || e.key === 'Delete') {
-                    clearCalculator();
-                } else if (e.key === 'Backspace') {
-                    deleteLast();
-                } else if (e.key === '%') {
-                    calculatePercentage();
-                }
-            });
         }
         
         // Initialize the calculator

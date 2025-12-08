@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Ultimate Tools Hub - Free web-based utilities including currency converter, scientific calculator, unit converter, PDF tools, and more.">
-    <meta name="keywords" content="online tools, currency converter, scientific calculator, unit converter, budget planner, PDF tools, image compression, text case converter">
-
+    <meta name="keywords" content="online tools, currency converter, scientific calculator, unit converter, budget planner, PDF tools, image compression, text case converter, URL shortener, QR code generator">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4319187914977768" crossorigin="anonymous">
+    </script>
+    
     <title>Ultimate Tools Hub - Free Web-Based Utilities</title>
     <link rel="icon" type="image/png" href="https://sursagars.github.io/favicon.png"/>
     <!-- Fonts & Icons -->
@@ -49,6 +53,8 @@
             background: linear-gradient(135deg, #f5f7ff 0%, #f0f2ff 100%);
             overflow-x: hidden;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -63,6 +69,25 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        /* Ad Banner */
+        .ad-banner {
+            text-align: center;
+            margin: 30px auto 40px;
+            padding: 10px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            max-width: 728px;
+        }
+
+        .ad-banner h3 {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         /* Hero Section */
@@ -180,6 +205,7 @@
         /* Tools Section */
         .tools-section {
             padding: 60px 0 80px;
+            flex: 1;
         }
 
         .section-title {
@@ -262,11 +288,17 @@
         #scientific-calculator-card .tool-header { 
             background: linear-gradient(135deg, #9C27B0, #7B1FA2);
         }
+        #url-shortener-card .tool-header { 
+            background: linear-gradient(135deg, #FF6B6B, #FF4757);
+        }
         #budget-planner-card .tool-header { 
             background: linear-gradient(135deg, #FF9800, #F57C00);
         }
         #daily-planner-card .tool-header { 
             background: linear-gradient(135deg, #f72585, #e01e75);
+        }
+        #qr-code-generator-card .tool-header { 
+            background: linear-gradient(135deg, #00C9FF, #92FE9D);
         }
         #image-compressor-card .tool-header { 
             background: linear-gradient(135deg, #00BCD4, #0097A7);
@@ -374,11 +406,17 @@
         #scientific-calculator-card .open-btn { 
             background: linear-gradient(135deg, #9C27B0, #7B1FA2);
         }
+        #url-shortener-card .open-btn { 
+            background: linear-gradient(135deg, #FF6B6B, #FF4757);
+        }
         #budget-planner-card .open-btn { 
             background: linear-gradient(135deg, #FF9800, #F57C00);
         }
         #daily-planner-card .open-btn { 
             background: linear-gradient(135deg, #f72585, #e01e75);
+        }
+        #qr-code-generator-card .open-btn { 
+            background: linear-gradient(135deg, #00C9FF, #92FE9D);
         }
         #image-compressor-card .open-btn { 
             background: linear-gradient(135deg, #00BCD4, #0097A7);
@@ -397,6 +435,61 @@
         }
         #text-case-converter-card .open-btn { 
             background: linear-gradient(135deg, #9d4edd, #8a3bc4);
+        }
+
+        /* Footer styles from pdf-excel.html */
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px 20px;
+            color: #6c757d;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            background-color: #f8f9fa;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--dark);
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            color: #6c757d;
+            font-size: 0.85rem;
+            margin-top: 15px;
+        }
+
+        /* Development Notice */
+        .dev-notice {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 6px;
+            padding: 8px 15px;
+            margin-top: 15px;
+            font-size: 0.8rem;
+            text-align: center;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .dev-notice strong {
+            color: #ffc107;
         }
 
         /* Responsive Styles */
@@ -459,6 +552,21 @@
             .tool-body {
                 padding: 30px 20px;
             }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+            
+            .ad-banner {
+                margin: 25px auto 35px;
+            }
+            
+            .dev-notice {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
         }
 
         @media (max-width: 576px) {
@@ -519,6 +627,11 @@
                 padding: 12px 35px;
                 font-size: 1rem;
             }
+            
+            .ad-banner {
+                margin: 20px auto 30px;
+                padding: 8px;
+            }
         }
 
         /* Subtle Floating Animation */
@@ -531,6 +644,27 @@
             animation: float 5s ease-in-out infinite;
         }
 
+        /* No Results Message */
+        #noResults {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        #noResults i {
+            font-size: 4rem;
+            color: var(--light-gray);
+            margin-bottom: 20px;
+        }
+
+        #noResults h3 {
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+
+        #noResults p {
+            color: var(--gray);
+        }
     </style>
 </head>
 <body>
@@ -542,11 +676,26 @@
                 <div class="headline-accent"></div>
             </div>
             
-            <p class="hero-tagline">Access 11 powerful, free web-based utilities designed to simplify your daily tasks. No registration required.</p>
+            <p class="hero-tagline">Access 13 powerful, free web-based utilities designed to simplify your daily tasks. No registration required.</p>
+            
+            <!-- Ad Banner - Moved under main heading -->
+            <div class="ad-banner">
+                <h3>Advertisement</h3>
+                <!-- Google AdSense Ad Unit -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-4319187914977768"
+                     data-ad-slot="9707260784"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
             
             <div class="hero-stats">
                 <div class="stat-item">
-                    <span class="stat-number">11</span>
+                    <span class="stat-number">13</span>
                     <span class="stat-text">Premium Tools</span>
                 </div>
                 <div class="stat-item">
@@ -608,6 +757,19 @@
                     </div>
                 </div>
                 
+                <!-- URL Shortener -->
+                <div class="tool-card" id="url-shortener-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-link"></i>
+                        </div>
+                        <h3>URL Shortener</h3>
+                    </div>
+                    <div class="tool-body">
+                        <a href="url-short.html" class="open-btn">Open Tool</a>
+                    </div>
+                </div>
+                
                 <!-- Budget Planner -->
                 <div class="tool-card" id="budget-planner-card">
                     <div class="tool-header">
@@ -631,6 +793,19 @@
                     </div>
                     <div class="tool-body">
                         <a href="planner.html" class="open-btn">Open Tool</a>
+                    </div>
+                </div>
+                
+                <!-- QR Code Generator -->
+                <div class="tool-card" id="qr-code-generator-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-qrcode"></i>
+                        </div>
+                        <h3>QR Code Generator</h3>
+                    </div>
+                    <div class="tool-body">
+                        <a href="qr-code.html" class="open-btn">Open Tool</a>
                     </div>
                 </div>
                 
@@ -715,56 +890,31 @@
         </div>
     </section>
 
+    <!-- Footer from pdf-excel.html -->
+    <div class="footer">
+        <div class="footer-links">
+            <a href="legal.html#about">About this Site</a>
+            <a href="legal.html#privacy">Privacy Policy</a>
+            <a href="legal.html#terms">Terms of Use</a>
+        </div>
+        <div class="copyright">
+            © <span id="currentYear"></span> Ultimate Tools Hub | 
+            <a href="https://sursagars.github.io" target="_blank">Development Version</a>
+        </div>
+    </div>
+    
+    <div class="dev-notice">
+        <strong>⚠️ Development Phase:</strong> This site is currently in testing on Pages. Final version coming soon.
+    </div>
+
     <script>
-        // Enhanced hover effects and animations
         document.addEventListener('DOMContentLoaded', function() {
             const toolCards = document.querySelectorAll('.tool-card');
-            const toolSearch = document.getElementById('toolSearch');
             const toolsGrid = document.getElementById('toolsGrid');
             
-            // Tool search functionality
-            toolSearch.addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase().trim();
-                const allCards = document.querySelectorAll('.tool-card');
-                
-                // Show/hide cards based on search
-                allCards.forEach(card => {
-                    const toolName = card.querySelector('h3').textContent.toLowerCase();
-                    if (toolName.includes(searchTerm) || searchTerm === '') {
-                        card.style.display = 'flex';
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    } else {
-                        card.style.opacity = '0';
-                        card.style.transform = 'translateY(20px)';
-                        setTimeout(() => {
-                            card.style.display = 'none';
-                        }, 300);
-                    }
-                });
-                
-                // If no results found, show message
-                const visibleCards = document.querySelectorAll('.tool-card[style*="display: flex"]');
-                if (visibleCards.length === 0 && searchTerm !== '') {
-                    if (!document.getElementById('noResults')) {
-                        const noResults = document.createElement('div');
-                        noResults.id = 'noResults';
-                        noResults.innerHTML = `
-                            <div style="text-align: center; padding: 40px; grid-column: 1 / -1;">
-                                <i class="fas fa-search" style="font-size: 3rem; color: #ccc; margin-bottom: 20px;"></i>
-                                <h3 style="color: #666; margin-bottom: 10px;">No tools found</h3>
-                                <p style="color: #999;">Try searching for a different tool</p>
-                            </div>
-                        `;
-                        toolsGrid.appendChild(noResults);
-                    }
-                } else {
-                    const noResults = document.getElementById('noResults');
-                    if (noResults) {
-                        noResults.remove();
-                    }
-                }
-            });
+            // Set current year in copyright
+            const currentYear = new Date().getFullYear();
+            document.getElementById('currentYear').textContent = currentYear;
             
             // Enhanced hover effects for tool cards
             toolCards.forEach(card => {
@@ -772,7 +922,6 @@
                     this.style.transform = 'translateY(-10px)';
                     this.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.12)';
                     
-                    // Add a subtle scale effect to the icon
                     const icon = this.querySelector('.tool-icon');
                     if (icon) {
                         icon.style.transform = 'scale(1.1) rotate(5deg)';
@@ -784,7 +933,6 @@
                     this.style.transform = 'translateY(0)';
                     this.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.08)';
                     
-                    // Reset icon
                     const icon = this.querySelector('.tool-icon');
                     if (icon) {
                         icon.style.transform = '';
@@ -807,29 +955,30 @@
             // Add floating animation to stats cards
             const statItems = document.querySelectorAll('.stat-item');
             statItems.forEach((item, index) => {
-                // Stagger the animation delay
                 item.style.animationDelay = `${index * 0.2}s`;
                 item.style.animation = 'float 4s ease-in-out infinite';
             });
             
-            // Add keyboard shortcut for search
-            document.addEventListener('keydown', function(e) {
-                if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-                    e.preventDefault();
-                    toolSearch.focus();
-                }
-                
-                // Escape clears search
-                if (e.key === 'Escape' && document.activeElement === toolSearch) {
-                    toolSearch.value = '';
-                    toolSearch.dispatchEvent(new Event('input'));
-                }
-            });
+            // Initialize AdSense
+            if (typeof adsbygoogle !== 'undefined') {
+                adsbygoogle.push({});
+            }
             
-            // Add search icon click to focus
-            document.querySelector('.search-icon').addEventListener('click', function() {
-                toolSearch.focus();
-            });
+            // Add warning for currency converter
+            const currencyCard = document.getElementById('currency-converter-card');
+            if (currencyCard) {
+                const currencyBtn = currencyCard.querySelector('.open-btn');
+                currencyBtn.addEventListener('click', function(e) {
+                    // Optional: Show a warning about free API usage
+                    if (!localStorage.getItem('currencyWarningShown')) {
+                        if (confirm('⚠️ IMPORTANT: Our currency converter uses a free third-party API.\n\nRates may be delayed and are for informational purposes only.\n\nNOT for financial transactions.\n\nClick OK to proceed or Cancel to stay on this page.')) {
+                            localStorage.setItem('currencyWarningShown', 'true');
+                        } else {
+                            e.preventDefault();
+                        }
+                    }
+                });
+            }
         });
     </script>
 </body>
