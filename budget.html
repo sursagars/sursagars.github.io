@@ -21,7 +21,7 @@
 
     <link rel="icon" type="image/png" href="https://sursagars.github.io/favicon.png"/>
     
-    <!-- Google AdSense Code - MUST be in head -->
+    <!-- Google AdSense Code -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4319187914977768"
      crossorigin="anonymous"></script>
      
@@ -114,13 +114,70 @@
             margin-right: auto;
         }
 
-        /* Download Actions */
+        /* Download Actions - Mobile Optimized */
         .download-actions {
             display: flex;
             justify-content: center;
             gap: 12px;
             flex-wrap: wrap;
             margin-top: 20px;
+        }
+
+        /* Horizontal Banner Ad Styles */
+        .horizontal-banner-ad {
+            width: 100%;
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .banner-ad-container {
+            width: 100%;
+            min-height: 100px;
+            background: #f8f9fa;
+            border: 2px solid #e1e5e9;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .banner-ad-label {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 2px 15px;
+            border-radius: 12px;
+            border: 1px solid #e1e5e9;
+        }
+
+        .banner-ad-wrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .horizontal-banner-ad {
+                margin: 20px 0;
+            }
+            
+            .banner-ad-container {
+                min-height: 90px;
+                padding: 12px;
+            }
         }
 
         /* Main Content Layout */
@@ -145,6 +202,10 @@
             padding: 20px;
             margin-bottom: 20px;
             transition: var(--transition);
+        }
+
+        .budget-section:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
         }
 
         .section-title {
@@ -191,6 +252,8 @@
             font-size: 1rem;
             transition: var(--transition);
             background: white;
+            -webkit-appearance: none;
+            appearance: none;
         }
 
         input:focus, select:focus {
@@ -199,7 +262,12 @@
             box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
         }
 
-        /* Button Styles */
+        input[type="number"] {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Button Styles - Touch Friendly */
         button {
             background-color: var(--primary-color);
             color: white;
@@ -216,18 +284,23 @@
             gap: 8px;
             min-height: 48px;
             min-width: 48px;
+            touch-action: manipulation;
         }
 
-        button:hover {
+        button:hover, button:active {
             background-color: #2980b9;
             transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(0);
         }
 
         .btn-danger {
             background-color: var(--danger-color);
         }
 
-        .btn-danger:hover {
+        .btn-danger:hover, .btn-danger:active {
             background-color: #c0392b;
         }
 
@@ -235,7 +308,7 @@
             background-color: var(--secondary-color);
         }
 
-        .btn-success:hover {
+        .btn-success:hover, .btn-success:active {
             background-color: #27ae60;
         }
 
@@ -243,8 +316,15 @@
             background-color: var(--warning-color);
         }
 
-        .btn-warning:hover {
+        .btn-warning:hover, .btn-warning:active {
             background-color: #e67e22;
+        }
+
+        .btn-small {
+            padding: 8px 12px;
+            font-size: 0.9rem;
+            min-height: 36px;
+            min-width: 36px;
         }
 
         /* Item Lists */
@@ -274,26 +354,42 @@
             }
         }
 
+        .item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        }
+
         .item-income {
             border-left-color: var(--secondary-color);
+            background: linear-gradient(to right, rgba(46, 204, 113, 0.05), rgba(46, 204, 113, 0.02));
         }
 
         .item-expense {
             border-left-color: var(--danger-color);
+            background: linear-gradient(to right, rgba(231, 76, 60, 0.05), rgba(231, 76, 60, 0.02));
         }
 
         .item-details {
             flex: 1;
+            min-width: 0;
         }
 
         .item-name {
             font-weight: 600;
             margin-bottom: 4px;
+            font-size: 1rem;
+            word-break: break-word;
+        }
+
+        .item-date {
+            font-size: 0.85rem;
+            color: #7f8c8d;
         }
 
         .item-amount {
             font-weight: 700;
             font-size: 1.2rem;
+            white-space: nowrap;
         }
 
         .item-income .item-amount {
@@ -302,6 +398,12 @@
 
         .item-expense .item-amount {
             color: var(--danger-color);
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
         }
 
         /* Summary Cards */
@@ -324,7 +426,13 @@
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
             text-align: center;
+            transition: var(--transition);
             border-top: 4px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
 
         .card-income {
@@ -343,11 +451,13 @@
             font-size: 0.95rem;
             color: #7f8c8d;
             margin-bottom: 12px;
+            font-weight: 600;
         }
 
         .card-amount {
             font-size: clamp(1.5rem, 4vw, 2rem);
             font-weight: 700;
+            line-height: 1.2;
         }
 
         .card-income .card-amount {
@@ -384,79 +494,107 @@
             border-radius: 7px;
             overflow: hidden;
             margin-top: 8px;
+            position: relative;
         }
 
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
             border-radius: 7px;
-            transition: width 0.6s ease;
+            transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Ad Space - FIXED STYLES */
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-image: linear-gradient(
+                -45deg,
+                rgba(255, 255, 255, 0.2) 25%,
+                transparent 25%,
+                transparent 50%,
+                rgba(255, 255, 255, 0.2) 50%,
+                rgba(255, 255, 255, 0.2) 75%,
+                transparent 75%,
+                transparent
+            );
+            background-size: 20px 20px;
+            animation: moveStripes 2s linear infinite;
+        }
+
+        @keyframes moveStripes {
+            0% { background-position: 0 0; }
+            100% { background-position: 20px 0; }
+        }
+
+        /* Ad Space (Original Sidebar Ads) */
         .ad-space {
-            background: white;
-            border: 2px solid #e1e5e9;
+            background: #f8f9fa;
+            border: 2px dashed #d1d9e0;
             border-radius: var(--border-radius);
-            padding: 15px;
+            padding: 20px;
             margin-bottom: 20px;
             text-align: center;
+            min-height: 250px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 250px;
-            width: 100%;
-            overflow: hidden;
+            transition: var(--transition);
         }
 
-        .ad-space-top {
-            min-height: 280px;
-        }
-
-        .ad-space-sidebar {
-            min-height: 300px;
-        }
-
-        @media (max-width: 767px) {
-            .ad-space {
-                min-height: 200px;
-            }
-            .ad-space-top {
-                min-height: 250px;
-            }
-            .ad-space-sidebar {
-                min-height: 250px;
-            }
+        .ad-space:hover {
+            border-color: var(--primary-color);
         }
 
         .ad-label {
             font-size: 0.8rem;
             color: #7f8c8d;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            margin-top: 30px;
+            height: 250px;
+            position: relative;
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        /* Utility Classes */
+        .hidden {
+            display: none !important;
+        }
+
+        .mobile-only {
             display: block;
-            width: 100%;
         }
 
-        /* Ad Container Styles */
-        .ad-container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .desktop-only {
+            display: none;
         }
 
-        .ad-container ins.adsbygoogle {
-            display: block !important;
-            width: 100%;
-            height: 100%;
+        @media (min-width: 768px) {
+            .mobile-only {
+                display: none;
+            }
+            .desktop-only {
+                display: block;
+            }
         }
 
-        /* Footer Styles */
+        /* Footer Styles - Mobile Optimized */
         .site-footer {
             background: var(--dark-color);
             color: white;
@@ -464,6 +602,18 @@
             margin-top: 40px;
             border-radius: var(--border-radius);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .site-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
         }
 
         .footer-links {
@@ -479,6 +629,7 @@
                 flex-direction: row;
                 justify-content: center;
                 gap: 30px;
+                flex-wrap: wrap;
             }
         }
 
@@ -487,78 +638,178 @@
             text-decoration: none;
             transition: var(--transition);
             font-weight: 500;
+            padding: 8px 0;
+            position: relative;
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: var(--transition);
+            transform: translateX(-50%);
         }
 
         .footer-links a:hover {
             color: white;
-            text-decoration: underline;
+        }
+
+        .footer-links a:hover::after {
+            width: 100%;
         }
 
         .copyright {
             color: #bdc3c7;
             font-size: 0.9rem;
+            line-height: 1.5;
         }
 
-        /* Utility Classes */
-        .hidden {
-            display: none !important;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        /* Mobile Bottom Bar */
-        .mobile-bottom-bar {
+        /* Mobile Bottom Action Bar */
+        .mobile-action-bar {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
             background: white;
-            padding: 10px;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            padding: 12px 16px;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: space-around;
+            gap: 10px;
             z-index: 1000;
+            padding-bottom: calc(12px + var(--safe-area-inset-bottom));
         }
 
-        .mobile-bottom-bar button {
+        .mobile-action-bar button {
             flex: 1;
-            margin: 0 5px;
+            padding: 12px;
+            font-size: 0.9rem;
+            min-height: 44px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #7f8c8d;
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        /* Swipe Actions for Mobile */
+        .item {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .swipe-actions {
+            position: absolute;
+            top: 0;
+            right: -100px;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 12px;
+            background: linear-gradient(to left, rgba(231, 76, 60, 0.9), rgba(192, 57, 43, 0.9));
+            transition: right 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .item.swipe-active .swipe-actions {
+            right: 0;
+        }
+
+        /* Responsive Typography */
+        @media (max-width: 360px) {
+            html {
+                font-size: 15px;
+            }
+            
+            .budget-section {
+                padding: 16px;
+            }
+            
+            button {
+                padding: 12px 16px;
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Landscape Orientation */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .tool-header {
+                padding: 16px;
+                margin-bottom: 16px;
+            }
+            
+            .budget-section {
+                padding: 16px;
+                margin-bottom: 16px;
+            }
+            
+            .main-content {
+                gap: 16px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Top Ad Space -->
-        <div class="ad-space ad-space-top">
-            <div class="ad-label">Advertisement</div>
-            <div class="ad-container">
-                <!-- AdSense Ad Unit 1 - Leaderboard/Responsive -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-4319187914977768"
-                     data-ad-slot="1234567890"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+        <!-- First Horizontal Banner Ad (Top of Content) -->
+        <div class="horizontal-banner-ad" id="banner-ad-top">
+            <div class="banner-ad-container">
+                <div class="banner-ad-label">Advertisement</div>
+                <div class="banner-ad-wrapper">
+                    <!-- Horizontal Banner Ad Unit 1 -->
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:728px;height:90px"
+                         data-ad-client="ca-pub-4319187914977768"
+                         data-ad-slot="1234567890"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
             </div>
         </div>
 
         <div class="tool-header">
             <h1>Monthly Financial Budget Tool</h1>
-            <p class="subtitle">Track your income, expenses, and savings to achieve your financial goals</p>
+            <p class="subtitle">Track your income, expenses, and savings to achieve your financial goals. Works perfectly on mobile and desktop.</p>
             <div class="download-actions">
                 <button id="download-excel" class="btn-success">
-                    📊 Export to Excel
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14,2 14,8 20,8"></polyline>
+                        <path d="M16 13H8"></path>
+                        <path d="M16 17H8"></path>
+                        <path d="M10 9H8"></path>
+                    </svg>
+                    Export to Excel
                 </button>
                 <button id="download-csv" class="btn-warning">
-                    📄 Export to CSV
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14,2 14,8 20,8"></polyline>
+                        <path d="M16 13H8"></path>
+                        <path d="M16 17H8"></path>
+                        <path d="M10 9H8"></path>
+                    </svg>
+                    Export to CSV
                 </button>
                 <button id="reset-budget" class="btn-danger">
-                    🔄 Reset All
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path>
+                    </svg>
+                    Reset All
                 </button>
             </div>
         </div>
@@ -568,17 +819,23 @@
                 <!-- Income Section -->
                 <div class="budget-section">
                     <div class="section-title">
-                        <h2>Income</h2>
-                        <button id="add-income" class="btn-success">+ Add Income</button>
+                        <h2>Income Sources</h2>
+                        <button id="add-income" class="btn-success">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            Add Income
+                        </button>
                     </div>
                     <form id="income-form" class="hidden">
                         <div class="form-group">
                             <label for="income-name">Income Source</label>
-                            <input type="text" id="income-name" placeholder="e.g., Salary, Freelance" required>
+                            <input type="text" id="income-name" placeholder="e.g., Salary, Freelance, Investment" required>
                         </div>
                         <div class="form-group">
                             <label for="income-amount">Amount ($)</label>
-                            <input type="number" id="income-amount" min="0" step="0.01" placeholder="0.00" required>
+                            <input type="number" id="income-amount" min="0" step="0.01" placeholder="0.00" required inputmode="decimal">
                         </div>
                         <div class="form-group" style="display: flex; gap: 10px;">
                             <button type="submit" class="btn-success" style="flex: 1;">Add Income</button>
@@ -586,9 +843,10 @@
                         </div>
                     </form>
                     
-                    <div id="income-empty" class="hidden" style="text-align: center; padding: 40px 20px; color: #7f8c8d;">
+                    <div id="income-empty" class="empty-state hidden">
+                        <div class="empty-state-icon">💰</div>
                         <p>No income sources added yet</p>
-                        <p>Click "Add Income" to get started</p>
+                        <p class="subtitle">Click "Add Income" to get started</p>
                     </div>
                     
                     <ul id="income-list" class="item-list"></ul>
@@ -598,16 +856,22 @@
                 <div class="budget-section">
                     <div class="section-title">
                         <h2>Expenses</h2>
-                        <button id="add-expense" class="btn-success">+ Add Expense</button>
+                        <button id="add-expense" class="btn-success">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            Add Expense
+                        </button>
                     </div>
                     <form id="expense-form" class="hidden">
                         <div class="form-group">
                             <label for="expense-name">Expense Category</label>
-                            <input type="text" id="expense-name" placeholder="e.g., Rent, Groceries" required>
+                            <input type="text" id="expense-name" placeholder="e.g., Rent, Groceries, Utilities" required>
                         </div>
                         <div class="form-group">
                             <label for="expense-amount">Amount ($)</label>
-                            <input type="number" id="expense-amount" min="0" step="0.01" placeholder="0.00" required>
+                            <input type="number" id="expense-amount" min="0" step="0.01" placeholder="0.00" required inputmode="decimal">
                         </div>
                         <div class="form-group" style="display: flex; gap: 10px;">
                             <button type="submit" class="btn-success" style="flex: 1;">Add Expense</button>
@@ -615,12 +879,30 @@
                         </div>
                     </form>
                     
-                    <div id="expense-empty" class="hidden" style="text-align: center; padding: 40px 20px; color: #7f8c8d;">
+                    <div id="expense-empty" class="empty-state hidden">
+                        <div class="empty-state-icon">🛒</div>
                         <p>No expenses added yet</p>
-                        <p>Click "Add Expense" to get started</p>
+                        <p class="subtitle">Click "Add Expense" to get started</p>
                     </div>
                     
                     <ul id="expense-list" class="item-list"></ul>
+                </div>
+
+                <!-- Second Horizontal Banner Ad (Middle of Content) -->
+                <div class="horizontal-banner-ad" id="banner-ad-middle">
+                    <div class="banner-ad-container">
+                        <div class="banner-ad-label">Advertisement</div>
+                        <div class="banner-ad-wrapper">
+                            <!-- Horizontal Banner Ad Unit 2 -->
+                            <ins class="adsbygoogle"
+                                 style="display:inline-block;width:728px;height:90px"
+                                 data-ad-client="ca-pub-4319187914977768"
+                                 data-ad-slot="2345678901"></ins>
+                            <script>
+                                 (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Summary Cards -->
@@ -628,17 +910,17 @@
                     <div class="card card-income">
                         <div class="card-title">Total Income</div>
                         <div class="card-amount" id="total-income">$0.00</div>
-                        <div style="font-size: 0.85rem; color: #7f8c8d; margin-top: 5px;" id="income-count">0 items</div>
+                        <div class="item-count" id="income-count">0 items</div>
                     </div>
                     <div class="card card-expense">
                         <div class="card-title">Total Expenses</div>
                         <div class="card-amount" id="total-expenses">$0.00</div>
-                        <div style="font-size: 0.85rem; color: #7f8c8d; margin-top: 5px;" id="expense-count">0 items</div>
+                        <div class="item-count" id="expense-count">0 items</div>
                     </div>
                     <div class="card card-balance">
                         <div class="card-title">Remaining Balance</div>
                         <div class="card-amount" id="remaining-balance">$0.00</div>
-                        <div style="font-size: 0.85rem; color: #7f8c8d; margin-top: 5px;" id="savings-rate">0% saved</div>
+                        <div class="item-count" id="savings-rate">0% saved</div>
                     </div>
                 </div>
 
@@ -648,34 +930,37 @@
                         <h2>Savings Progress</h2>
                         <span id="savings-percentage" style="font-weight: 700; font-size: 1.2rem;">0%</span>
                     </div>
+                    <p style="color: #7f8c8d; font-size: 0.95rem; margin-bottom: 16px;">Track your monthly savings goal</p>
                     <div class="progress-bar">
                         <div class="progress-fill" id="savings-progress" style="width: 0%"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 8px; font-size: 0.9rem; color: #7f8c8d;">
+                        <span>$0</span>
+                        <span id="savings-goal">Goal: $0</span>
                     </div>
                 </div>
             </div>
 
             <div class="content-secondary">
-                <!-- Sidebar Ad Space 1 -->
-                <div class="ad-space ad-space-sidebar">
+                <!-- Ad Space 1 -->
+                <div class="ad-space">
                     <div class="ad-label">Advertisement</div>
-                    <div class="ad-container">
-                        <!-- AdSense Ad Unit 2 - Sidebar Rectangle -->
-                        <ins class="adsbygoogle"
-                             style="display:block"
-                             data-ad-client="ca-pub-4319187914977768"
-                             data-ad-slot="2345678901"
-                             data-ad-format="rectangle"
-                             data-full-width-responsive="false"></ins>
-                        <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                    </div>
+                    <!-- Google AdSense Ad Unit -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-4319187914977768"
+                         data-ad-slot="3456789012"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
                 </div>
 
                 <!-- Budget Tips -->
                 <div class="budget-section">
                     <h2>Budget Tips</h2>
-                    <ul style="list-style: none; padding-left: 0; margin-top: 15px;">
+                    <ul style="list-style: none; margin-top: 16px;">
                         <li style="margin-bottom: 12px; padding-left: 24px; position: relative;">
                             <span style="position: absolute; left: 0;">📊</span>
                             Track every expense, no matter how small
@@ -692,30 +977,32 @@
                             <span style="position: absolute; left: 0;">🔄</span>
                             Adjust categories as needed
                         </li>
+                        <li style="margin-bottom: 12px; padding-left: 24px; position: relative;">
+                            <span style="position: absolute; left: 0;">🎯</span>
+                            Set realistic financial goals
+                        </li>
                     </ul>
                 </div>
 
-                <!-- Sidebar Ad Space 2 -->
-                <div class="ad-space ad-space-sidebar">
+                <!-- Ad Space 2 -->
+                <div class="ad-space">
                     <div class="ad-label">Advertisement</div>
-                    <div class="ad-container">
-                        <!-- AdSense Ad Unit 3 - Sidebar Banner -->
-                        <ins class="adsbygoogle"
-                             style="display:block"
-                             data-ad-client="ca-pub-4319187914977768"
-                             data-ad-slot="3456789012"
-                             data-ad-format="auto"
-                             data-full-width-responsive="true"></ins>
-                        <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                    </div>
+                    <!-- Google AdSense Ad Unit -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-4319187914977768"
+                         data-ad-slot="4567890123"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
                 </div>
                 
                 <!-- Quick Stats -->
                 <div class="budget-section">
                     <h2>Quick Stats</h2>
-                    <div style="margin-top: 15px;">
+                    <div style="margin-top: 16px;">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                             <span>Monthly Budget</span>
                             <span id="monthly-budget" style="font-weight: 600;">$0.00</span>
@@ -724,7 +1011,7 @@
                             <span>Daily Average</span>
                             <span id="daily-average" style="font-weight: 600;">$0.00</span>
                         </div>
-                        <div style="display: flex; justify-content: space-between;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                             <span>Largest Expense</span>
                             <span id="largest-expense" style="font-weight: 600; color: var(--danger-color);">$0.00</span>
                         </div>
@@ -732,23 +1019,30 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Bottom Ad Space -->
-        <div class="ad-space" style="margin-top: 30px;">
-            <div class="ad-label">Advertisement</div>
-            <div class="ad-container">
-                <!-- AdSense Ad Unit 4 - Bottom Banner -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-4319187914977768"
-                     data-ad-slot="4567890123"
-                     data-ad-format="horizontal"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
-        </div>
+    <!-- Mobile Action Bar -->
+    <div class="mobile-action-bar desktop-only">
+        <button id="mobile-add-income" class="btn-success">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Income
+        </button>
+        <button id="mobile-add-expense" class="btn-danger">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Expense
+        </button>
+        <button id="mobile-view-summary" class="btn-warning">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+            </svg>
+            Summary
+        </button>
     </div>
 
     <!-- Footer Section -->
@@ -758,9 +1052,11 @@
                 <a href="legal.html#about">About this Site</a>
                 <a href="legal.html#privacy">Privacy Policy</a>
                 <a href="legal.html#terms">Terms of Use</a>
+                <a href="legal.html#contact">Contact</a>
             </div>
             <div class="copyright">
-                &copy; <span id="currentYear"></span> Monthly Financial Budget Tool. All rights reserved.
+                &copy; <span id="currentYear"></span> Monthly Financial Budget Tool. All rights reserved.<br>
+                <small style="opacity: 0.8;">Works on all devices - mobile, tablet, and desktop</small>
             </div>
         </div>
     </footer>
@@ -784,13 +1080,20 @@
         const incomeCountEl = document.getElementById('income-count');
         const expenseCountEl = document.getElementById('expense-count');
         const savingsRateEl = document.getElementById('savings-rate');
+        const savingsGoalEl = document.getElementById('savings-goal');
         const monthlyBudgetEl = document.getElementById('monthly-budget');
         const dailyAverageEl = document.getElementById('daily-average');
         const largestExpenseEl = document.getElementById('largest-expense');
 
+        // Mobile action buttons
+        const mobileAddIncomeBtn = document.getElementById('mobile-add-income');
+        const mobileAddExpenseBtn = document.getElementById('mobile-add-expense');
+        const mobileViewSummaryBtn = document.getElementById('mobile-view-summary');
+
         // Data storage
         let incomes = [];
         let expenses = [];
+        let swipeActiveItem = null;
 
         // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
@@ -801,27 +1104,21 @@
             loadData();
             updateUI();
             
-            // Event listeners for buttons
+            // Setup event listeners for desktop buttons
             document.getElementById('add-income').addEventListener('click', function() {
-                incomeForm.classList.remove('hidden');
-                this.style.display = 'none';
+                showIncomeForm();
             });
             
             document.getElementById('cancel-income').addEventListener('click', function() {
-                incomeForm.classList.add('hidden');
-                document.getElementById('add-income').style.display = 'block';
-                incomeForm.reset();
+                hideIncomeForm();
             });
             
             document.getElementById('add-expense').addEventListener('click', function() {
-                expenseForm.classList.remove('hidden');
-                this.style.display = 'none';
+                showExpenseForm();
             });
             
             document.getElementById('cancel-expense').addEventListener('click', function() {
-                expenseForm.classList.add('hidden');
-                document.getElementById('add-expense').style.display = 'block';
-                expenseForm.reset();
+                hideExpenseForm();
             });
             
             // Form submissions
@@ -842,14 +1139,64 @@
             // Reset button
             resetBudgetBtn.addEventListener('click', resetBudget);
             
-            // Initialize AdSense ads
+            // Mobile action buttons
+            mobileAddIncomeBtn.addEventListener('click', function() {
+                showIncomeForm();
+                scrollToElement('.budget-section:first-child');
+            });
+            
+            mobileAddExpenseBtn.addEventListener('click', function() {
+                showExpenseForm();
+                scrollToElement('.budget-section:nth-child(2)');
+            });
+            
+            mobileViewSummaryBtn.addEventListener('click', function() {
+                scrollToElement('.summary-cards');
+            });
+            
+            // Touch/swipe support for mobile
+            setupTouchEvents();
+            
+            // Initialize AdSense
             initAdSense();
             
-            // Show toast on load
-            setTimeout(() => {
-                showToast('Budget tool loaded successfully!', 'success');
-            }, 1000);
+            // Check for empty states initially
+            checkEmptyStates();
         });
+
+        // Show/hide income form
+        function showIncomeForm() {
+            incomeForm.classList.remove('hidden');
+            document.getElementById('add-income').style.display = 'none';
+            document.getElementById('income-name').focus();
+        }
+
+        function hideIncomeForm() {
+            incomeForm.classList.add('hidden');
+            document.getElementById('add-income').style.display = 'flex';
+            incomeForm.reset();
+        }
+
+        // Show/hide expense form
+        function showExpenseForm() {
+            expenseForm.classList.remove('hidden');
+            document.getElementById('add-expense').style.display = 'none';
+            document.getElementById('expense-name').focus();
+        }
+
+        function hideExpenseForm() {
+            expenseForm.classList.add('hidden');
+            document.getElementById('add-expense').style.display = 'flex';
+            expenseForm.reset();
+        }
+
+        // Scroll to element helper
+        function scrollToElement(selector) {
+            const element = document.querySelector(selector);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
 
         // Add income
         function addIncome() {
@@ -867,10 +1214,9 @@
                 incomes.push(income);
                 saveData();
                 updateUI();
-                incomeForm.reset();
-                incomeForm.classList.add('hidden');
-                document.getElementById('add-income').style.display = 'block';
+                hideIncomeForm();
                 
+                // Show success feedback
                 showToast('Income added successfully!', 'success');
             } else {
                 showToast('Please enter valid income details', 'error');
@@ -893,10 +1239,9 @@
                 expenses.push(expense);
                 saveData();
                 updateUI();
-                expenseForm.reset();
-                expenseForm.classList.add('hidden');
-                document.getElementById('add-expense').style.display = 'block';
+                hideExpenseForm();
                 
+                // Show success feedback
                 showToast('Expense added successfully!', 'success');
             } else {
                 showToast('Please enter valid expense details', 'error');
@@ -954,6 +1299,10 @@
             // Update savings rate
             savingsRateEl.textContent = `${savingsPercentage.toFixed(1)}% saved`;
             
+            // Update savings goal
+            const suggestedGoal = totalIncome * 0.2; // 20% of income
+            savingsGoalEl.textContent = `Goal: $${suggestedGoal.toFixed(2)}`;
+            
             // Update quick stats
             monthlyBudgetEl.textContent = `$${totalIncome.toFixed(2)}`;
             
@@ -973,20 +1322,7 @@
             } else {
                 incomeEmptyEl.classList.add('hidden');
                 incomes.forEach(income => {
-                    const li = document.createElement('li');
-                    li.className = 'item item-income';
-                    li.innerHTML = `
-                        <div class="item-details">
-                            <div class="item-name">${income.name}</div>
-                            <div style="font-size: 0.85rem; color: #7f8c8d;">${income.date}</div>
-                        </div>
-                        <div class="item-amount">$${income.amount.toFixed(2)}</div>
-                        <div style="display: flex; gap: 8px;">
-                            <button class="btn-danger" onclick="removeIncome(${income.id})" style="padding: 8px 12px; font-size: 0.9rem;">
-                                Delete
-                            </button>
-                        </div>
-                    `;
+                    const li = createListItem(income, 'income');
                     incomeList.appendChild(li);
                 });
             }
@@ -998,23 +1334,43 @@
             } else {
                 expenseEmptyEl.classList.add('hidden');
                 expenses.forEach(expense => {
-                    const li = document.createElement('li');
-                    li.className = 'item item-expense';
-                    li.innerHTML = `
-                        <div class="item-details">
-                            <div class="item-name">${expense.name}</div>
-                            <div style="font-size: 0.85rem; color: #7f8c8d;">${expense.date}</div>
-                        </div>
-                        <div class="item-amount">$${expense.amount.toFixed(2)}</div>
-                        <div style="display: flex; gap: 8px;">
-                            <button class="btn-danger" onclick="removeExpense(${expense.id})" style="padding: 8px 12px; font-size: 0.9rem;">
-                                Delete
-                            </button>
-                        </div>
-                    `;
+                    const li = createListItem(expense, 'expense');
                     expenseList.appendChild(li);
                 });
             }
+            
+            // Check empty states
+            checkEmptyStates();
+        }
+
+        // Create list item
+        function createListItem(item, type) {
+            const li = document.createElement('li');
+            li.className = `item item-${type}`;
+            li.dataset.id = item.id;
+            
+            li.innerHTML = `
+                <div class="item-details">
+                    <div class="item-name">${item.name}</div>
+                    <div class="item-date">${item.date}</div>
+                </div>
+                <div class="item-amount">$${item.amount.toFixed(2)}</div>
+                <div class="item-actions">
+                    <button class="btn-danger btn-small" onclick="${type === 'income' ? 'removeIncome' : 'removeExpense'}(${item.id})">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path>
+                        </svg>
+                        Delete
+                    </button>
+                </div>
+            `;
+            
+            return li;
+        }
+
+        // Check empty states
+        function checkEmptyStates() {
+            // Already handled in updateUI
         }
 
         // Save data to localStorage
@@ -1022,8 +1378,9 @@
             try {
                 localStorage.setItem('budgetIncomes', JSON.stringify(incomes));
                 localStorage.setItem('budgetExpenses', JSON.stringify(expenses));
+                localStorage.setItem('budgetLastSave', new Date().toISOString());
             } catch (e) {
-                console.warn('Could not save data:', e);
+                console.warn('Could not save data to localStorage:', e);
             }
         }
 
@@ -1041,35 +1398,59 @@
                     expenses = JSON.parse(savedExpenses);
                 }
             } catch (e) {
-                console.warn('Could not load data:', e);
+                console.warn('Could not load data from localStorage:', e);
+                incomes = [];
+                expenses = [];
             }
         }
 
-        // Initialize AdSense ads
-        function initAdSense() {
-            // Wait for page to load completely
-            setTimeout(() => {
-                // Force AdSense to refresh all ads
-                if (window.adsbygoogle) {
-                    // Push empty configuration for each ad unit
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                    (adsbygoogle = window.adsbygoogle || []).push({});
+        // Setup touch events for mobile swipe
+        function setupTouchEvents() {
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            document.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            
+            document.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe(touchStartX, touchEndX);
+            }, { passive: true });
+        }
+
+        // Handle swipe gestures
+        function handleSwipe(startX, endX) {
+            const swipeThreshold = 50;
+            const swipeDistance = endX - startX;
+            
+            // If swipe left (negative distance) and significant enough
+            if (swipeDistance < -swipeThreshold) {
+                // Find the item that was swiped
+                const swipedItem = document.elementFromPoint(startX, 50); // Rough estimate
+                if (swipedItem && swipedItem.closest('.item')) {
+                    const item = swipedItem.closest('.item');
+                    if (swipeActiveItem && swipeActiveItem !== item) {
+                        swipeActiveItem.classList.remove('swipe-active');
+                    }
+                    item.classList.add('swipe-active');
+                    swipeActiveItem = item;
                     
-                    // Additional attempt to load ads
+                    // Auto-hide after 3 seconds
                     setTimeout(() => {
-                        const ads = document.querySelectorAll('.adsbygoogle');
-                        ads.forEach((ad, index) => {
-                            try {
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-                            } catch (e) {
-                                console.warn('AdSense error for ad unit', index, e);
-                            }
-                        });
-                    }, 2000);
+                        if (item.classList.contains('swipe-active')) {
+                            item.classList.remove('swipe-active');
+                            swipeActiveItem = null;
+                        }
+                    }, 3000);
                 }
-            }, 3000);
+            }
+            
+            // If swipe right (positive distance) and significant enough
+            if (swipeDistance > swipeThreshold && swipeActiveItem) {
+                swipeActiveItem.classList.remove('swipe-active');
+                swipeActiveItem = null;
+            }
         }
 
         // Show toast notification
@@ -1080,11 +1461,11 @@
             
             // Create toast
             const toast = document.createElement('div');
-            toast.className = 'toast';
+            toast.className = `toast toast-${type}`;
             toast.textContent = message;
             toast.style.cssText = `
                 position: fixed;
-                bottom: 20px;
+                bottom: 80px;
                 left: 50%;
                 transform: translateX(-50%);
                 background: ${type === 'success' ? '#2ecc71' : type === 'error' ? '#e74c3c' : '#3498db'};
@@ -1108,18 +1489,58 @@
             }, 3000);
         }
 
-        // Download as Excel
+        // Initialize AdSense - Enhanced for better ad loading
+        function initAdSense() {
+            // Wait for page to load completely
+            setTimeout(() => {
+                if (window.adsbygoogle) {
+                    console.log('AdSense initialized - loading all ad units');
+                    
+                    // Initialize all ad units
+                    try {
+                        // Horizontal banner ads
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        
+                        // Sidebar ads
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        
+                        console.log('All ad units initialized');
+                    } catch (e) {
+                        console.warn('Error initializing some ad units:', e);
+                    }
+                    
+                    // Additional attempt to load ads after user interaction
+                    document.addEventListener('click', function loadAdsOnInteraction() {
+                        setTimeout(() => {
+                            if (window.adsbygoogle) {
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                            }
+                        }, 100);
+                        document.removeEventListener('click', loadAdsOnInteraction);
+                    }, { once: true });
+                } else {
+                    console.warn('AdSense not loaded yet');
+                }
+            }, 2000);
+        }
+
+        // Download as Excel (XLSX)
         function downloadExcel() {
             try {
                 const data = prepareExportData();
                 const worksheet = XLSX.utils.json_to_sheet(data);
                 const workbook = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(workbook, worksheet, "Budget");
-                XLSX.writeFile(workbook, `budget_${new Date().toISOString().slice(0,10)}.xlsx`);
-                showToast('Excel file downloaded!', 'success');
+                XLSX.writeFile(workbook, `monthly_budget_${new Date().toISOString().slice(0,10)}.xlsx`);
+                showToast('Excel file downloaded successfully!', 'success');
             } catch (error) {
-                console.error('Excel download error:', error);
-                showToast('Error downloading Excel', 'error');
+                console.error('Error downloading Excel:', error);
+                showToast('Error downloading Excel file', 'error');
             }
         }
 
@@ -1134,16 +1555,16 @@
                 if (link.download !== undefined) {
                     const url = URL.createObjectURL(blob);
                     link.setAttribute("href", url);
-                    link.setAttribute("download", `budget_${new Date().toISOString().slice(0,10)}.csv`);
+                    link.setAttribute("download", `monthly_budget_${new Date().toISOString().slice(0,10)}.csv`);
                     link.style.visibility = 'hidden';
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
-                    showToast('CSV file downloaded!', 'success');
+                    showToast('CSV file downloaded successfully!', 'success');
                 }
             } catch (error) {
-                console.error('CSV download error:', error);
-                showToast('Error downloading CSV', 'error');
+                console.error('Error downloading CSV:', error);
+                showToast('Error downloading CSV file', 'error');
             }
         }
 
@@ -1152,55 +1573,85 @@
             const totalIncome = incomes.reduce((sum, income) => sum + income.amount, 0);
             const totalExpenses = expenses.reduce((sum, expense) => sum + expense.amount, 0);
             const remainingBalance = totalIncome - totalExpenses;
+            const savingsPercentage = totalIncome > 0 ? (remainingBalance / totalIncome) * 100 : 0;
             
             const data = [];
             
-            data.push({ Type: "INCOME", Category: "", Amount: "" });
+            // Add headers
+            data.push({ Type: "MONTHLY BUDGET REPORT", Category: "", Amount: "", Date: "" });
+            data.push({ Type: `Generated: ${new Date().toLocaleDateString()}`, Category: "", Amount: "", Date: "" });
+            data.push({ Type: "", Category: "", Amount: "", Date: "" });
             
-            incomes.forEach(income => {
-                data.push({ 
-                    Type: "Income", 
-                    Category: income.name, 
-                    Amount: `$${income.amount.toFixed(2)}` 
+            // Add income header
+            data.push({ Type: "INCOME SOURCES", Category: "", Amount: "", Date: "" });
+            
+            // Add income items
+            if (incomes.length === 0) {
+                data.push({ Type: "No income sources", Category: "", Amount: "", Date: "" });
+            } else {
+                incomes.forEach(income => {
+                    data.push({ 
+                        Type: "Income", 
+                        Category: income.name, 
+                        Amount: `$${income.amount.toFixed(2)}`,
+                        Date: income.date
+                    });
                 });
-            });
+            }
             
+            // Add income total
             data.push({ 
-                Type: "Total Income", 
+                Type: "TOTAL INCOME", 
                 Category: "", 
-                Amount: `$${totalIncome.toFixed(2)}` 
+                Amount: `$${totalIncome.toFixed(2)}`,
+                Date: ""
             });
             
-            data.push({ Type: "", Category: "", Amount: "" });
-            data.push({ Type: "EXPENSES", Category: "", Amount: "" });
+            // Add empty row
+            data.push({ Type: "", Category: "", Amount: "", Date: "" });
             
-            expenses.forEach(expense => {
-                data.push({ 
-                    Type: "Expense", 
-                    Category: expense.name, 
-                    Amount: `$${expense.amount.toFixed(2)}` 
+            // Add expense header
+            data.push({ Type: "EXPENSES", Category: "", Amount: "", Date: "" });
+            
+            // Add expense items
+            if (expenses.length === 0) {
+                data.push({ Type: "No expenses", Category: "", Amount: "", Date: "" });
+            } else {
+                expenses.forEach(expense => {
+                    data.push({ 
+                        Type: "Expense", 
+                        Category: expense.name, 
+                        Amount: `$${expense.amount.toFixed(2)}`,
+                        Date: expense.date
+                    });
                 });
-            });
+            }
             
+            // Add expense total
             data.push({ 
-                Type: "Total Expenses", 
+                Type: "TOTAL EXPENSES", 
                 Category: "", 
-                Amount: `$${totalExpenses.toFixed(2)}` 
+                Amount: `$${totalExpenses.toFixed(2)}`,
+                Date: ""
             });
             
-            data.push({ Type: "", Category: "", Amount: "" });
-            data.push({ Type: "SUMMARY", Category: "", Amount: "" });
+            // Add empty row
+            data.push({ Type: "", Category: "", Amount: "", Date: "" });
+            
+            // Add summary
+            data.push({ Type: "SUMMARY", Category: "", Amount: "", Date: "" });
             data.push({ 
                 Type: "Remaining Balance", 
                 Category: "", 
-                Amount: `$${remainingBalance.toFixed(2)}` 
+                Amount: `$${remainingBalance.toFixed(2)}`,
+                Date: ""
             });
             
-            const savingsPercentage = totalIncome > 0 ? (remainingBalance / totalIncome) * 100 : 0;
             data.push({ 
                 Type: "Savings Rate", 
                 Category: "", 
-                Amount: `${savingsPercentage.toFixed(1)}%` 
+                Amount: `${savingsPercentage.toFixed(1)}%`,
+                Date: ""
             });
             
             return data;
@@ -1211,11 +1662,13 @@
             const headers = Object.keys(data[0]);
             const csvRows = [];
             
+            // Add header row
             csvRows.push(headers.join(','));
             
+            // Add data rows
             for (const row of data) {
                 const values = headers.map(header => {
-                    const escaped = ('' + row[header]).replace(/"/g, '\\"');
+                    const escaped = ('' + row[header]).replace(/"/g, '""');
                     return `"${escaped}"`;
                 });
                 csvRows.push(values.join(','));
@@ -1224,7 +1677,7 @@
             return csvRows.join('\n');
         }
 
-        // Add CSS for animations
+        // Add CSS for animations and ad responsiveness
         const style = document.createElement('style');
         style.textContent = `
             @keyframes fadeInUp {
@@ -1237,19 +1690,48 @@
                 to { opacity: 0; transform: translate(-50%, 20px); }
             }
             
-            /* AdSense fallback styling */
-            .adsbygoogle[data-ad-status="unfilled"] {
-                display: none !important;
+            .item-count {
+                font-size: 0.85rem;
+                color: #7f8c8d;
+                margin-top: 4px;
             }
             
-            .ad-fallback {
-                background: #f8f9fa;
-                border: 2px dashed #dee2e6;
-                border-radius: 8px;
-                padding: 20px;
-                text-align: center;
-                color: #6c757d;
-                font-size: 0.9rem;
+            /* Responsive banner ads */
+            @media (max-width: 768px) {
+                .banner-ad-container ins.adsbygoogle {
+                    width: 320px !important;
+                    height: 100px !important;
+                }
+            }
+            
+            @media (max-width: 480px) {
+                .banner-ad-container ins.adsbygoogle {
+                    width: 300px !important;
+                    height: 100px !important;
+                }
+            }
+            
+            @media (max-width: 360px) {
+                .banner-ad-container ins.adsbygoogle {
+                    width: 280px !important;
+                    height: 90px !important;
+                }
+            }
+            
+            /* AdSense loading states */
+            .adsbygoogle[data-ad-status="unfilled"] {
+                background: #f8f9fa !important;
+                border: 2px dashed #dee2e6 !important;
+                border-radius: 8px !important;
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+                color: #6c757d !important;
+                font-size: 0.9rem !important;
+            }
+            
+            .adsbygoogle[data-ad-status="unfilled"]::before {
+                content: "Ad loading..." !important;
             }
         `;
         document.head.appendChild(style);
