@@ -8,12 +8,11 @@
     <meta name="author" content="Daily Planner Pro">
     <title>Daily Planner Pro - Organize Your Day Efficiently | Free Online Tool</title>
     
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4319187914977768" crossorigin="anonymous"></script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
+    
     <link rel="icon" type="image/png" href="https://sursagars.github.io/favicon.png"/>
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4319187914977768"
-     crossorigin="anonymous">
-    </script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -283,6 +282,17 @@
             align-items: center;
         }
 
+        /* Additional Ad Styles */
+        .ad-space.additional-ad {
+            margin-top: 30px;
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            min-height: 250px;
+        }
+
         /* Footer styles from pdf-excel.html */
         .footer {
             text-align: center;
@@ -348,6 +358,12 @@
             .ad-space {
                 min-height: 200px;
             }
+            
+            .ad-space.additional-ad {
+                min-height: 200px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -375,6 +391,9 @@
     </style>
 </head>
 <body>
+    <!-- AMP Auto Ads for automatic ad placement -->
+    <amp-auto-ads type="adsense" data-ad-client="ca-pub-4319187914977768"></amp-auto-ads>
+
     <!-- Header Section -->
     <header>
         <div class="container">
@@ -470,6 +489,14 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Additional Ad Unit (Responsive) -->
+            <div class="ad-space additional-ad">
+                <div class="ad-label">Advertisement</div>
+                <div class="ad-container" id="additionalAd">
+                    <!-- Additional responsive ad will be loaded here -->
+                </div>
+            </div>
         </div>
     </main>
 
@@ -491,8 +518,13 @@
         document.getElementById('currentYear').textContent = new Date().getFullYear();
         
         // AdMob/AdSense Configuration
-        const AD_UNIT_ID = '9707260784'; // Your ad unit ID
-        const PUBLISHER_ID = 'ca-app-pub-4319187914977768'; // Your publisher ID
+        const AD_UNIT_IDS = {
+            TOP_BANNER: '9707260784',
+            SIDEBAR: '9707260784',
+            ADDITIONAL: '4555770131'
+        };
+        
+        const PUBLISHER_ID = 'ca-pub-4319187914977768';
         
         // Initialize ads
         function initializeAds() {
@@ -501,6 +533,9 @@
             
             // Initialize sidebar ads
             initializeSidebarAds();
+            
+            // Initialize additional responsive ad
+            initializeAdditionalAd();
             
             // Refresh ads periodically (every 60 seconds)
             setInterval(refreshAds, 60000);
@@ -521,7 +556,7 @@
             adElement.style.width = isMobile ? '320px' : '728px';
             adElement.style.height = isMobile ? '100px' : '90px';
             adElement.setAttribute('data-ad-client', PUBLISHER_ID);
-            adElement.setAttribute('data-ad-slot', AD_UNIT_ID);
+            adElement.setAttribute('data-ad-slot', AD_UNIT_IDS.TOP_BANNER);
             adElement.setAttribute('data-ad-format', 'auto');
             adElement.setAttribute('data-full-width-responsive', 'true');
             
@@ -547,7 +582,7 @@
             adElement1.style.width = '300px';
             adElement1.style.height = '250px';
             adElement1.setAttribute('data-ad-client', PUBLISHER_ID);
-            adElement1.setAttribute('data-ad-slot', AD_UNIT_ID);
+            adElement1.setAttribute('data-ad-slot', AD_UNIT_IDS.SIDEBAR);
             
             sidebarAd1.appendChild(adElement1);
             
@@ -558,7 +593,7 @@
             adElement2.style.width = '300px';
             adElement2.style.height = '250px';
             adElement2.setAttribute('data-ad-client', PUBLISHER_ID);
-            adElement2.setAttribute('data-ad-slot', AD_UNIT_ID);
+            adElement2.setAttribute('data-ad-slot', AD_UNIT_IDS.SIDEBAR);
             
             sidebarAd2.appendChild(adElement2);
             
@@ -572,10 +607,38 @@
             }, 2000);
         }
         
+        // Initialize additional responsive ad
+        function initializeAdditionalAd() {
+            const additionalAdContainer = document.getElementById('additionalAd');
+            
+            // Clear container
+            additionalAdContainer.innerHTML = '';
+            
+            // Create ad element
+            const adElement = document.createElement('ins');
+            adElement.className = 'adsbygoogle';
+            adElement.style.display = 'block';
+            adElement.style.width = '100%';
+            adElement.style.maxWidth = '1200px';
+            adElement.style.height = '250px';
+            adElement.setAttribute('data-ad-client', PUBLISHER_ID);
+            adElement.setAttribute('data-ad-slot', AD_UNIT_IDS.ADDITIONAL);
+            adElement.setAttribute('data-ad-format', 'auto');
+            adElement.setAttribute('data-full-width-responsive', 'true');
+            
+            additionalAdContainer.appendChild(adElement);
+            
+            // Push ad to Google
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        }
+        
         // Refresh ads
         function refreshAds() {
             console.log('Refreshing ads...');
-            initializeAds();
+            // Reinitialize all ads
+            initializeTopBannerAd();
+            initializeSidebarAds();
+            initializeAdditionalAd();
         }
         
         // Set current date
@@ -672,6 +735,7 @@
         // Handle responsive ads on resize
         function handleResponsiveAds() {
             initializeTopBannerAd();
+            initializeAdditionalAd();
         }
 
         // Event Listeners
