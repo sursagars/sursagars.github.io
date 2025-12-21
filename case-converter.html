@@ -7,20 +7,23 @@
     
     <link rel="icon" type="image/png" href="https://sursagars.github.io/favicon.png"/>
 
+    <!-- Updated Google AdSense Integration -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4319187914977768"
-     crossorigin="anonymous">
+     crossorigin="anonymous"></script>
+    <!-- aka -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-4319187914977768"
+         data-ad-slot="4555770131"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
 
     <meta name="description" content="Free online text case converter tool. Instantly transform text to uppercase, lowercase, proper case, sentence case and more. Fast, easy-to-use, and mobile-friendly.">
     <meta name="keywords" content="text case converter, uppercase, lowercase, proper case, title case, text transformation, online tool">
     <meta name="author" content="Text Tools">
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4319187914977768"
-     crossorigin="anonymous">
-    </script>
-
-    <!-- AdMob SDK -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4319187914977768" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -457,7 +460,7 @@
     <div class="container">
         <!-- Policy Compliance Notice -->
         <div class="policy-notice" id="policyNotice">
-            <strong><i class="fas fa-info-circle"></i> AdMob Policy Compliance:</strong> This site follows Google AdMob policies. Ads are placed in designated areas without interfering with user experience.
+            <strong><i class="fas fa-info-circle"></i> Google AdSense Policy Compliance:</strong> This site follows Google AdSense policies. Ads are placed in designated areas without interfering with user experience.
         </div>
         
         <div class="content-wrapper">
@@ -466,9 +469,9 @@
                 <!-- Top Banner Ad - Leaderboard (728x90) / Banner (320x50) -->
                 <div class="ad-container leaderboard" id="topBannerAd">
                     <div class="ad-loading">
-                        <i class="fas fa-ad"></i> Loading Ad...
+                        <i class="fas fa-ad"></i> Loading Google AdSense...
                     </div>
-                    <!-- AdMob Ad will be inserted here -->
+                    <!-- Google AdSense ad will be inserted here -->
                 </div>
                 
                 <!-- Text Case Converter Tool -->
@@ -541,9 +544,9 @@
                 <!-- Medium Rectangle Ad (300x250) -->
                 <div class="ad-container medium-rectangle" id="mediumRectangleAd">
                     <div class="ad-loading">
-                        <i class="fas fa-ad"></i> Loading Ad...
+                        <i class="fas fa-ad"></i> Loading Google AdSense...
                     </div>
-                    <!-- AdMob Ad will be inserted here -->
+                    <!-- Google AdSense ad will be inserted here -->
                 </div>
             </main>
             
@@ -551,19 +554,19 @@
             <aside>
                 <div class="ad-container skyscraper" id="skyscraperAd">
                     <div class="ad-loading">
-                        <i class="fas fa-ad"></i> Loading Ad...
+                        <i class="fas fa-ad"></i> Loading Google AdSense...
                     </div>
-                    <!-- AdMob Ad will be inserted here -->
+                    <!-- Google AdSense ad will be inserted here -->
                 </div>
             </aside>
         </div>
     </div>
     
-    <!-- AdMob Configuration Info -->
+    <!-- Google AdSense Configuration Info -->
     <div class="container">
         <div class="ad-info">
-            <strong>AdMob Configuration:</strong> App ID: ca-app-pub-4319187914977768~7345655475 | 
-            Ad Unit ID: ca-app-pub-4319187914977768/9707260784
+            <strong>Google AdSense Configuration:</strong> Publisher ID: ca-pub-4319187914977768 | 
+            Ad Slot: 4555770131
         </div>
     </div>
     
@@ -606,9 +609,9 @@
         const lineCountEl = document.getElementById('lineCount');
         const sentenceCountEl = document.getElementById('sentenceCount');
         
-        // AdMob Configuration
-        const ADMOB_APP_ID = 'ca-app-pub-4319187914977768~7345655475';
-        const ADMOB_AD_UNIT_ID = 'ca-pub-4319187914977768/9707260784';
+        // Google AdSense Configuration
+        const AD_SENSE_CLIENT = 'ca-pub-4319187914977768';
+        const AD_SENSE_SLOT = '4555770131';
         
         // Initialize with sample text
         window.addEventListener('DOMContentLoaded', () => {
@@ -618,37 +621,20 @@
             showPolicyNotice();
         });
         
-        // Initialize AdMob Ads
+        // Initialize Google AdSense Ads
         function initializeAds() {
-            // Wait for AdMob SDK to load
+            // Wait for AdSense SDK to load
             setTimeout(() => {
                 try {
                     // Top Banner Ad (responsive)
                     const topBannerAd = document.getElementById('topBannerAd');
                     if (topBannerAd) {
-                        // Create ad container
-                        const adScript = document.createElement('script');
-                        adScript.innerHTML = `
-                            (adsbygoogle = window.adsbygoogle || []).push({
-                                google_ad_client: "ca-pub-4319187914977768",
-                                enable_page_level_ads: false,
-                                overlays: {bottom: true}
-                            });
-                            
-                            // Load responsive top banner
-                            (adsbygoogle = window.adsbygoogle || []).push({
-                                google_ad_client: "ca-pub-4319187914977768",
-                                enable_page_level_ads: false
-                            });
-                        `;
-                        topBannerAd.appendChild(adScript);
-                        
                         // Create responsive ad
                         const adElement = document.createElement('ins');
                         adElement.className = 'adsbygoogle';
                         adElement.style.display = 'block';
-                        adElement.setAttribute('data-ad-client', 'ca-pub-4319187914977768');
-                        adElement.setAttribute('data-ad-slot', ADMOB_AD_UNIT_ID);
+                        adElement.setAttribute('data-ad-client', AD_SENSE_CLIENT);
+                        adElement.setAttribute('data-ad-slot', AD_SENSE_SLOT);
                         adElement.setAttribute('data-ad-format', 'auto');
                         adElement.setAttribute('data-full-width-responsive', 'true');
                         
@@ -665,8 +651,8 @@
                         const adElement = document.createElement('ins');
                         adElement.className = 'adsbygoogle';
                         adElement.style.display = 'block';
-                        adElement.setAttribute('data-ad-client', 'ca-pub-4319187914977768');
-                        adElement.setAttribute('data-ad-slot', ADMOB_AD_UNIT_ID);
+                        adElement.setAttribute('data-ad-client', AD_SENSE_CLIENT);
+                        adElement.setAttribute('data-ad-slot', AD_SENSE_SLOT);
                         adElement.setAttribute('data-ad-format', 'rectangle');
                         adElement.setAttribute('data-ad-layout', 'in-article');
                         
@@ -682,8 +668,8 @@
                         const adElement = document.createElement('ins');
                         adElement.className = 'adsbygoogle';
                         adElement.style.display = 'block';
-                        adElement.setAttribute('data-ad-client', 'ca-pub-4319187914977768');
-                        adElement.setAttribute('data-ad-slot', ADMOB_AD_UNIT_ID);
+                        adElement.setAttribute('data-ad-client', AD_SENSE_CLIENT);
+                        adElement.setAttribute('data-ad-slot', AD_SENSE_SLOT);
                         adElement.setAttribute('data-ad-format', 'vertical');
                         adElement.setAttribute('data-ad-layout', 'in-article');
                         
@@ -693,10 +679,10 @@
                         (adsbygoogle = window.adsbygoogle || []).push({});
                     }
                     
-                    console.log('AdMob ads initialized successfully');
+                    console.log('Google AdSense ads initialized successfully');
                     
                 } catch (error) {
-                    console.error('Error initializing AdMob ads:', error);
+                    console.error('Error initializing Google AdSense ads:', error);
                     showAdPlaceholders();
                 }
             }, 1000);
@@ -709,8 +695,8 @@
                 container.innerHTML = `
                     <div class="ad-loading">
                         <i class="fas fa-ad"></i> 
-                        <p>AdMob Ad Unit: ${ADMOB_AD_UNIT_ID.substring(0, 20)}...</p>
-                        <small>If ads don't load, check your AdMob configuration</small>
+                        <p>AdSense Ad Slot: ${AD_SENSE_SLOT}</p>
+                        <small>If ads don't load, check your AdSense configuration</small>
                     </div>
                 `;
             });
@@ -881,7 +867,7 @@
         // Set proper case as active by default
         propercaseBtn.classList.add('active');
         
-        // AdMob Policy Compliance
+        // Google AdSense Policy Compliance
         // Ensure ads don't interfere with user experience
         document.addEventListener('DOMContentLoaded', function() {
             // Check if ads are blocking content

@@ -7,8 +7,18 @@
     
     <link rel="icon" type="image/png" href="https://sursagars.github.io/favicon.png"/>
 
+    <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4319187914977768"
-     crossorigin="anonymous">
+     crossorigin="anonymous"></script>
+    <!-- aka -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-4319187914977768"
+         data-ad-slot="4555770131"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
 
     <meta name="description" content="Compress images online for free. Reduce file size without losing quality. Choose compression levels from low to high. Fully responsive tool for web, mobile. Fast, secure, no upload required.">
@@ -21,9 +31,6 @@
     <meta property="og:description" content="Compress your images quickly and easily online. Perfect for web optimization.">
     <meta property="og:image" content="https://yourdomain.com/og-image.jpg">
     <meta property="og:url" content="https://yourdomain.com/img-compress.html">
-
-    <!-- AdMob SDK Integration -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4319187914977768" crossorigin="anonymous"></script>
 
     <!-- Schema.org for SEO -->
     <script type="application/ld+json">
@@ -426,7 +433,7 @@
                         <i class="fas fa-ad"></i>
                         <p>Loading Ad...</p>
                     </div>
-                    <!-- AdMob Ad will be inserted here -->
+                    <!-- Google AdSense ad will be inserted here -->
                 </div>
 
                 <div class="upload-area" id="uploadArea">
@@ -480,7 +487,7 @@
                         <i class="fas fa-ad"></i>
                         <p>Loading Ad...</p>
                     </div>
-                    <!-- AdMob Ad will be inserted here -->
+                    <!-- Google AdSense ad will be inserted here -->
                 </div>
 
                 <!-- Additional Ad Space -->
@@ -489,7 +496,7 @@
                         <i class="fas fa-ad"></i>
                         <p>Loading Ad...</p>
                     </div>
-                    <!-- AdMob Ad will be inserted here -->
+                    <!-- Google AdSense ad will be inserted here -->
                 </div>
             </aside>
         </main>
@@ -511,9 +518,9 @@
         // Set current year in footer (matching currency.html functionality)
         document.getElementById('currentYear').textContent = new Date().getFullYear();
         
-        // AdMob Configuration
-        const ADMOB_APP_ID = 'ca-app-pub-4319187914977768~7345655475';
-        const ADMOB_AD_UNIT_ID = 'ca-pub-4319187914977768/9707260784';
+        // Google AdSense Configuration
+        const AD_SENSE_CLIENT = 'ca-pub-4319187914977768';
+        const AD_SENSE_SLOT = '4555770131';
         
         // DOM Elements
         const uploadArea = document.getElementById('uploadArea');
@@ -542,9 +549,9 @@
             showPolicyNotice();
         });
 
-        // Initialize AdMob Ads
+        // Initialize Google AdSense Ads
         function initializeAds() {
-            // Wait for AdMob SDK to load
+            // Wait for AdSense SDK to load
             setTimeout(() => {
                 try {
                     // Top Banner Ad (responsive)
@@ -554,8 +561,8 @@
                         const adElement = document.createElement('ins');
                         adElement.className = 'adsbygoogle';
                         adElement.style.display = 'block';
-                        adElement.setAttribute('data-ad-client', 'ca-pub-4319187914977768');
-                        adElement.setAttribute('data-ad-slot', ADMOB_AD_UNIT_ID);
+                        adElement.setAttribute('data-ad-client', AD_SENSE_CLIENT);
+                        adElement.setAttribute('data-ad-slot', AD_SENSE_SLOT);
                         adElement.setAttribute('data-ad-format', 'auto');
                         adElement.setAttribute('data-full-width-responsive', 'true');
                         
@@ -572,8 +579,8 @@
                         const adElement = document.createElement('ins');
                         adElement.className = 'adsbygoogle';
                         adElement.style.display = 'block';
-                        adElement.setAttribute('data-ad-client', 'ca-pub-4319187914977768');
-                        adElement.setAttribute('data-ad-slot', ADMOB_AD_UNIT_ID);
+                        adElement.setAttribute('data-ad-client', AD_SENSE_CLIENT);
+                        adElement.setAttribute('data-ad-slot', AD_SENSE_SLOT);
                         adElement.setAttribute('data-ad-format', 'rectangle');
                         adElement.setAttribute('data-ad-layout', 'in-article');
                         
@@ -589,8 +596,8 @@
                         const adElement = document.createElement('ins');
                         adElement.className = 'adsbygoogle';
                         adElement.style.display = 'block';
-                        adElement.setAttribute('data-ad-client', 'ca-pub-4319187914977768');
-                        adElement.setAttribute('data-ad-slot', ADMOB_AD_UNIT_ID);
+                        adElement.setAttribute('data-ad-client', AD_SENSE_CLIENT);
+                        adElement.setAttribute('data-ad-slot', AD_SENSE_SLOT);
                         adElement.setAttribute('data-ad-format', 'rectangle');
                         adElement.setAttribute('data-ad-layout', 'in-article');
                         
@@ -600,10 +607,10 @@
                         (adsbygoogle = window.adsbygoogle || []).push({});
                     }
                     
-                    console.log('AdMob ads initialized successfully');
+                    console.log('Google AdSense ads initialized successfully');
                     
                 } catch (error) {
-                    console.error('Error initializing AdMob ads:', error);
+                    console.error('Error initializing Google AdSense ads:', error);
                     showAdPlaceholders();
                 }
             }, 1000);
@@ -616,8 +623,8 @@
                 container.innerHTML = `
                     <div class="ad-loading">
                         <i class="fas fa-ad"></i>
-                        <p>AdMob Ad Unit: ${ADMOB_AD_UNIT_ID.substring(0, 20)}...</p>
-                        <div class="ad-info">App ID: ${ADMOB_APP_ID.substring(0, 25)}...</div>
+                        <p>AdSense Ad Unit: ${AD_SENSE_SLOT}</p>
+                        <div class="ad-info">Client: ${AD_SENSE_CLIENT.substring(0, 25)}...</div>
                     </div>
                 `;
             });
@@ -746,7 +753,7 @@
             document.body.removeChild(a);
         });
 
-        // AdMob Policy Compliance Checks
+        // Ad Policy Compliance Checks
         document.addEventListener('DOMContentLoaded', function() {
             // Ensure ads don't interfere with user experience
             const checkAdOverlap = () => {
