@@ -48,7 +48,7 @@
         
         .container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 0 20px;
             flex: 1;
@@ -278,34 +278,68 @@
             font-weight: 500;
         }
         
-        /* Ad Containers */
-        .ad-container {
+        /* Fly-in Ad Container */
+        #flyinAd {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
             background: white;
             border-radius: var(--radius);
-            box-shadow: var(--shadow);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            z-index: 999;
+            opacity: 0;
+            transform: translateY(100px) scale(0.9);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid rgba(0,0,0,0.1);
             overflow: hidden;
-            margin: 30px 0;
-            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        #flyinAd.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
         }
         
         .ad-header {
-            background: #f8f9ff;
+            background: linear-gradient(135deg, #f8f9ff, #e8ebff);
             padding: 15px 20px;
-            border-bottom: 1px solid #e8ebff;
+            border-bottom: 1px solid #e0e6ff;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: space-between;
             font-size: 0.9rem;
             color: var(--gray);
             font-weight: 500;
         }
         
+        .ad-close {
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+        
+        .ad-close:hover {
+            background: rgba(0,0,0,0.05);
+            color: var(--dark);
+        }
+        
         .ad-content {
-            min-height: 100px;
+            min-height: 250px;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            background: #fafbff;
         }
         
         .ad-loading {
@@ -318,8 +352,8 @@
         /* Toast */
         .toast {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 80px;
+            right: 20px;
             background: var(--success);
             color: white;
             padding: 16px 24px;
@@ -414,10 +448,6 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .ad-container {
-                margin: 20px 0;
-            }
-            
             .footer-links {
                 gap: 20px;
                 flex-direction: column;
@@ -427,6 +457,20 @@
             textarea {
                 padding: 18px;
                 min-height: 150px;
+            }
+            
+            /* Fly-in Ad for Mobile */
+            #flyinAd {
+                width: calc(100% - 40px);
+                max-width: 320px;
+                right: 20px;
+                bottom: 20px;
+            }
+            
+            .toast {
+                left: 20px;
+                right: 20px;
+                bottom: 100px;
             }
         }
         
@@ -447,10 +491,11 @@
                 font-size: 1.2rem;
             }
             
-            .toast {
-                left: 20px;
-                right: 20px;
-                bottom: 20px;
+            #flyinAd {
+                width: calc(100% - 30px);
+                max-width: 280px;
+                right: 15px;
+                bottom: 15px;
             }
         }
         
@@ -460,7 +505,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        .tool-container, .ad-container {
+        .tool-container {
             animation: fadeIn 0.6s ease-out;
         }
     </style>
@@ -477,25 +522,6 @@
     </header>
     
     <div class="container">
-        <!-- Top Ad -->
-        <div class="ad-container" id="topAd">
-            <div class="ad-header">
-                <i class="fas fa-ad"></i>
-                <span>Advertisement</span>
-            </div>
-            <div class="ad-content">
-                <div class="ad-loading">
-                    <i class="fas fa-spinner fa-spin"></i> Loading AdSense...
-                </div>
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-4319187914977768"
-                     data-ad-slot="4555770131"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-            </div>
-        </div>
-        
         <!-- Main Tool -->
         <div class="main-content">
             <div class="tool-container">
@@ -570,24 +596,30 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Bottom Ad -->
-        <div class="ad-container" id="bottomAd">
-            <div class="ad-header">
+    </div>
+    
+    <!-- Fly-in Ad (Bottom Right) -->
+    <div id="flyinAd">
+        <div class="ad-header">
+            <div>
                 <i class="fas fa-ad"></i>
                 <span>Advertisement</span>
             </div>
-            <div class="ad-content">
-                <div class="ad-loading">
-                    <i class="fas fa-spinner fa-spin"></i> Loading AdSense...
-                </div>
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-4319187914977768"
-                     data-ad-slot="4555770131"
-                     data-ad-format="rectangle"
-                     data-ad-layout="in-article"></ins>
+            <button class="ad-close" id="closeAd">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="ad-content">
+            <div class="ad-loading">
+                <i class="fas fa-spinner fa-spin"></i><br>
+                Loading AdSense...
             </div>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4319187914977768"
+                 data-ad-slot="4555770131"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
         </div>
     </div>
     
@@ -632,6 +664,8 @@
         const copyBtn = document.getElementById('copyBtn');
         const swapBtn = document.getElementById('swapBtn');
         const toast = document.getElementById('toast');
+        const flyinAd = document.getElementById('flyinAd');
+        const closeAdBtn = document.getElementById('closeAd');
         
         // Statistics elements
         const charCountEl = document.getElementById('charCount');
@@ -648,29 +682,42 @@
             convertToProperCase();
             updateStatistics();
             
-            // Initialize AdSense ads
-            initializeAds();
-            
             // Set proper case button as active
             propercaseBtn.classList.add('active');
+            
+            // Show fly-in ad after delay
+            setTimeout(() => {
+                showFlyinAd();
+            }, 2000);
         });
         
-        // Initialize Google AdSense Ads
-        function initializeAds() {
-            try {
-                // Initialize ads
-                (adsbygoogle = window.adsbygoogle || []).push({});
+        // Show fly-in ad
+        function showFlyinAd() {
+            // Check if user has closed ad before
+            if (!localStorage.getItem('adClosed')) {
+                flyinAd.classList.add('show');
                 
-                // Replace loading messages after a delay
-                setTimeout(() => {
-                    document.querySelectorAll('.ad-loading').forEach(loading => {
-                        loading.style.display = 'none';
-                    });
-                }, 2000);
-                
-            } catch (error) {
-                console.error('AdSense initialization error:', error);
+                // Initialize AdSense ad
+                try {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    
+                    // Hide loading message after a delay
+                    setTimeout(() => {
+                        const loadingMsg = document.querySelector('.ad-loading');
+                        if (loadingMsg) {
+                            loadingMsg.style.display = 'none';
+                        }
+                    }, 1500);
+                } catch (error) {
+                    console.error('AdSense error:', error);
+                }
             }
+        }
+        
+        // Close fly-in ad
+        function closeFlyinAd() {
+            flyinAd.classList.remove('show');
+            localStorage.setItem('adClosed', 'true');
         }
         
         // Update statistics
@@ -820,6 +867,9 @@
         copyBtn.addEventListener('click', copyToClipboard);
         swapBtn.addEventListener('click', swapText);
         
+        // Close ad button
+        closeAdBtn.addEventListener('click', closeFlyinAd);
+        
         // Auto-update on input
         inputText.addEventListener('input', () => {
             updateStatistics();
@@ -833,17 +883,14 @@
             else convertToProperCase();
         });
         
-        // Mobile ad adjustments
-        function adjustAdsForMobile() {
-            if (window.innerWidth < 768) {
-                document.querySelectorAll('.ad-content').forEach(ad => {
-                    ad.style.minHeight = '100px';
-                });
+        // Hide ad when clicking outside (optional)
+        document.addEventListener('click', (e) => {
+            if (!flyinAd.contains(e.target) && !e.target.closest('.control-btn') && 
+                !e.target.closest('.action-btn') && flyinAd.classList.contains('show')) {
+                // Optionally hide ad when clicking outside
+                // closeFlyinAd();
             }
-        }
-        
-        window.addEventListener('resize', adjustAdsForMobile);
-        adjustAdsForMobile();
+        });
     </script>
 </body>
 </html>
