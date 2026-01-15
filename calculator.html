@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Scientific Calculator | Advanced Math Tool with Functions & Graphing</title>
 
     <link rel="icon" type="image/png" href="https://sursagars.github.io/favicon.png"/>
@@ -64,13 +64,19 @@
             --button-bg: #1e3a5f;
             --button-hover: #2a4a7a;
             --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            --transition: all 0.2s ease;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --radius: 12px;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html {
+            scroll-behavior: smooth;
         }
         
         body {
@@ -392,6 +398,8 @@
             justify-content: center;
             font-family: 'Inter', sans-serif;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            min-height: 44px;
+            min-width: 44px;
         }
         
         .calc-btn:hover {
@@ -559,6 +567,8 @@
             justify-content: center;
             cursor: pointer;
             transition: var(--transition);
+            min-height: 44px;
+            min-width: 44px;
         }
         
         .history-btn:hover {
@@ -673,6 +683,102 @@
             margin-top: 3px;
         }
         
+        /* NEW: Fly-in Ad Container */
+        #flyinAd {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            z-index: 999;
+            opacity: 0;
+            transform: translateY(100px) scale(0.9);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        #flyinAd.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        
+        .ad-header {
+            background: linear-gradient(135deg, #f8f9ff, #e8ebff);
+            padding: 15px 20px;
+            border-bottom: 1px solid #e0e6ff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--gray-color);
+            font-weight: 500;
+        }
+        
+        .ad-close {
+            background: none;
+            border: none;
+            color: var(--gray-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+        
+        .ad-close:hover {
+            background: rgba(0,0,0,0.05);
+            color: var(--dark-color);
+        }
+        
+        .ad-content {
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: #fafbff;
+        }
+        
+        .ad-loading {
+            color: var(--gray-color);
+            font-style: italic;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        /* NEW: Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: var(--success-color);
+            color: white;
+            padding: 16px 24px;
+            border-radius: var(--radius);
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.3);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+        }
+        
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
         /* Footer Styles */
         .footer {
             text-align: center;
@@ -695,11 +801,15 @@
             color: white;
             text-decoration: none;
             transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .footer-links a:hover {
             color: var(--primary-color);
             text-decoration: underline;
+            transform: translateY(-2px);
         }
         
         .copyright {
@@ -716,6 +826,11 @@
         
         .fade-in {
             animation: fadeIn 0.5s ease;
+        }
+        
+        /* Utility Classes */
+        .hidden {
+            display: none !important;
         }
         
         /* Responsive adjustments for calculator buttons */
@@ -743,6 +858,20 @@
                 gap: 15px;
                 align-items: center;
             }
+            
+            /* Mobile fly-in ad */
+            #flyinAd {
+                width: calc(100% - 40px);
+                max-width: 320px;
+                right: 20px;
+                bottom: 20px;
+            }
+            
+            .toast {
+                left: 20px;
+                right: 20px;
+                bottom: 100px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -757,6 +886,13 @@
             
             .calc-btn.scientific {
                 display: none;
+            }
+            
+            #flyinAd {
+                width: calc(100% - 30px);
+                max-width: 280px;
+                right: 15px;
+                bottom: 15px;
             }
         }
     </style>
@@ -983,30 +1119,14 @@
                         <button class="history-btn" id="exportHistory" title="Export History">
                             <i class="fas fa-download"></i>
                         </button>
+                        <button class="history-btn" id="copyHistory" title="Copy History">
+                            <i class="fas fa-copy"></i>
+                        </button>
                     </div>
                 </div>
                 
                 <div class="history-list" id="historyList">
-                    <div class="history-item">
-                        <div class="history-expression">45 × sin(30) + log(100)</div>
-                        <div class="history-result">27.5</div>
-                    </div>
-                    <div class="history-item">
-                        <div class="history-expression">(5² + √144) ÷ 2</div>
-                        <div class="history-result">18.5</div>
-                    </div>
-                    <div class="history-item">
-                        <div class="history-expression">π × 7²</div>
-                        <div class="history-result">153.938</div>
-                    </div>
-                    <div class="history-item">
-                        <div class="history-expression">e^(ln(10))</div>
-                        <div class="history-result">10</div>
-                    </div>
-                    <div class="history-item">
-                        <div class="history-expression">cos(60) × 100</div>
-                        <div class="history-result">50</div>
-                    </div>
+                    <!-- History items will be populated here -->
                 </div>
                 
                 <!-- Bottom Ad -->
@@ -1031,14 +1151,51 @@
         <!-- Updated Footer with Legal Links -->
         <div class="footer">
             <div class="footer-links">
-                <a href="legal.html#about">About this Site </a>
-                <a href="legal.html#privacy">Privacy Policy</a>
-                <a href="legal.html#terms">Terms of Use</a>
+                <a href="legal.html#about">
+                    <i class="fas fa-info-circle"></i> About this Site
+                </a>
+                <a href="legal.html#privacy">
+                    <i class="fas fa-shield-alt"></i> Privacy Policy
+                </a>
+                <a href="legal.html#terms">
+                    <i class="fas fa-file-contract"></i> Terms of Use
+                </a>
             </div>
             <div class="copyright">
                 &copy; <span id="currentYear"></span> Scientific Calculator Tool. All rights reserved.
             </div>
         </div>
+    </div>
+
+    <!-- NEW: Fly-in Ad (Bottom Right) -->
+    <div id="flyinAd">
+        <div class="ad-header">
+            <div>
+                <i class="fas fa-ad"></i>
+                <span>Advertisement</span>
+            </div>
+            <button class="ad-close" id="closeAd">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="ad-content">
+            <div class="ad-loading">
+                <i class="fas fa-spinner fa-spin"></i><br>
+                Loading AdSense...
+            </div>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4319187914977768"
+                 data-ad-slot="4555770131"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+    </div>
+    
+    <!-- NEW: Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span>Calculation copied to clipboard!</span>
     </div>
 
     <script>
@@ -1065,12 +1222,69 @@
         const programmerModeBtn = document.getElementById('programmerMode');
         const clearHistoryBtn = document.getElementById('clearHistory');
         const exportHistoryBtn = document.getElementById('exportHistory');
+        const copyHistoryBtn = document.getElementById('copyHistory');
+        
+        // NEW: Fly-in ad and toast elements
+        const flyinAd = document.getElementById('flyinAd');
+        const closeAdBtn = document.getElementById('closeAd');
+        const toast = document.getElementById('toast');
         
         // Initialize calculator
         function init() {
             updateDisplay();
             setupEventListeners();
             loadHistory();
+            
+            // Show fly-in ad after delay
+            setTimeout(() => {
+                showFlyinAd();
+            }, 2000);
+        }
+        
+        // NEW: Show fly-in ad
+        function showFlyinAd() {
+            // Check if user has closed ad before
+            if (!localStorage.getItem('calculatorAdClosed')) {
+                flyinAd.classList.add('show');
+                
+                // Initialize AdSense ad
+                try {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    
+                    // Hide loading message after a delay
+                    setTimeout(() => {
+                        const loadingMsg = document.querySelector('.ad-loading');
+                        if (loadingMsg) {
+                            loadingMsg.style.display = 'none';
+                        }
+                    }, 1500);
+                } catch (error) {
+                    console.error('AdSense error:', error);
+                }
+            }
+        }
+        
+        // NEW: Close fly-in ad
+        function closeFlyinAd() {
+            flyinAd.classList.remove('show');
+            localStorage.setItem('calculatorAdClosed', 'true');
+        }
+        
+        // NEW: Show toast notification
+        function showToast(message, type = 'success') {
+            const colors = {
+                success: '#38b000',
+                error: '#ef476f',
+                info: '#3a86ff'
+            };
+            
+            toast.style.background = colors[type] || colors.success;
+            toast.querySelector('span').textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
         }
         
         // Update display
@@ -1182,6 +1396,9 @@
                 const expression = `${formatNumber(previousInput)} ${getOperationSymbol(operation)} ${formatNumber(currentInput)}`;
                 addToHistory(expression, computation);
                 
+                // Show toast notification
+                showToast('Calculation completed!');
+                
                 // Update display
                 currentInput = computation.toString();
                 operation = undefined;
@@ -1191,6 +1408,7 @@
             } catch (error) {
                 currentInput = 'Error';
                 updateDisplay();
+                showToast('Calculation error!', 'error');
             }
         }
         
@@ -1297,10 +1515,12 @@
                     case 'deg':
                         isDegreeMode = true;
                         result = currentInput;
+                        showToast('Switched to Degree mode');
                         break;
                     case 'rad':
                         isDegreeMode = false;
                         result = currentInput;
+                        showToast('Switched to Radian mode');
                         break;
                     default:
                         return;
@@ -1312,6 +1532,7 @@
                 
                 if (func !== 'deg' && func !== 'rad') {
                     addToHistory(expression, result);
+                    showToast('Function calculated!');
                 }
                 
                 currentInput = result.toString();
@@ -1320,6 +1541,7 @@
             } catch (error) {
                 currentInput = 'Error';
                 updateDisplay();
+                showToast('Function error!', 'error');
             }
         }
         
@@ -1377,6 +1599,7 @@
             previousInput = '';
             operation = null;
             updateDisplay();
+            showToast('Calculator cleared');
         }
         
         // Delete last character
@@ -1445,6 +1668,7 @@
                 historyItem.addEventListener('click', () => {
                     currentInput = item.result.replace(/,/g, '');
                     updateDisplay();
+                    showToast('Result copied to calculator');
                 });
                 
                 historyList.appendChild(historyItem);
@@ -1470,13 +1694,14 @@
                 calculationHistory = [];
                 updateHistoryDisplay();
                 saveHistory();
+                showToast('History cleared');
             }
         }
         
         // Export history
         function exportHistory() {
             if (calculationHistory.length === 0) {
-                alert('No history to export');
+                showToast('No history to export', 'info');
                 return;
             }
             
@@ -1492,6 +1717,29 @@
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+            showToast('History exported as CSV');
+        }
+        
+        // NEW: Copy history to clipboard
+        function copyHistory() {
+            if (calculationHistory.length === 0) {
+                showToast('No history to copy', 'info');
+                return;
+            }
+            
+            let textContent = "Calculator History:\n\n";
+            calculationHistory.forEach(item => {
+                textContent += `${item.expression} = ${item.result} (${item.timestamp})\n`;
+            });
+            
+            navigator.clipboard.writeText(textContent)
+                .then(() => {
+                    showToast('History copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                    showToast('Failed to copy history', 'error');
+                });
         }
         
         // Save history to localStorage
@@ -1524,6 +1772,7 @@
             basicModeBtn.classList.add('active');
             scientificModeBtn.classList.remove('active');
             programmerModeBtn.classList.remove('active');
+            showToast('Switched to Basic mode');
         }
         
         // Switch to scientific mode
@@ -1534,11 +1783,12 @@
             basicModeBtn.classList.remove('active');
             scientificModeBtn.classList.add('active');
             programmerModeBtn.classList.remove('active');
+            showToast('Switched to Scientific mode');
         }
         
         // Switch to programmer mode
         function switchToProgrammerMode() {
-            alert('Programmer mode will be available in the next update!');
+            showToast('Programmer mode coming soon!', 'info');
             // For now, switch to basic mode
             switchToBasicMode();
         }
@@ -1608,6 +1858,45 @@
             // History buttons
             clearHistoryBtn.addEventListener('click', clearHistory);
             exportHistoryBtn.addEventListener('click', exportHistory);
+            copyHistoryBtn.addEventListener('click', copyHistory);
+            
+            // NEW: Fly-in ad close button
+            closeAdBtn.addEventListener('click', closeFlyinAd);
+            
+            // Keyboard support
+            document.addEventListener('keydown', handleKeyboardInput);
+        }
+        
+        // Handle keyboard input
+        function handleKeyboardInput(event) {
+            const key = event.key;
+            
+            // Prevent default for calculator keys
+            if (/[0-9\.\+\-\*\/=]|Enter|Escape|Backspace|Delete/.test(key)) {
+                event.preventDefault();
+            }
+            
+            if (key >= '0' && key <= '9') {
+                appendNumber(key);
+            } else if (key === '.') {
+                appendNumber('.');
+            } else if (key === '+') {
+                chooseOperation('add');
+            } else if (key === '-') {
+                chooseOperation('subtract');
+            } else if (key === '*') {
+                chooseOperation('multiply');
+            } else if (key === '/') {
+                chooseOperation('divide');
+            } else if (key === '=' || key === 'Enter') {
+                calculate();
+            } else if (key === 'Escape' || key === 'Delete') {
+                clearCalculator();
+            } else if (key === 'Backspace') {
+                deleteLast();
+            } else if (key === '%') {
+                calculatePercentage();
+            }
         }
         
         // Initialize the calculator
