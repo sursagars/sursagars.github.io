@@ -81,12 +81,45 @@
         .container {
             max-width: 1400px;
             margin: 0 auto;
+            position: relative;
         }
         
         /* Header Styles */
         header {
             text-align: center;
             padding: 25px 0 30px;
+            position: relative;
+        }
+        
+        /* NEW: Home Button */
+        .home-button {
+            position: absolute;
+            top: 20px;
+            right: 0;
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: white;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        .home-button:hover {
+            background: rgba(67, 97, 238, 0.7);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.3);
+        }
+        
+        .home-button i {
+            font-size: 1.3rem;
         }
         
         .logo-container {
@@ -190,39 +223,7 @@
             100% { opacity: 1; }
         }
         
-        /* Ad Container Styles */
-        .ad-container {
-            display: flex;
-            justify-content: center;
-            margin: 25px 0;
-            padding: 20px;
-            background-color: white;
-            border-radius: 16px;
-            box-shadow: var(--card-shadow);
-            min-height: 120px;
-            border: 1px solid var(--border-color);
-        }
-        
-        .ad-placeholder {
-            width: 100%;
-            max-width: 728px;
-            height: 120px;
-            background: linear-gradient(90deg, #f1f3f9 25%, #e8ecf5 50%, #f1f3f9 75%);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray-color);
-            font-size: 0.95rem;
-            background-size: 200% 100%;
-            animation: loading 1.5s infinite;
-            overflow: hidden;
-        }
-        
-        @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
+        /* REMOVED: All Ad Container Styles */
         
         /* Main Layout */
         .main-layout {
@@ -623,52 +624,6 @@
             color: #dc2626;
         }
         
-        /* Mobile Ad */
-        .mobile-ad {
-            display: none;
-            margin: 30px 0;
-        }
-        
-        @media (max-width: 767px) {
-            .mobile-ad {
-                display: flex;
-                justify-content: center;
-            }
-            
-            .ad-container:first-of-type {
-                display: none;
-            }
-            
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            .converter-card, .rates-card {
-                padding: 25px;
-            }
-            
-            .currency-amount {
-                font-size: 1.8rem;
-            }
-            
-            .result-value {
-                font-size: 2.2rem;
-            }
-            
-            .action-buttons {
-                grid-template-columns: 1fr;
-            }
-            
-            .status-bar {
-                gap: 10px;
-            }
-            
-            .status-item {
-                padding: 10px 15px;
-                font-size: 0.85rem;
-            }
-        }
-        
         /* Info Box */
         .info-box {
             background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
@@ -798,6 +753,77 @@
             background: rgba(67, 97, 238, 0.08);
         }
         
+        /* NEW: Fly-in Ad Container */
+        #flyinAd {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            z-index: 999;
+            opacity: 0;
+            transform: translateY(100px) scale(0.9);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        #flyinAd.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        
+        .ad-header {
+            background: linear-gradient(135deg, #f8f9ff, #e8ebff);
+            padding: 15px 20px;
+            border-bottom: 1px solid #e0e6ff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--gray-color);
+            font-weight: 500;
+        }
+        
+        .ad-close {
+            background: none;
+            border: none;
+            color: var(--gray-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+        
+        .ad-close:hover {
+            background: rgba(0,0,0,0.05);
+            color: var(--dark-color);
+        }
+        
+        .ad-content {
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: #fafbff;
+        }
+        
+        .ad-loading {
+            color: var(--gray-color);
+            font-style: italic;
+            text-align: center;
+            padding: 30px;
+        }
+        
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -807,12 +833,85 @@
         .fade-in {
             animation: fadeIn 0.5s ease;
         }
+        
+        /* Responsive adjustments */
+        @media (max-width: 767px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .converter-card, .rates-card {
+                padding: 25px;
+            }
+            
+            .currency-amount {
+                font-size: 1.8rem;
+            }
+            
+            .result-value {
+                font-size: 2.2rem;
+            }
+            
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .status-bar {
+                gap: 10px;
+            }
+            
+            .status-item {
+                padding: 10px 15px;
+                font-size: 0.85rem;
+            }
+            
+            /* Home button mobile adjustments */
+            .home-button {
+                width: 45px;
+                height: 45px;
+                top: 15px;
+                right: 15px;
+            }
+            
+            /* Mobile fly-in ad */
+            #flyinAd {
+                width: calc(100% - 40px);
+                max-width: 320px;
+                right: 20px;
+                bottom: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            #flyinAd {
+                width: calc(100% - 30px);
+                max-width: 280px;
+                right: 15px;
+                bottom: 15px;
+            }
+            
+            .home-button {
+                width: 40px;
+                height: 40px;
+                top: 10px;
+                right: 10px;
+            }
+            
+            .home-button i {
+                font-size: 1.1rem;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Header -->
         <header>
+            <!-- NEW: Home Button -->
+            <a href="index.html" class="home-button" title="Go to Home">
+                <i class="fas fa-home"></i>
+            </a>
+            
             <div class="logo-container">
                 <div class="logo-icon">
                     <i class="fas fa-bolt"></i>
@@ -854,23 +953,7 @@
             </div>
         </header>
         
-        <!-- Top Ad -->
-        <div class="ad-container fade-in">
-            <div class="ad-placeholder">
-                <!-- AdSense Ad Unit -->
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- Live Currency Converter Top Banner -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-4319187914977768"
-                     data-ad-slot="9707260784"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
-        </div>
+        <!-- REMOVED: Top Ad Container -->
         
         <!-- Main Layout -->
         <div class="main-layout">
@@ -970,22 +1053,7 @@
                     </button>
                 </div>
                 
-                <!-- Mobile Ad -->
-                <div class="mobile-ad">
-                    <div class="ad-placeholder" style="height: 100px; max-width: 320px;">
-                        <!-- Mobile AdSense Ad Unit -->
-                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                        <ins class="adsbygoogle"
-                             style="display:block"
-                             data-ad-format="fluid"
-                             data-ad-layout-key="-fb+5w+4e-db+86"
-                             data-ad-client="ca-pub-4319187914977768"
-                             data-ad-slot="9707260784"></ins>
-                        <script>
-                             (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                    </div>
-                </div>
+                <!-- REMOVED: Mobile Ad -->
                 
                 <!-- Info Box -->
                 <div class="info-box">
@@ -1020,21 +1088,7 @@
                     </table>
                 </div>
                 
-                <!-- Bottom Ad -->
-                <div class="ad-container" style="margin: 25px 0 0; padding: 15px;">
-                    <div class="ad-placeholder" style="height: 100px;">
-                        <!-- Bottom AdSense Ad Unit -->
-                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                        <ins class="adsbygoogle"
-                             style="display:block"
-                             data-ad-format="autorelaxed"
-                             data-ad-client="ca-pub-4319187914977768"
-                             data-ad-slot="9707260784"></ins>
-                        <script>
-                             (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                    </div>
-                </div>
+                <!-- REMOVED: Bottom Ad Container -->
             </div>
         </div>
         
@@ -1048,6 +1102,31 @@
             <div class="copyright">
                 &copy; <span id="currentYear"></span> Live Currency Converter. All rights reserved.
             </div>
+        </div>
+    </div>
+
+    <!-- Fly-in Ad (Bottom Right) -->
+    <div id="flyinAd">
+        <div class="ad-header">
+            <div>
+                <i class="fas fa-ad"></i>
+                <span>Advertisement</span>
+            </div>
+            <button class="ad-close" id="closeAd">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="ad-content">
+            <div class="ad-loading">
+                <i class="fas fa-spinner fa-spin"></i><br>
+                Loading AdSense...
+            </div>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4319187914977768"
+                 data-ad-slot="4555770131"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
         </div>
     </div>
 
@@ -1103,6 +1182,10 @@
         const toSearch = document.getElementById('toSearch');
         const fromList = document.getElementById('fromList');
         const toList = document.getElementById('toList');
+        
+        // Fly-in ad elements
+        const flyinAd = document.getElementById('flyinAd');
+        const closeAdBtn = document.getElementById('closeAd');
         
         // Currency data for display (will be supplemented by API data)
         const currencyData = {
@@ -1164,10 +1247,44 @@
             showLoadingState();
             await fetchExchangeRates();
             
+            // Show fly-in ad after delay
+            setTimeout(() => {
+                showFlyinAd();
+            }, 2000);
+            
             // Auto-refresh every 60 seconds
             setInterval(async () => {
                 await fetchExchangeRates();
             }, 60000);
+        }
+        
+        // Show fly-in ad
+        function showFlyinAd() {
+            // Check if user has closed ad before
+            if (!localStorage.getItem('currencyAdClosed')) {
+                flyinAd.classList.add('show');
+                
+                // Initialize AdSense ad
+                try {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    
+                    // Hide loading message after a delay
+                    setTimeout(() => {
+                        const loadingMsg = document.querySelector('.ad-loading');
+                        if (loadingMsg) {
+                            loadingMsg.style.display = 'none';
+                        }
+                    }, 1500);
+                } catch (error) {
+                    console.error('AdSense error:', error);
+                }
+            }
+        }
+        
+        // Close fly-in ad
+        function closeFlyinAd() {
+            flyinAd.classList.remove('show');
+            localStorage.setItem('currencyAdClosed', 'true');
         }
         
         // Update current date and time
@@ -1552,6 +1669,9 @@
             toDropdown.addEventListener('click', function(e) {
                 e.stopPropagation();
             });
+            
+            // Fly-in ad close button
+            closeAdBtn.addEventListener('click', closeFlyinAd);
         }
         
         // Initialize the app when DOM is loaded
