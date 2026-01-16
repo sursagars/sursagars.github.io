@@ -2,44 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free online daily planner tool to organize your tasks, schedule, and boost productivity. Plan your day efficiently with our responsive planner.">
-    <meta name="keywords" content="daily planner, task management, schedule, productivity, time management, organize tasks, daily schedule">
-    <meta name="author" content="Daily Planner Pro">
-    <title>Daily Planner Pro - Organize Your Day Efficiently | Free Online Tool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Free online PDF splitter tool to extract pages from PDF files. Split PDF by page ranges or extract specific pages easily.">
+    <meta name="keywords" content="PDF splitter, PDF tool, PDF pages, extract PDF, split PDF, PDF editor, PDF online, free PDF tool">
+    <meta name="author" content="PDF Splitter Tool">
     
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PDF Splitter | Free Online PDF Tool">
+    <meta property="og:description" content="Split PDF files by page ranges or extract specific pages easily">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PDF Splitter | Free Online PDF Tool">
+    <meta name="twitter:description" content="Split PDF files by page ranges or extract specific pages easily">
+    
+    <title>PDF Splitter | Free Online PDF Tool</title>
+
     <link rel="icon" type="image/png" href="https://sursagars.github.io/favicon.png"/>
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4319187914977768"
-     crossorigin="anonymous">
-    </script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
         :root {
             --primary-color: #4361ee;
-            --secondary-color: #3a0ca3;
-            --accent-color: #4cc9f0;
+            --primary-dark: #3a56d4;
+            --secondary-color: #4cc9f0;
+            --success-color: #2ecc71;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+            --dark-color: #1a1a2e;
             --light-color: #f8f9fa;
-            --dark-color: #212529;
-            --success-color: #4bb543;
-            --warning-color: #ffcc00;
-            --danger-color: #dc3545;
             --gray-color: #6c757d;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
+            --border-color: #e0e0e0;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: #f5f7fb;
+            background: linear-gradient(135deg, #f5f7ff 0%, #f0f2ff 100%);
             color: var(--dark-color);
             line-height: 1.6;
             min-height: 100vh;
@@ -51,731 +65,1631 @@
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        /* Header Styles */
-        header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 1.5rem 0;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo i {
-            font-size: 1.8rem;
-        }
-
-        .logo h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .date-display {
-            text-align: center;
-            margin-top: 5px;
-            font-size: 1.1rem;
-        }
-
-        /* Main Content */
-        main {
-            padding: 2rem 0;
+            padding: 0 20px;
             flex: 1;
         }
 
-        .planner-container {
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 20px;
-        }
-
-        @media (max-width: 992px) {
-            .planner-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Planner Styles */
-        .planner {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #3f37c9);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
             overflow: hidden;
         }
 
-        .planner-header {
-            background-color: var(--primary-color);
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%234361ee' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.1;
+        }
+
+        .header-content h1 {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-content p {
+            font-size: 1.15rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            font-weight: 400;
+        }
+
+        /* Home Button */
+        .home-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
             color: white;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .planner-header h2 {
-            font-size: 1.3rem;
-        }
-
-        .time-slots {
-            max-height: 600px;
-            overflow-y: auto;
-        }
-
-        .time-slot {
-            display: grid;
-            grid-template-columns: 100px 1fr 80px;
-            border-bottom: 1px solid #e9ecef;
-            padding: 0.8rem;
-            align-items: center;
-            transition: var(--transition);
-        }
-
-        .time-slot:hover {
-            background-color: #f8f9fa;
-        }
-
-        .time-label {
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
             font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .task-input {
-            border: none;
-            padding: 0.5rem;
-            font-size: 1rem;
-            background: transparent;
-            width: 100%;
-            outline: none;
-        }
-
-        .task-actions {
             display: flex;
-            gap: 5px;
-            justify-content: flex-end;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            z-index: 10;
         }
 
-        .btn {
-            padding: 0.4rem 0.8rem;
-            border: none;
-            border-radius: 4px;
+        .home-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .action-btn {
+            padding: 16px 24px;
+            background: #f1f3ff;
+            color: var(--dark-color);
+            border: 2px solid #e0e6ff;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
-            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
         }
 
-        .btn-save {
-            background-color: var(--success-color);
+        .action-btn:hover {
+            background: #e8ebff;
+            transform: translateY(-2px);
+            border-color: var(--primary-color);
+        }
+
+        .action-btn.primary {
+            background: linear-gradient(135deg, var(--secondary-color), #3ab5d9);
             color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
         }
 
-        .btn-delete {
-            background-color: var(--danger-color);
+        .action-btn.primary:hover {
+            background: linear-gradient(135deg, #3ab5d9, #2aa3c7);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .action-btn.success {
+            background: linear-gradient(135deg, var(--success-color), #27ae60);
             color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
         }
 
-        .btn-edit {
-            background-color: var(--warning-color);
+        .action-btn.success:hover {
+            background: linear-gradient(135deg, #27ae60, #219653);
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+        }
+
+        .action-btn.warning {
+            background: linear-gradient(135deg, var(--warning-color), #e67e22);
             color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
         }
 
-        .btn:hover {
-            opacity: 0.9;
+        .action-btn.warning:hover {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
+        }
+
+        .action-btn.danger {
+            background: linear-gradient(135deg, var(--danger-color), #c0392b);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .action-btn.danger:hover {
+            background: linear-gradient(135deg, #c0392b, #a93226);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (min-width: 992px) {
+            .main-content {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        /* Tool Container */
+        .tool-container {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 35px;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .input-section, .output-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f2ff;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--secondary-color);
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-color);
+            font-size: 0.95rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 16px 18px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: var(--transition);
+            background: #fafbff;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.15);
+            background: white;
+        }
+
+        /* File Upload */
+        .file-upload-area {
+            border: 3px dashed var(--border-color);
+            border-radius: var(--radius);
+            padding: 50px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: #f8f9ff;
+            margin-bottom: 20px;
+        }
+
+        .file-upload-area:hover {
+            border-color: var(--primary-color);
+            background: #f0f2ff;
+        }
+
+        .file-upload-area.dragover {
+            border-color: var(--success-color);
+            background: rgba(46, 204, 113, 0.05);
+        }
+
+        .file-upload-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .file-info {
+            background: #f8f9ff;
+            padding: 15px;
+            border-radius: var(--radius);
+            margin-top: 15px;
+            display: none;
+        }
+
+        .file-info.show {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        /* Page Selection */
+        .page-selection {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: var(--radius);
+            margin-top: 20px;
+        }
+
+        .page-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .page-option {
+            background: white;
+            padding: 20px;
+            border-radius: var(--radius);
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .page-option:hover {
+            border-color: var(--primary-color);
             transform: translateY(-2px);
         }
 
-        /* Sidebar Styles */
-        .sidebar {
+        .page-option.active {
+            border-color: var(--success-color);
+            background: rgba(46, 204, 113, 0.05);
+        }
+
+        /* Main Split Button */
+        .split-button-container {
             display: flex;
-            flex-direction: column;
-            gap: 20px;
+            justify-content: center;
+            margin: 30px 0;
         }
 
-        .stats-card, .quick-actions, .ad-space {
-            background-color: white;
-            border-radius: 10px;
+        .split-download-btn {
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: none;
+            background: linear-gradient(135deg, var(--success-color), #27ae60);
+            color: white;
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.3);
+        }
+
+        .split-download-btn:hover {
+            background: linear-gradient(135deg, #27ae60, #219653);
+            box-shadow: 0 8px 25px rgba(46, 204, 113, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .split-download-btn:disabled {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Button Styles */
+        .btn {
+            padding: 12px 20px;
+            border-radius: var(--radius);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: none;
+            min-height: 44px;
+            min-width: 44px;
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            min-height: 36px;
+            min-width: 36px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), #3a56d4);
+            color: white;
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #3a56d4, #2a46c4);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success-color), #27ae60);
+            color: white;
+            box-shadow: 0 4px 12px rgba(46, 204, 113, 0.25);
+        }
+
+        .btn-success:hover {
+            background: linear-gradient(135deg, #27ae60, #219653);
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger-color), #c0392b);
+            color: white;
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.25);
+        }
+
+        .btn-danger:hover {
+            background: linear-gradient(135deg, #c0392b, #a93226);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.35);
+            transform: translateY(-2px);
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .loading-spinner.show {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Result Container */
+        .result-container {
+            background: #f8f9ff;
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .result-container.show {
+            display: block;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #e8ebff;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Download Buttons Container */
+        .download-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Tips Section */
+        .tips-section {
+            background: white;
+            padding: 25px;
+            border-radius: var(--radius);
             box-shadow: var(--shadow);
-            padding: 1.5rem;
+            margin-bottom: 30px;
+            border: 1px solid #e8ebff;
         }
 
-        .stats-card h3, .quick-actions h3 {
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-            border-bottom: 2px solid #e9ecef;
-            padding-bottom: 0.5rem;
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f2ff;
+        }
+
+        .tip-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .tip-icon {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            flex-shrink: 0;
+        }
+
+        .tip-content h4 {
+            color: var(--dark-color);
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .tip-content p {
+            color: var(--gray-color);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Quick Stats */
+        .quick-stats {
+            background: white;
+            padding: 25px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid #e8ebff;
         }
 
         .stat-item {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 0.8rem;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f2ff;
+        }
+
+        .stat-item:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            color: var(--dark-color);
+            font-weight: 500;
         }
 
         .stat-value {
-            font-weight: 600;
-            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.1rem;
         }
 
-        .quick-action-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .quick-action-btn {
-            background-color: var(--light-color);
-            border: 1px solid #dee2e6;
-            padding: 0.8rem;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .quick-action-btn:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        /* Ad Space Styles */
-        .ad-space {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: #f8f9fa;
-            border: 1px dashed #dee2e6;
+        /* Fly-in Ad Container */
+        #flyinAd {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            z-index: 999;
+            opacity: 0;
+            transform: translateY(100px) scale(0.9);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid rgba(0,0,0,0.1);
             overflow: hidden;
-            min-height: 250px;
         }
-
-        .ad-space.leaderboard {
-            min-height: 100px;
-            margin-bottom: 20px;
+        
+        #flyinAd.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
         }
-
-        .ad-label {
-            font-size: 0.8rem;
-            color: var(--gray-color);
-            margin-bottom: 10px;
-        }
-
-        .ad-container {
-            width: 100%;
-            height: 100%;
+        
+        .ad-header {
+            background: linear-gradient(135deg, #f8f9ff, #e8ebff);
+            padding: 15px 20px;
+            border-bottom: 1px solid #e0e6ff;
             display: flex;
-            justify-content: center;
             align-items: center;
-        }
-
-        /* Footer Styles (from pdf-excel.html) */
-        .footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 30px 20px;
-            color: #6c757d;
-            font-size: 0.85rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
-            background-color: #f8f9fa;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .footer-links a {
-            color: var(--dark-color);
-            text-decoration: none;
-            transition: var(--transition);
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--gray-color);
             font-weight: 500;
         }
         
-        .footer-links a:hover {
-            color: var(--primary-color);
-            text-decoration: underline;
+        .ad-close {
+            background: none;
+            border: none;
+            color: var(--gray-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
         }
         
+        .ad-close:hover {
+            background: rgba(0,0,0,0.05);
+            color: var(--dark-color);
+        }
+        
+        .ad-content {
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: #fafbff;
+        }
+        
+        .ad-message {
+            color: var(--gray-color);
+            text-align: center;
+            padding: 20px;
+            font-size: 0.95rem;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: var(--success-color);
+            color: white;
+            padding: 16px 24px;
+            border-radius: var(--radius);
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.3);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Footer */
+        footer {
+            background: white;
+            margin-top: 60px;
+            padding: 40px 0;
+            border-top: 1px solid #e8ebff;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
         .copyright {
-            color: #6c757d;
-            font-size: 0.85rem;
-            margin-top: 15px;
+            color: var(--gray-color);
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 10px;
         }
 
-        /* Responsive Adjustments */
+        /* Responsive */
         @media (max-width: 768px) {
-            .time-slot {
-                grid-template-columns: 80px 1fr;
-                gap: 10px;
+            .header-content h1 {
+                font-size: 2.2rem;
             }
             
-            .task-actions {
-                grid-column: 1 / -1;
-                justify-content: flex-start;
+            .header-content p {
+                font-size: 1rem;
             }
             
-            .header-content {
+            .tool-container {
+                padding: 25px;
+            }
+            
+            .action-buttons {
                 flex-direction: column;
-                gap: 10px;
             }
             
-            .logo h1 {
-                font-size: 1.3rem;
+            .action-btn, .btn, .split-download-btn {
+                width: 100%;
             }
             
-            .ad-space.leaderboard {
-                min-height: 70px;
-            }
-            
-            .ad-space {
-                min-height: 200px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .quick-action-buttons {
+            .page-options {
                 grid-template-columns: 1fr;
             }
             
-            .planner-header {
+            .download-buttons {
                 flex-direction: column;
-                gap: 10px;
-                text-align: center;
+            }
+            
+            .split-download-btn {
+                padding: 16px 30px;
+                font-size: 1.1rem;
+            }
+            
+            .footer-links {
+                gap: 20px;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            /* Home Button for Mobile */
+            .home-button {
+                top: 15px;
+                right: 15px;
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+            
+            /* Fly-in Ad for Mobile */
+            #flyinAd {
+                width: calc(100% - 40px);
+                max-width: 320px;
+                right: 20px;
+                bottom: 20px;
+            }
+            
+            .toast {
+                left: 20px;
+                right: 20px;
+                bottom: 100px;
             }
         }
 
-        /* Print Styles */
-        @media print {
-            .ad-space, .quick-actions {
-                display: none;
+        @media (max-width: 480px) {
+            .header-content h1 {
+                font-size: 1.8rem;
             }
             
-            .planner-container {
-                grid-template-columns: 1fr;
+            .section-title {
+                font-size: 1.2rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
             }
+            
+            .file-upload-area {
+                padding: 30px 15px;
+            }
+            
+            .home-button {
+                top: 10px;
+                right: 10px;
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+            
+            #flyinAd {
+                width: calc(100% - 30px);
+                max-width: 280px;
+                right: 15px;
+                bottom: 15px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tool-container, .tips-section, .quick-stats {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        /* Utility Classes */
+        .hidden {
+            display: none !important;
         }
     </style>
 </head>
 <body>
-    <!-- Header Section -->
+    <!-- Header -->
     <header>
+        <!-- Home Button -->
+        <a href="index.html" class="home-button">
+            <i class="fas fa-home"></i>
+        </a>
+        
         <div class="container">
             <div class="header-content">
-                <div class="logo">
-                    <i class="fas fa-calendar-alt"></i>
-                    <h1>Daily Planner Pro</h1>
+                <h1>PDF Splitter Tool</h1>
+                <p>Extract pages from PDF files. Split PDF by page ranges or extract specific pages easily. 100% free and secure.</p>
+                <div class="action-buttons">
+                    <button class="action-btn success" id="split-download-btn-top">
+                        <i class="fas fa-cut"></i> Split & Download PDF
+                    </button>
+                    <button class="action-btn warning" id="reset-all">
+                        <i class="fas fa-trash"></i> Reset All
+                    </button>
                 </div>
-                <div class="date-display" id="currentDate">Monday, January 1, 2023</div>
             </div>
         </div>
     </header>
+    
+    <div class="container">
+        <div class="main-content">
+            <!-- Primary Content -->
+            <div class="content-primary">
+                <!-- File Upload Section -->
+                <div class="tool-container">
+                    <div class="section-title">
+                        <h2><i class="fas fa-file-upload"></i> Upload PDF File</h2>
+                    </div>
+                    
+                    <div class="file-upload-area" id="fileDropArea">
+                        <div class="file-upload-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <h3>Drop PDF file here</h3>
+                        <p>or click to browse (Max: 50MB)</p>
+                        <input type="file" id="pdfFile" accept=".pdf" class="hidden">
+                    </div>
+                    
+                    <div id="fileInfo" class="file-info">
+                        <div class="result-item">
+                            <span class="stat-label">File Name:</span>
+                            <span class="stat-value" id="fileName">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="stat-label">File Size:</span>
+                            <span class="stat-value" id="fileSize">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="stat-label">Pages:</span>
+                            <span class="stat-value" id="pageCount">-</span>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- Main Content -->
-    <main>
-        <div class="container">
-            <!-- Top Ad Banner -->
-            <div class="ad-space leaderboard" style="margin-bottom: 20px;">
-                <div class="ad-label">Advertisement</div>
-                <div class="ad-container" id="topBannerAd">
-                    <!-- Top banner ad will be loaded here -->
+                <!-- Split Options Section -->
+                <div class="tool-container">
+                    <div class="section-title">
+                        <h2><i class="fas fa-cogs"></i> Split Options</h2>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Select Split Method:</label>
+                        <div class="page-options">
+                            <div class="page-option active" data-method="range">
+                                <i class="fas fa-sliders-h fa-2x"></i>
+                                <h4>Page Range</h4>
+                                <p>Split by specific pages</p>
+                            </div>
+                            <div class="page-option" data-method="single">
+                                <i class="fas fa-file-export fa-2x"></i>
+                                <h4>Single Pages</h4>
+                                <p>Extract individual pages</p>
+                            </div>
+                            <div class="page-option" data-method="interval">
+                                <i class="fas fa-ruler-combined fa-2x"></i>
+                                <h4>Fixed Interval</h4>
+                                <p>Split every N pages</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Page Range Option -->
+                    <div id="rangeOption" class="page-selection">
+                        <label for="pageRange">Enter Page Range (e.g., 1-5, 8, 11-15):</label>
+                        <input type="text" id="pageRange" placeholder="1-5, 8, 11-15">
+                        <p style="color: var(--gray-color); font-size: 0.9rem; margin-top: 8px;">
+                            Separate ranges with commas. Use hyphens for ranges.
+                        </p>
+                    </div>
+                    
+                    <!-- Single Pages Option -->
+                    <div id="singleOption" class="page-selection hidden">
+                        <label for="singlePages">Enter Page Numbers (e.g., 1,3,5,7):</label>
+                        <input type="text" id="singlePages" placeholder="1,3,5,7">
+                        <p style="color: var(--gray-color); font-size: 0.9rem; margin-top: 8px;">
+                            Separate page numbers with commas.
+                        </p>
+                    </div>
+                    
+                    <!-- Interval Option -->
+                    <div id="intervalOption" class="page-selection hidden">
+                        <label for="intervalSize">Split every N pages:</label>
+                        <input type="number" id="intervalSize" min="1" placeholder="5">
+                        <p style="color: var(--gray-color); font-size: 0.9rem; margin-top: 8px;">
+                            PDF will be split into multiple files, each containing N pages.
+                        </p>
+                    </div>
+                    
+                    <!-- Main Split & Download Button -->
+                    <div class="split-button-container">
+                        <button class="split-download-btn" id="split-download-btn-main" disabled>
+                            <i class="fas fa-cut"></i>
+                            <span>SPLIT & DOWNLOAD PDF</span>
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="loading-spinner" id="loadingSpinner">
+                        <div class="spinner"></div>
+                        <p>Processing PDF file...</p>
+                    </div>
+                    
+                    <div class="download-buttons" id="downloadButtons" style="display: none;">
+                        <button class="btn btn-success" id="downloadAllBtn">
+                            <i class="fas fa-download"></i> Download All Split Files
+                        </button>
+                        <button class="btn btn-primary" id="downloadZipBtn">
+                            <i class="fas fa-file-archive"></i> Download as ZIP
+                        </button>
+                    </div>
+                    
+                    <div class="result-container" id="resultContainer">
+                        <div class="section-title">
+                            <h2><i class="fas fa-check-circle"></i> Split Results</h2>
+                        </div>
+                        <div id="resultContent"></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="planner-container">
-                <!-- Main Planner -->
-                <div class="planner">
-                    <div class="planner-header">
-                        <h2><i class="fas fa-tasks"></i> Today's Schedule</h2>
-                        <button class="btn btn-save" id="saveAllBtn">Save All Changes</button>
+            <!-- Sidebar Content -->
+            <div class="content-secondary">
+                <!-- PDF Tips -->
+                <div class="tips-section">
+                    <h2 style="color: var(--primary-color); margin-bottom: 25px; font-size: 1.4rem;">
+                        <i class="fas fa-lightbulb"></i> PDF Tips
+                    </h2>
+                    <div class="tip-item">
+                        <div class="tip-icon">📄</div>
+                        <div class="tip-content">
+                            <h4>Large PDFs</h4>
+                            <p>For PDFs over 50MB, consider compressing first for faster processing.</p>
+                        </div>
                     </div>
-                    <div class="time-slots" id="timeSlots">
-                        <!-- Time slots will be generated by JavaScript -->
+                    <div class="tip-item">
+                        <div class="tip-icon">🔒</div>
+                        <div class="tip-content">
+                            <h4>Secure Processing</h4>
+                            <p>All files are processed locally in your browser. No upload to servers.</p>
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <div class="tip-icon">⚡</div>
+                        <div class="tip-content">
+                            <h4>Fast Splitting</h4>
+                            <p>Processing happens locally, making it faster than cloud-based tools.</p>
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <div class="tip-icon">📱</div>
+                        <div class="tip-content">
+                            <h4>Mobile Friendly</h4>
+                            <p>Works perfectly on mobile devices. No app installation needed.</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Sidebar -->
-                <div class="sidebar">
-                    <!-- Statistics Card -->
-                    <div class="stats-card">
-                        <h3><i class="fas fa-chart-pie"></i> Today's Progress</h3>
-                        <div class="stat-item">
-                            <span>Total Tasks:</span>
-                            <span class="stat-value" id="totalTasks">0</span>
-                        </div>
-                        <div class="stat-item">
-                            <span>Completed:</span>
-                            <span class="stat-value" id="completedTasks">0</span>
-                        </div>
-                        <div class="stat-item">
-                            <span>Remaining:</span>
-                            <span class="stat-value" id="remainingTasks">0</span>
-                        </div>
-                        <div class="stat-item">
-                            <span>Completion:</span>
-                            <span class="stat-value" id="completionRate">0%</span>
-                        </div>
+                <!-- Quick Stats -->
+                <div class="quick-stats">
+                    <h2 style="color: var(--primary-color); margin-bottom: 25px; font-size: 1.4rem;">
+                        <i class="fas fa-chart-line"></i> Quick Stats
+                    </h2>
+                    <div class="stat-item">
+                        <span class="stat-label">Max File Size</span>
+                        <span class="stat-value">50 MB</span>
                     </div>
-
-                    <!-- Quick Actions -->
-                    <div class="quick-actions">
-                        <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
-                        <div class="quick-action-buttons">
-                            <div class="quick-action-btn" id="clearAllBtn">
-                                <i class="fas fa-trash"></i> Clear All
-                            </div>
-                            <div class="quick-action-btn" id="addTaskBtn">
-                                <i class="fas fa-plus"></i> Add Task
-                            </div>
-                            <div class="quick-action-btn" id="exportBtn">
-                                <i class="fas fa-download"></i> Export
-                            </div>
-                            <div class="quick-action-btn" id="printBtn">
-                                <i class="fas fa-print"></i> Print
-                            </div>
-                        </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Format</span>
+                        <span class="stat-value">PDF Only</span>
                     </div>
-
-                    <!-- Sidebar Ad 1 -->
-                    <div class="ad-space">
-                        <div class="ad-label">Advertisement</div>
-                        <div class="ad-container" id="sidebarAd1">
-                            <!-- Sidebar ad 1 will be loaded here -->
-                        </div>
-                    </div>
-
-                    <!-- Sidebar Ad 2 -->
-                    <div class="ad-space">
-                        <div class="ad-label">Advertisement</div>
-                        <div class="ad-container" id="sidebarAd2">
-                            <!-- Sidebar ad 2 will be loaded here -->
-                        </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Processing</span>
+                        <span class="stat-value">Local</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
-
-    <!-- Footer from pdf-excel.html -->
-    <div class="footer">
-        <div class="footer-links">
-            <a href="legal.html#about">About this Site</a>
-            <a href="legal.html#privacy">Privacy Policy</a>
-            <a href="legal.html#terms">Terms of Use</a>
-        </div>
-        <div class="copyright">
-            &copy; <span id="currentYear"></span> Daily Planner Pro. All rights reserved.
         </div>
     </div>
+    
+    <!-- Fly-in Ad (Bottom Right) -->
+    <div id="flyinAd">
+        <div class="ad-header">
+            <div>
+                <i class="fas fa-star"></i>
+                <span>Support Us</span>
+            </div>
+            <button class="ad-close" id="closeAd">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="ad-content">
+            <div class="ad-message">
+                <i class="fas fa-heart" style="color: #e74c3c; font-size: 2rem; margin-bottom: 15px;"></i>
+                <h4>Like this tool?</h4>
+                <p>Consider sharing it with friends or supporting our work!</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Operation completed!</span>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="legal.html#about">
+                        <i class="fas fa-info-circle"></i> About
+                    </a>
+                    <a href="legal.html#privacy">
+                        <i class="fas fa-shield-alt"></i> Privacy Policy
+                    </a>
+                    <a href="legal.html#terms">
+                        <i class="fas fa-file-contract"></i> Terms of Use
+                    </a>
+                </div>
+                <div class="copyright">
+                    &copy; <span id="currentYear"></span> PDF Splitter Tool. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
 
-    <!-- JavaScript -->
+    <!-- PDF-Lib library for PDF manipulation -->
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <!-- JSZip for creating ZIP files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script>
-        // AdMob/AdSense Configuration
-        const AD_UNIT_ID = '9707260784'; // Your ad unit ID
-        const PUBLISHER_ID = 'ca-app-pub-4319187914977768'; // Your publisher ID
-        
-        // Initialize ads
-        function initializeAds() {
-            // Initialize top banner ad
-            initializeTopBannerAd();
+        // DOM Elements
+        const fileDropArea = document.getElementById('fileDropArea');
+        const pdfFileInput = document.getElementById('pdfFile');
+        const fileInfo = document.getElementById('fileInfo');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const pageCount = document.getElementById('pageCount');
+        const splitDownloadBtnTop = document.getElementById('split-download-btn-top');
+        const splitDownloadBtnMain = document.getElementById('split-download-btn-main');
+        const resetAllBtn = document.getElementById('reset-all');
+        const pageOptions = document.querySelectorAll('.page-option');
+        const rangeOption = document.getElementById('rangeOption');
+        const singleOption = document.getElementById('singleOption');
+        const intervalOption = document.getElementById('intervalOption');
+        const pageRangeInput = document.getElementById('pageRange');
+        const singlePagesInput = document.getElementById('singlePages');
+        const intervalSizeInput = document.getElementById('intervalSize');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const resultContainer = document.getElementById('resultContainer');
+        const resultContent = document.getElementById('resultContent');
+        const downloadButtons = document.getElementById('downloadButtons');
+        const downloadAllBtn = document.getElementById('downloadAllBtn');
+        const downloadZipBtn = document.getElementById('downloadZipBtn');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+        const flyinAd = document.getElementById('flyinAd');
+        const closeAdBtn = document.getElementById('closeAd');
+
+        // State variables
+        let currentPdf = null;
+        let currentPdfBytes = null;
+        let totalPages = 0;
+        let splitResults = [];
+        let originalFileName = '';
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
             
-            // Initialize sidebar ads
-            initializeSidebarAds();
+            // Setup event listeners
+            fileDropArea.addEventListener('click', () => pdfFileInput.click());
+            pdfFileInput.addEventListener('change', handleFileSelect);
             
-            // Refresh ads periodically (every 60 seconds)
-            setInterval(refreshAds, 60000);
-        }
-        
-        // Initialize top banner ad
-        function initializeTopBannerAd() {
-            const topAdContainer = document.getElementById('topBannerAd');
-            const isMobile = window.innerWidth <= 768;
+            // Drag and drop events
+            fileDropArea.addEventListener('dragover', handleDragOver);
+            fileDropArea.addEventListener('dragleave', handleDragLeave);
+            fileDropArea.addEventListener('drop', handleDrop);
             
-            // Clear container
-            topAdContainer.innerHTML = '';
+            // Split & Download buttons (both top and main)
+            splitDownloadBtnTop.addEventListener('click', splitAndDownloadPDF);
+            splitDownloadBtnMain.addEventListener('click', splitAndDownloadPDF);
             
-            // Create ad element
-            const adElement = document.createElement('ins');
-            adElement.className = 'adsbygoogle';
-            adElement.style.display = 'block';
-            adElement.style.width = isMobile ? '320px' : '728px';
-            adElement.style.height = isMobile ? '100px' : '90px';
-            adElement.setAttribute('data-ad-client', PUBLISHER_ID);
-            adElement.setAttribute('data-ad-slot', AD_UNIT_ID);
-            adElement.setAttribute('data-ad-format', 'auto');
-            adElement.setAttribute('data-full-width-responsive', 'true');
+            // Reset button
+            resetAllBtn.addEventListener('click', resetAll);
             
-            topAdContainer.appendChild(adElement);
+            // Page option selection
+            pageOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    pageOptions.forEach(opt => opt.classList.remove('active'));
+                    option.classList.add('active');
+                    
+                    const method = option.getAttribute('data-method');
+                    showOption(method);
+                });
+            });
             
-            // Push ad to Google
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        }
-        
-        // Initialize sidebar ads
-        function initializeSidebarAds() {
-            const sidebarAd1 = document.getElementById('sidebarAd1');
-            const sidebarAd2 = document.getElementById('sidebarAd2');
+            // Download buttons
+            downloadAllBtn.addEventListener('click', downloadAllSplitFiles);
+            downloadZipBtn.addEventListener('click', downloadAsZip);
             
-            // Clear containers
-            sidebarAd1.innerHTML = '';
-            sidebarAd2.innerHTML = '';
+            // Close ad button
+            closeAdBtn.addEventListener('click', closeFlyinAd);
             
-            // Create first sidebar ad
-            const adElement1 = document.createElement('ins');
-            adElement1.className = 'adsbygoogle';
-            adElement1.style.display = 'inline-block';
-            adElement1.style.width = '300px';
-            adElement1.style.height = '250px';
-            adElement1.setAttribute('data-ad-client', PUBLISHER_ID);
-            adElement1.setAttribute('data-ad-slot', AD_UNIT_ID);
-            
-            sidebarAd1.appendChild(adElement1);
-            
-            // Create second sidebar ad
-            const adElement2 = document.createElement('ins');
-            adElement2.className = 'adsbygoogle';
-            adElement2.style.display = 'inline-block';
-            adElement2.style.width = '300px';
-            adElement2.style.height = '250px';
-            adElement2.setAttribute('data-ad-client', PUBLISHER_ID);
-            adElement2.setAttribute('data-ad-slot', AD_UNIT_ID);
-            
-            sidebarAd2.appendChild(adElement2);
-            
-            // Push ads to Google with delay between them
+            // Show fly-in ad after delay
             setTimeout(() => {
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            }, 1000);
-            
-            setTimeout(() => {
-                (adsbygoogle = window.adsbygoogle || []).push({});
+                showFlyinAd();
             }, 2000);
+        });
+
+        // Show fly-in ad
+        function showFlyinAd() {
+            if (!localStorage.getItem('adClosed')) {
+                flyinAd.classList.add('show');
+            }
         }
         
-        // Refresh ads
-        function refreshAds() {
-            console.log('Refreshing ads...');
-            initializeAds();
-        }
-        
-        // Set current date
-        function updateCurrentDate() {
-            const now = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', options);
+        // Close fly-in ad
+        function closeFlyinAd() {
+            flyinAd.classList.remove('show');
+            localStorage.setItem('adClosed', 'true');
         }
 
-        // Generate time slots
-        function generateTimeSlots() {
-            const timeSlotsContainer = document.getElementById('timeSlots');
-            timeSlotsContainer.innerHTML = '';
+        // Handle drag over
+        function handleDragOver(e) {
+            e.preventDefault();
+            fileDropArea.classList.add('dragover');
+        }
 
-            // Create time slots from 6:00 AM to 10:00 PM
-            for (let hour = 6; hour <= 22; hour++) {
-                const timeSlot = document.createElement('div');
-                timeSlot.className = 'time-slot';
-                
-                // Format time label
-                const period = hour >= 12 ? 'PM' : 'AM';
-                const displayHour = hour > 12 ? hour - 12 : hour;
-                const timeLabel = `${displayHour}:00 ${period}`;
-                
-                timeSlot.innerHTML = `
-                    <div class="time-label">${timeLabel}</div>
-                    <input type="text" class="task-input" placeholder="Add a task for ${timeLabel}" data-hour="${hour}">
-                    <div class="task-actions">
-                        <button class="btn btn-save save-btn">Save</button>
-                        <button class="btn btn-delete delete-btn">Delete</button>
-                    </div>
-                `;
-                
-                timeSlotsContainer.appendChild(timeSlot);
+        // Handle drag leave
+        function handleDragLeave(e) {
+            e.preventDefault();
+            fileDropArea.classList.remove('dragover');
+        }
+
+        // Handle drop
+        function handleDrop(e) {
+            e.preventDefault();
+            fileDropArea.classList.remove('dragover');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFile(files[0]);
+            }
+        }
+
+        // Handle file select
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (file) {
+                handleFile(file);
+            }
+        }
+
+        // Handle file
+        async function handleFile(file) {
+            // Check if file is PDF
+            if (!file.type.includes('pdf')) {
+                showToast('Please select a PDF file', 'error');
+                return;
             }
             
-            // Load saved tasks
-            loadTasks();
-            updateStats();
+            // Check file size (50MB max)
+            if (file.size > 50 * 1024 * 1024) {
+                showToast('File size exceeds 50MB limit', 'error');
+                return;
+            }
+            
+            // Show loading
+            loadingSpinner.classList.add('show');
+            
+            try {
+                // Read file as array buffer
+                const arrayBuffer = await file.arrayBuffer();
+                currentPdfBytes = new Uint8Array(arrayBuffer);
+                
+                // Load PDF
+                const pdfDoc = await window.PDFLib.PDFDocument.load(currentPdfBytes);
+                currentPdf = pdfDoc;
+                totalPages = pdfDoc.getPageCount();
+                originalFileName = file.name.replace('.pdf', '');
+                
+                // Update file info
+                fileName.textContent = file.name;
+                fileSize.textContent = formatFileSize(file.size);
+                pageCount.textContent = totalPages;
+                
+                // Show file info
+                fileInfo.classList.add('show');
+                
+                // Update page range placeholder
+                pageRangeInput.placeholder = `1-${totalPages}`;
+                
+                // Enable split button
+                splitDownloadBtnMain.disabled = false;
+                
+                // Clear previous results
+                splitResults = [];
+                downloadButtons.style.display = 'none';
+                resultContainer.classList.remove('show');
+                
+                showToast('PDF loaded successfully! Ready to split.');
+            } catch (error) {
+                console.error('Error loading PDF:', error);
+                showToast('Error loading PDF file', 'error');
+            } finally {
+                loadingSpinner.classList.remove('show');
+            }
         }
 
-        // Load tasks from localStorage
-        function loadTasks() {
-            const savedTasks = JSON.parse(localStorage.getItem('dailyPlannerTasks')) || {};
-            const taskInputs = document.querySelectorAll('.task-input');
+        // Show selected option
+        function showOption(method) {
+            rangeOption.classList.add('hidden');
+            singleOption.classList.add('hidden');
+            intervalOption.classList.add('hidden');
             
-            taskInputs.forEach(input => {
-                const hour = input.getAttribute('data-hour');
-                if (savedTasks[hour]) {
-                    input.value = savedTasks[hour];
+            if (method === 'range') {
+                rangeOption.classList.remove('hidden');
+            } else if (method === 'single') {
+                singleOption.classList.remove('hidden');
+            } else if (method === 'interval') {
+                intervalOption.classList.remove('hidden');
+            }
+        }
+
+        // Split and download PDF
+        async function splitAndDownloadPDF() {
+            if (!currentPdf) {
+                showToast('Please upload a PDF file first', 'error');
+                return;
+            }
+            
+            const activeOption = document.querySelector('.page-option.active');
+            const method = activeOption.getAttribute('data-method');
+            
+            try {
+                loadingSpinner.classList.add('show');
+                resultContainer.classList.remove('show');
+                downloadButtons.style.display = 'none';
+                
+                splitResults = [];
+                
+                if (method === 'range') {
+                    await splitByRange();
+                } else if (method === 'single') {
+                    await splitBySinglePages();
+                } else if (method === 'interval') {
+                    await splitByInterval();
                 }
-            });
+                
+                // Show results
+                displayResults();
+                downloadButtons.style.display = 'flex';
+                resultContainer.classList.add('show');
+                
+                // Auto-download the first file for single page or single range
+                if (splitResults.length === 1) {
+                    downloadSingleFile(0);
+                    showToast('PDF split and downloaded successfully!');
+                } else if (splitResults.length > 1) {
+                    showToast(`PDF split into ${splitResults.length} files! Ready to download.`);
+                }
+                
+            } catch (error) {
+                console.error('Error splitting PDF:', error);
+                showToast(error.message || 'Error splitting PDF', 'error');
+            } finally {
+                loadingSpinner.classList.remove('show');
+            }
         }
 
-        // Save tasks to localStorage
-        function saveTasks() {
-            const taskInputs = document.querySelectorAll('.task-input');
-            const tasks = {};
+        // Split by page range
+        async function splitByRange() {
+            const input = pageRangeInput.value.trim();
+            if (!input) {
+                throw new Error('Please enter page ranges');
+            }
             
-            taskInputs.forEach(input => {
-                const hour = input.getAttribute('data-hour');
-                tasks[hour] = input.value;
-            });
+            const ranges = parsePageRanges(input);
+            if (ranges.length === 0) {
+                throw new Error('No valid page ranges found');
+            }
             
-            localStorage.setItem('dailyPlannerTasks', JSON.stringify(tasks));
-            updateStats();
-            alert('All tasks saved successfully!');
-        }
-
-        // Update statistics
-        function updateStats() {
-            const taskInputs = document.querySelectorAll('.task-input');
-            let totalTasks = 0;
-            let completedTasks = 0;
-            
-            taskInputs.forEach(input => {
-                if (input.value.trim() !== '') {
-                    totalTasks++;
-                    // Simple check for completion
-                    if (input.value.includes('✓') || input.value.includes('(done)') || input.value.includes('✅')) {
-                        completedTasks++;
+            // If only one range, create single file
+            if (ranges.length === 1) {
+                const { start, end } = ranges[0];
+                
+                if (start < 1 || end > totalPages || start > end) {
+                    throw new Error(`Invalid page range: ${start}-${end}`);
+                }
+                
+                const pageNumbers = Array.from({length: end - start + 1}, (_, j) => start + j);
+                const pdfBytes = await extractPages(pageNumbers);
+                
+                splitResults.push({
+                    name: `${originalFileName}_pages_${start}-${end}.pdf`,
+                    bytes: pdfBytes,
+                    pages: pageNumbers,
+                    index: 1
+                });
+            } else {
+                // Multiple ranges, create separate files
+                for (let i = 0; i < ranges.length; i++) {
+                    const { start, end } = ranges[i];
+                    
+                    if (start < 1 || end > totalPages || start > end) {
+                        throw new Error(`Invalid page range: ${start}-${end}`);
                     }
+                    
+                    const pageNumbers = Array.from({length: end - start + 1}, (_, j) => start + j);
+                    const pdfBytes = await extractPages(pageNumbers);
+                    
+                    splitResults.push({
+                        name: `${originalFileName}_range_${i + 1}_pages_${start}-${end}.pdf`,
+                        bytes: pdfBytes,
+                        pages: pageNumbers,
+                        index: i + 1
+                    });
                 }
-            });
-            
-            document.getElementById('totalTasks').textContent = totalTasks;
-            document.getElementById('completedTasks').textContent = completedTasks;
-            document.getElementById('remainingTasks').textContent = totalTasks - completedTasks;
-            
-            const completionRate = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
-            document.getElementById('completionRate').textContent = `${completionRate}%`;
+            }
         }
 
-        // Handle responsive ads on resize
-        function handleResponsiveAds() {
-            initializeTopBannerAd();
+        // Split by single pages
+        async function splitBySinglePages() {
+            const input = singlePagesInput.value.trim();
+            if (!input) {
+                throw new Error('Please enter page numbers');
+            }
+            
+            const pages = parseSinglePages(input);
+            if (pages.length === 0) {
+                throw new Error('No valid page numbers found');
+            }
+            
+            // Check for invalid pages
+            const invalidPages = pages.filter(page => page < 1 || page > totalPages);
+            if (invalidPages.length > 0) {
+                throw new Error(`Invalid page numbers: ${invalidPages.join(', ')}`);
+            }
+            
+            // If only one page, create single file
+            if (pages.length === 1) {
+                const pageNum = pages[0];
+                const pdfBytes = await extractPages([pageNum]);
+                
+                splitResults.push({
+                    name: `${originalFileName}_page_${pageNum}.pdf`,
+                    bytes: pdfBytes,
+                    pages: [pageNum],
+                    index: 1
+                });
+            } else {
+                // Multiple pages, create separate files for each
+                for (let i = 0; i < pages.length; i++) {
+                    const pageNum = pages[i];
+                    const pdfBytes = await extractPages([pageNum]);
+                    
+                    splitResults.push({
+                        name: `${originalFileName}_page_${pageNum}.pdf`,
+                        bytes: pdfBytes,
+                        pages: [pageNum],
+                        index: i + 1
+                    });
+                }
+            }
         }
 
-        // Event Listeners
-        document.addEventListener('DOMContentLoaded', function() {
-            updateCurrentDate();
-            generateTimeSlots();
+        // Split by interval
+        async function splitByInterval() {
+            const interval = parseInt(intervalSizeInput.value) || 1;
+            if (interval < 1) {
+                throw new Error('Interval must be at least 1 page');
+            }
             
-            // Initialize ads after a short delay
-            setTimeout(() => {
-                initializeAds();
-            }, 1500);
+            const numFiles = Math.ceil(totalPages / interval);
             
-            // Handle responsive ads on resize
-            window.addEventListener('resize', handleResponsiveAds);
-            
-            // Save All button
-            document.getElementById('saveAllBtn').addEventListener('click', saveTasks);
-            
-            // Individual save buttons
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('save-btn')) {
-                    const input = e.target.closest('.time-slot').querySelector('.task-input');
-                    const hour = input.getAttribute('data-hour');
-                    const tasks = JSON.parse(localStorage.getItem('dailyPlannerTasks')) || {};
-                    tasks[hour] = input.value;
-                    localStorage.setItem('dailyPlannerTasks', JSON.stringify(tasks));
-                    updateStats();
-                    alert('Task saved!');
-                }
+            for (let i = 0; i < numFiles; i++) {
+                const startPage = i * interval + 1;
+                const endPage = Math.min((i + 1) * interval, totalPages);
+                const pageNumbers = Array.from({length: endPage - startPage + 1}, (_, j) => startPage + j);
                 
-                // Delete buttons
-                if (e.target.classList.contains('delete-btn')) {
-                    const input = e.target.closest('.time-slot').querySelector('.task-input');
-                    input.value = '';
-                    const hour = input.getAttribute('data-hour');
-                    const tasks = JSON.parse(localStorage.getItem('dailyPlannerTasks')) || {};
-                    delete tasks[hour];
-                    localStorage.setItem('dailyPlannerTasks', JSON.stringify(tasks));
-                    updateStats();
-                }
-            });
-            
-            // Clear All button
-            document.getElementById('clearAllBtn').addEventListener('click', function() {
-                if (confirm('Are you sure you want to clear all tasks?')) {
-                    localStorage.removeItem('dailyPlannerTasks');
-                    generateTimeSlots();
-                }
-            });
-            
-            // Add Task button
-            document.getElementById('addTaskBtn').addEventListener('click', function() {
-                const emptySlots = Array.from(document.querySelectorAll('.task-input'))
-                    .filter(input => input.value === '');
+                const pdfBytes = await extractPages(pageNumbers);
                 
-                if (emptySlots.length > 0) {
-                    emptySlots[0].focus();
+                splitResults.push({
+                    name: `${originalFileName}_part_${i + 1}_pages_${startPage}-${endPage}.pdf`,
+                    bytes: pdfBytes,
+                    pages: pageNumbers,
+                    index: i + 1
+                });
+            }
+        }
+
+        // Extract pages from PDF
+        async function extractPages(pageNumbers) {
+            const pdfDoc = await window.PDFLib.PDFDocument.create();
+            const sourceDoc = await window.PDFLib.PDFDocument.load(currentPdfBytes);
+            
+            for (const pageNum of pageNumbers) {
+                const [copiedPage] = await pdfDoc.copyPages(sourceDoc, [pageNum - 1]);
+                pdfDoc.addPage(copiedPage);
+            }
+            
+            return await pdfDoc.save();
+        }
+
+        // Parse page ranges input
+        function parsePageRanges(input) {
+            const ranges = [];
+            const parts = input.split(',').map(part => part.trim());
+            
+            for (const part of parts) {
+                if (part.includes('-')) {
+                    const [startStr, endStr] = part.split('-');
+                    const start = parseInt(startStr);
+                    const end = parseInt(endStr);
+                    
+                    if (!isNaN(start) && !isNaN(end)) {
+                        ranges.push({
+                            start: Math.min(start, end),
+                            end: Math.max(start, end)
+                        });
+                    }
                 } else {
-                    alert('All time slots are filled!');
+                    const pageNum = parseInt(part);
+                    if (!isNaN(pageNum)) {
+                        ranges.push({
+                            start: pageNum,
+                            end: pageNum
+                        });
+                    }
                 }
+            }
+            
+            return ranges;
+        }
+
+        // Parse single pages input
+        function parseSinglePages(input) {
+            const pages = [];
+            const parts = input.split(',').map(part => part.trim());
+            
+            for (const part of parts) {
+                const pageNum = parseInt(part);
+                if (!isNaN(pageNum)) {
+                    pages.push(pageNum);
+                }
+            }
+            
+            return pages;
+        }
+
+        // Display results
+        function displayResults() {
+            resultContent.innerHTML = '';
+            
+            if (splitResults.length === 0) {
+                resultContent.innerHTML = '<p>No results to display</p>';
+                return;
+            }
+            
+            splitResults.forEach(result => {
+                const resultItem = document.createElement('div');
+                resultItem.className = 'result-item';
+                resultItem.innerHTML = `
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; margin-bottom: 4px;">${result.name}</div>
+                        <div style="font-size: 0.9rem; color: var(--gray-color);">
+                            Pages: ${result.pages.length > 5 ? result.pages[0] + ' to ' + result.pages[result.pages.length-1] : result.pages.join(', ')}
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-small download-single-btn" data-index="${result.index - 1}">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                `;
+                resultContent.appendChild(resultItem);
             });
             
-            // Export button
-            document.getElementById('exportBtn').addEventListener('click', function() {
-                const tasks = [];
-                document.querySelectorAll('.time-slot').forEach(slot => {
-                    const time = slot.querySelector('.time-label').textContent;
-                    const task = slot.querySelector('.task-input').value;
-                    if (task.trim()) {
-                        tasks.push(`${time}: ${task}`);
-                    }
+            // Add event listeners to download single buttons
+            document.querySelectorAll('.download-single-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    downloadSingleFile(index);
+                });
+            });
+        }
+
+        // Download single file
+        function downloadSingleFile(index) {
+            if (splitResults[index]) {
+                const result = splitResults[index];
+                downloadPDF(result.bytes, result.name);
+                showToast(`Downloaded: ${result.name}`);
+            }
+        }
+
+        // Download all split files
+        async function downloadAllSplitFiles() {
+            if (splitResults.length === 0) {
+                showToast('No files to download', 'error');
+                return;
+            }
+            
+            for (let i = 0; i < splitResults.length; i++) {
+                const result = splitResults[i];
+                downloadPDF(result.bytes, result.name);
+                
+                // Small delay between downloads to avoid browser blocking
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+            
+            showToast(`Downloaded ${splitResults.length} file(s)`);
+        }
+
+        // Download as ZIP
+        async function downloadAsZip() {
+            if (splitResults.length === 0) {
+                showToast('No files to zip', 'error');
+                return;
+            }
+            
+            try {
+                loadingSpinner.classList.add('show');
+                
+                const zip = new JSZip();
+                
+                // Add all PDFs to zip
+                splitResults.forEach(result => {
+                    zip.file(result.name, result.bytes);
                 });
                 
-                const blob = new Blob([tasks.join('\n')], { type: 'text/plain' });
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'daily-planner-tasks.txt';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                window.URL.revokeObjectURL(url);
-            });
-            
-            // Print button
-            document.getElementById('printBtn').addEventListener('click', function() {
-                window.print();
-            });
-            
-            // Set current year in footer
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
-        });
-
-        // Additional feature: Mark task as complete with Enter key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && e.target.classList.contains('task-input')) {
-                const input = e.target;
-                if (!input.value.includes('✓') && !input.value.includes('✅')) {
-                    input.value = input.value + ' ✓';
-                    const hour = input.getAttribute('data-hour');
-                    const tasks = JSON.parse(localStorage.getItem('dailyPlannerTasks')) || {};
-                    tasks[hour] = input.value;
-                    localStorage.setItem('dailyPlannerTasks', JSON.stringify(tasks));
-                    updateStats();
-                }
+                // Generate zip file
+                const zipBlob = await zip.generateAsync({type: 'blob'});
+                
+                // Download zip
+                const url = URL.createObjectURL(zipBlob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `${originalFileName}_split_files.zip`;
+                link.click();
+                URL.revokeObjectURL(url);
+                
+                showToast('ZIP file downloaded successfully!');
+            } catch (error) {
+                console.error('Error creating ZIP:', error);
+                showToast('Error creating ZIP file', 'error');
+            } finally {
+                loadingSpinner.classList.remove('show');
             }
-        });
+        }
+
+        // Download PDF file
+        function downloadPDF(pdfBytes, fileName) {
+            const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = fileName;
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Reset all
+        function resetAll() {
+            if (confirm('Are you sure you want to reset everything?')) {
+                currentPdf = null;
+                currentPdfBytes = null;
+                totalPages = 0;
+                splitResults = [];
+                originalFileName = '';
+                
+                pdfFileInput.value = '';
+                fileInfo.classList.remove('show');
+                resultContainer.classList.remove('show');
+                downloadButtons.style.display = 'none';
+                pageRangeInput.value = '';
+                singlePagesInput.value = '';
+                intervalSizeInput.value = '';
+                
+                fileName.textContent = '-';
+                fileSize.textContent = '-';
+                pageCount.textContent = '-';
+                
+                // Disable split button
+                splitDownloadBtnMain.disabled = true;
+                
+                showToast('All data has been reset');
+            }
+        }
+
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            const colors = {
+                success: '#2ecc71',
+                error: '#e74c3c',
+                info: '#3498db'
+            };
+            
+            toast.style.background = colors[type] || colors.success;
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Format file size
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
     </script>
 </body>
 </html>
