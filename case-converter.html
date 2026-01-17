@@ -13,6 +13,9 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4319187914977768" crossorigin="anonymous"></script>
+
     <script async custom-element="amp-auto-ads"
         src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
     </script>
@@ -329,13 +332,14 @@
             bottom: -150px;
             left: 0;
             right: 0;
-            background: linear-gradient(135deg, #4361ee, #3f37c9);
-            color: white;
+            background: white;
+            color: var(--dark-color);
             padding: 15px 20px;
             text-align: center;
             box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
             transition: bottom 0.5s ease;
             z-index: 999;
+            border-top: 3px solid var(--primary-color);
         }
         
         .bottom-ad.show {
@@ -343,55 +347,28 @@
         }
         
         .ad-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
         
-        .ad-text {
-            flex: 1;
-            text-align: left;
-        }
-        
-        .ad-text h3 {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-        }
-        
-        .ad-text p {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-        
-        .ad-actions {
+        .ad-header {
             display: flex;
-            gap: 15px;
             align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
         }
         
-        .ad-btn {
-            background-color: white;
-            color: #4361ee;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 50px;
+        .ad-label {
+            font-size: 0.9rem;
+            color: var(--gray-color);
             font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        
-        .ad-btn:hover {
-            background-color: #f8f9fa;
-            transform: translateY(-2px);
         }
         
         .close-ad {
             background: none;
             border: none;
-            color: white;
+            color: var(--gray-color);
             font-size: 1.5rem;
             cursor: pointer;
             width: 30px;
@@ -404,7 +381,18 @@
         }
         
         .close-ad:hover {
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(0, 0, 0, 0.1);
+            color: var(--dark-color);
+        }
+        
+        .adsense-container {
+            width: 100%;
+            overflow: hidden;
+            text-align: center;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         /* Responsive Adjustments */
@@ -438,18 +426,7 @@
             }
             
             .ad-content {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
-            
-            .ad-text {
-                text-align: center;
-            }
-            
-            .ad-actions {
-                width: 100%;
-                justify-content: center;
+                padding: 0 10px;
             }
             
             .footer {
@@ -495,6 +472,10 @@
             .footer-links {
                 flex-direction: column;
                 gap: 15px;
+            }
+            
+            .adsense-container {
+                min-height: 100px;
             }
         }
     </style>
@@ -594,16 +575,24 @@
         </div>
     </div>
     
-    <!-- Bottom Fly-in Ad -->
+    <!-- Bottom Fly-in Google AdSense Ad -->
     <div class="bottom-ad" id="bottomAd">
         <div class="ad-content">
-            <div class="ad-text">
-                <h3>Like this tool?</h3>
-                <p>Check out our other free text tools for more productivity!</p>
-            </div>
-            <div class="ad-actions">
-                <button class="ad-btn" onclick="window.location.href='/tools'">Explore More Tools</button>
+            <div class="ad-header">
+                <div class="ad-label">Advertisement</div>
                 <button class="close-ad" id="closeAd">&times;</button>
+            </div>
+            <div class="adsense-container">
+                <!-- Google AdSense Ad Unit -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-4319187914977768"
+                     data-ad-slot="1234567890"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
             </div>
         </div>
     </div>
