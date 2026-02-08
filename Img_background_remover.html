@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Background Remover • 100% Local • Professional Quality • 60 sec wait</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="description" content="Professional AI background remover tool. Remove backgrounds from images 100% locally in your browser. No uploads, no servers, completely private.">
+<meta name="keywords" content="background remover, AI tool, image editor, remove background, transparent PNG, photo editing, local processing">
+<meta name="author" content="AI Background Remover">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="AI Background Remover • 100% Local Processing">
+<meta property="og:description" content="Remove backgrounds from images completely in your browser. No uploads, no servers, 100% private.">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Background Remover • 100% Local Processing">
+<meta name="twitter:description" content="Remove backgrounds from images completely in your browser. No uploads, no servers, 100% private.">
+
+<script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.21.0-dev.20250206-d981b153d3/dist/ort.min.js"></script>
+
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4319187914977768" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --primary-color: #4361ee;
+        --primary-dark: #3a56d4;
+        --secondary-color: #4cc9f0;
+        --success-color: #2ecc71;
+        --danger-color: #e74c3c;
+        --warning-color: #f39c12;
+        --dark-color: #1a1a2e;
+        --light-color: #f8f9fa;
+        --gray-color: #6c757d;
+        --border-color: #e0e0e0;
+        --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        --radius: 12px;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+        font-size: 16px;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background: linear-gradient(135deg, #f5f7ff 0%, #f0f2ff 100%);
+        color: var(--dark-color);
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        flex: 1;
+    }
+
+    /* Header */
+    header {
+        background: linear-gradient(135deg, var(--primary-color), #3f37c9);
+        color: white;
+        padding: 30px 0;
+        text-align: center;
+        margin-bottom: 30px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%234361ee' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+        opacity: 0.1;
+    }
+
+    .header-content h1 {
+        font-size: 2.8rem;
+        margin-bottom: 12px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .header-content p {
+        font-size: 1.15rem;
+        opacity: 0.95;
+        max-width: 700px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+        font-weight: 400;
+    }
+
+    /* Home Button */
+    .home-button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: var(--transition);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        z-index: 10;
+    }
+
+    .home-button:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Action Buttons */
+    .action-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 25px;
+    }
+
+    .action-btn {
+        padding: 16px 24px;
+        background: #f1f3ff;
+        color: var(--dark-color);
+        border: 2px solid #e0e6ff;
+        border-radius: var(--radius);
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .action-btn:hover {
+        background: #e8ebff;
+        transform: translateY(-2px);
+        border-color: var(--primary-color);
+    }
+
+    .action-btn.primary {
+        background: linear-gradient(135deg, var(--secondary-color), #3ab5d9);
+        color: white;
+        border: none;
+        box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+    }
+
+    .action-btn.primary:hover {
+        background: linear-gradient(135deg, #3ab5d9, #2aa3c7);
+        box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+    }
+
+    .action-btn.success {
+        background: linear-gradient(135deg, var(--success-color), #27ae60);
+        color: white;
+        border: none;
+        box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+    }
+
+    .action-btn.success:hover {
+        background: linear-gradient(135deg, #27ae60, #219653);
+        box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+    }
+
+    .action-btn.danger {
+        background: linear-gradient(135deg, var(--danger-color), #c0392b);
+        color: white;
+        border: none;
+        box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+    }
+
+    .action-btn.danger:hover {
+        background: linear-gradient(135deg, #c0392b, #a93226);
+        box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+    }
+
+    /* Main Content */
+    .main-content {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+    @media (min-width: 992px) {
+        .main-content {
+            grid-template-columns: 2fr 1fr;
+        }
+    }
+
+    /* Tool Container */
+    .tool-container {
+        background: white;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 35px;
+        overflow: hidden;
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .section-title {
+        font-size: 1.4rem;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #f0f2ff;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .section-title i {
+        color: var(--secondary-color);
+    }
+
+    /* Upload Area (Updated to match budget1.html input area) */
+    .upload-area {
+        border: 2px dashed var(--border-color);
+        border-radius: var(--radius);
+        padding: 3rem;
+        margin-bottom: 2rem;
+        transition: var(--transition);
+        background-color: #f9f9f9;
+        min-height: 250px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .upload-area:hover {
+        border-color: var(--primary-color);
+        background-color: #f0f4ff;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(67, 97, 238, 0.1);
+    }
+
+    .upload-area.dragover {
+        border-color: var(--primary-color);
+        background-color: #e8ebff;
+    }
+
+    .upload-area i {
+        font-size: 3rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+
+    .upload-area h3 {
+        margin-bottom: 1rem;
+        color: var(--dark-color);
+        font-size: 1.3rem;
+    }
+
+    .upload-area p {
+        color: var(--gray-color);
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    /* Preview Container */
+    .preview-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-top: 30px;
+    }
+
+    @media (min-width: 768px) {
+        .preview-container {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    .preview-box {
+        background: white;
+        border-radius: var(--radius);
+        padding: 20px;
+        text-align: center;
+        box-shadow: var(--shadow);
+        border: 1px solid #e8ebff;
+        transition: var(--transition);
+    }
+
+    .preview-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+
+    .preview-box h3 {
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .preview-box img {
+        max-width: 100%;
+        max-height: 300px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        object-fit: contain;
+        background: white;
+        padding: 5px;
+    }
+
+    #resultImg.transparent {
+        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGUlEQVQ4y2NgoBT8////H6ACkoD+AAAA//8DAApWX26AAAAAAElFTkSuQmCC') repeat;
+        background-size: 20px 20px;
+    }
+
+    /* Options */
+    .options {
+        background: white;
+        padding: 25px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        margin: 30px 0;
+        border: 1px solid #e8ebff;
+    }
+
+    .option-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .option-group:last-child {
+        margin-bottom: 0;
+    }
+
+    .option-group label {
+        font-weight: 600;
+        color: var(--dark-color);
+        min-width: 120px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    select, input[type="color"] {
+        padding: 12px 16px;
+        border-radius: var(--radius);
+        background: #f8f9ff;
+        color: var(--dark-color);
+        border: 2px solid var(--border-color);
+        font-size: 0.95rem;
+        transition: var(--transition);
+        flex: 1;
+        min-width: 200px;
+    }
+
+    select:focus, input[type="color"]:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.15);
+        background: white;
+    }
+
+    input[type="color"] {
+        width: 60px;
+        height: 44px;
+        cursor: pointer;
+        padding: 5px;
+    }
+
+    /* Button Styles */
+    .btn {
+        padding: 14px 28px;
+        border-radius: var(--radius);
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        border: none;
+        min-height: 48px;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, var(--primary-color), #3f37c9);
+        color: white;
+        box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #3f37c9, #342e9c);
+        box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        transform: translateY(-2px);
+    }
+
+    .btn-primary:disabled {
+        background: #94a3b8;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+    }
+
+    .btn-success {
+        background: linear-gradient(135deg, var(--success-color), #27ae60);
+        color: white;
+        box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+    }
+
+    .btn-success:hover {
+        background: linear-gradient(135deg, #27ae60, #219653);
+        box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+        transform: translateY(-2px);
+    }
+
+    .btn-success:disabled {
+        background: #94a3b8;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+    }
+
+    /* Loading */
+    .loading {
+        text-align: center;
+        padding: 40px;
+        background: white;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        margin: 30px 0;
+        border: 1px solid #e8ebff;
+        display: none;
+    }
+
+    .spinner {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid var(--primary-color);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Tips Section */
+    .tips-section {
+        background: white;
+        padding: 25px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        margin-bottom: 30px;
+        border: 1px solid #e8ebff;
+    }
+
+    .tip-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #f0f2ff;
+    }
+
+    .tip-item:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .tip-icon {
+        font-size: 1.5rem;
+        color: var(--secondary-color);
+        flex-shrink: 0;
+    }
+
+    .tip-content h4 {
+        color: var(--dark-color);
+        margin-bottom: 5px;
+        font-weight: 600;
+    }
+
+    .tip-content p {
+        color: var(--gray-color);
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+
+    /* Fly-in Ad Container */
+    #flyinAd {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 300px;
+        background: white;
+        border-radius: var(--radius);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        z-index: 999;
+        opacity: 0;
+        transform: translateY(100px) scale(0.9);
+        transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        border: 1px solid rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+    
+    #flyinAd.show {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    
+    .ad-header {
+        background: linear-gradient(135deg, #f8f9ff, #e8ebff);
+        padding: 15px 20px;
+        border-bottom: 1px solid #e0e6ff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.9rem;
+        color: var(--gray-color);
+        font-weight: 500;
+    }
+    
+    .ad-close {
+        background: none;
+        border: none;
+        color: var(--gray-color);
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: var(--transition);
+        padding: 0;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+    }
+    
+    .ad-close:hover {
+        background: rgba(0,0,0,0.05);
+        color: var(--dark-color);
+    }
+    
+    .ad-content {
+        min-height: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: #fafbff;
+    }
+    
+    .ad-loading {
+        color: var(--gray-color);
+        font-style: italic;
+        text-align: center;
+        padding: 30px;
+    }
+
+    /* Toast Notification */
+    .toast {
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        background: var(--success-color);
+        color: white;
+        padding: 16px 24px;
+        border-radius: var(--radius);
+        box-shadow: 0 6px 20px rgba(46, 204, 113, 0.3);
+        transform: translateY(100px);
+        opacity: 0;
+        transition: var(--transition);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 500;
+    }
+
+    .toast.show {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    /* Footer */
+    footer {
+        background: white;
+        margin-top: 60px;
+        padding: 40px 0;
+        border-top: 1px solid #e8ebff;
+    }
+
+    .footer-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .footer-links {
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .footer-links a {
+        color: var(--dark-color);
+        text-decoration: none;
+        font-weight: 500;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .footer-links a:hover {
+        color: var(--primary-color);
+        transform: translateY(-2px);
+    }
+
+    .copyright {
+        color: var(--gray-color);
+        font-size: 0.9rem;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .header-content h1 {
+            font-size: 2.2rem;
+        }
+        
+        .header-content p {
+            font-size: 1rem;
+        }
+        
+        .tool-container {
+            padding: 25px;
+        }
+        
+        .action-buttons {
+            flex-direction: column;
+        }
+        
+        .action-btn, .btn {
+            width: 100%;
+        }
+        
+        .upload-area {
+            padding: 2rem 1rem;
+            min-height: 200px;
+        }
+        
+        .option-group {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .option-group label {
+            min-width: auto;
+        }
+        
+        select, input[type="color"] {
+            width: 100%;
+            min-width: auto;
+        }
+        
+        .preview-container {
+            gap: 20px;
+        }
+        
+        .preview-box {
+            padding: 15px;
+        }
+        
+        .home-button {
+            top: 15px;
+            right: 15px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+        
+        /* Fly-in Ad for Mobile */
+        #flyinAd {
+            width: calc(100% - 40px);
+            max-width: 320px;
+            right: 20px;
+            bottom: 20px;
+        }
+        
+        .toast {
+            left: 20px;
+            right: 20px;
+            bottom: 100px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .header-content h1 {
+            font-size: 1.8rem;
+        }
+        
+        .section-title {
+            font-size: 1.2rem;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .home-button {
+            top: 10px;
+            right: 10px;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+        }
+        
+        #flyinAd {
+            width: calc(100% - 30px);
+            max-width: 280px;
+            right: 15px;
+            bottom: 15px;
+        }
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .tool-container, .tips-section, .preview-box, .options {
+        animation: fadeIn 0.6s ease-out;
+    }
+
+    /* Utility Classes */
+    .hidden {
+        display: none !important;
+    }
+</style>
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VY72VMKT8S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VY72VMKT8S');
+</script>
+
+<body>
+    <!-- Header -->
+    <header>
+        <!-- Home Button -->
+        <a href="index.html" class="home-button">
+            <i class="fas fa-home"></i>
+        </a>
+        
+        <div class="container">
+            <div class="header-content">
+                <h1>AI Background Remover</h1>
+                <p>Professional client-side AI • No uploads • No server • Best quality for any image</p>
+                <div class="action-buttons">
+                    <button class="action-btn success" onclick="document.getElementById('fileInput').click()">
+                        <i class="fas fa-upload"></i> Select Image
+                    </button>
+                    <button class="action-btn danger" onclick="resetTool()">
+                        <i class="fas fa-trash"></i> Clear All
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="main-content">
+            <!-- Primary Content -->
+            <div class="content-primary">
+                <!-- Upload Section -->
+                <div class="tool-container">
+                    <div class="section-title">
+                        <h2><i class="fas fa-image"></i> Upload Image</h2>
+                    </div>
+                    
+                    <!-- Upload Area -->
+                    <div class="upload-area" id="dropArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>Drop Image Here</h3>
+                        <p>or click to browse files</p>
+                        <p style="font-size:0.9rem; margin-top:10px; color: var(--gray-color);">
+                            <i class="fas fa-info-circle"></i> Supports JPG, PNG, WEBP (Max 10MB)
+                        </p>
+                        <input type="file" id="fileInput" accept="image/*" hidden>
+                    </div>
+
+                    <!-- Options -->
+                    <div class="options">
+                        <div class="option-group">
+                            <label><i class="fas fa-palette"></i> Background:</label>
+                            <select id="bgMode">
+                                <option value="transparent">Transparent (PNG)</option>
+                                <option value="white">White</option>
+                                <option value="black">Black</option>
+                                <option value="custom">Custom Color</option>
+                            </select>
+                            <input type="color" id="customColor" value="#ffffff">
+                        </div>
+                        <div class="option-group">
+                            <label><i class="fas fa-cog"></i> AI Model:</label>
+                            <select id="modelSelect">
+                                <option value="isnet_quint8">Small (Fast)</option>
+                                <option value="isnet_fp16" selected>Medium (Balanced)</option>
+                                <option value="isnet">Large (High Quality)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="action-buttons">
+                        <button id="removeBtn" onclick="processImage()" class="btn-primary" disabled>
+                            <i class="fas fa-magic"></i> Remove Background
+                        </button>
+                        <button id="downloadBtn" onclick="downloadImage()" class="btn-success" style="display:none;">
+                            <i class="fas fa-download"></i> Download Result
+                        </button>
+                    </div>
+
+                    <!-- Loading -->
+                    <div class="loading" id="loading">
+                        <div class="spinner"></div>
+                        <h3>AI Processing...</h3>
+                        <p>First time may take 10-60 seconds to load model</p>
+                        <p style="color: var(--gray-color); font-size:0.9rem; margin-top:10px;">
+                            <i class="fas fa-info-circle"></i> Processing 100% locally in your browser
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Preview Section -->
+                <div class="preview-container" id="previewContainer" style="display:none;">
+                    <div class="preview-box">
+                        <h3><i class="fas fa-image"></i> Original</h3>
+                        <img id="originalImg">
+                    </div>
+                    <div class="preview-box">
+                        <h3><i class="fas fa-star"></i> Result</h3>
+                        <img id="resultImg" alt="Processed Image">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar Content -->
+            <div class="content-secondary">
+                <!-- Tips Section -->
+                <div class="tips-section">
+                    <h2 style="color: var(--primary-color); margin-bottom: 25px; font-size: 1.4rem;">
+                        <i class="fas fa-lightbulb"></i> How It Works
+                    </h2>
+                    <div class="tip-item">
+                        <div class="tip-icon">🤖</div>
+                        <div class="tip-content">
+                            <h4>AI Powered</h4>
+                            <p>Uses advanced AI models to accurately detect and remove backgrounds.</p>
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <div class="tip-icon">🔒</div>
+                        <div class="tip-content">
+                            <h4>100% Local</h4>
+                            <p>All processing happens in your browser. No data leaves your computer.</p>
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <div class="tip-icon">⚡</div>
+                        <div class="tip-content">
+                            <h4>Fast Processing</h4>
+                            <p>Optimized models for quick background removal on any device.</p>
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <div class="tip-icon">🎨</div>
+                        <div class="tip-content">
+                            <h4>Custom Backgrounds</h4>
+                            <p>Choose transparent, solid colors, or custom backgrounds for your images.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Tips -->
+                <div class="tips-section">
+                    <h2 style="color: var(--primary-color); margin-bottom: 25px; font-size: 1.4rem;">
+                        <i class="fas fa-tips"></i> Tips
+                    </h2>
+                    <div class="tip-item">
+                        <div class="tip-icon">📷</div>
+                        <div class="tip-content">
+                            <h4>Image Quality</h4>
+                            <p>For best results, use high-contrast images with clear subject edges.</p>
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <div class="tip-icon">💻</div>
+                        <div class="tip-content">
+                            <h4>Performance</h4>
+                            <p>Use "Small" model for faster results, "Large" for highest quality.</p>
+                        </div>
+                    </div>
+                    <div class="tip-item">
+                        <div class="tip-icon">💾</div>
+                        <div class="tip-content">
+                            <h4>Save Results</h4>
+                            <p>Download as PNG for transparent backgrounds or with custom colors.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Fly-in Ad (Bottom Right) -->
+    <div id="flyinAd">
+        <div class="ad-header">
+            <div>
+                <i class="fas fa-ad"></i>
+                <span>Advertisement</span>
+            </div>
+            <button class="ad-close" id="closeAd">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="ad-content">
+            <div class="ad-loading">
+                <i class="fas fa-spinner fa-spin"></i><br>
+                Loading Ad...
+            </div>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4319187914977768"
+                 data-ad-slot="4555770131"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Image processed successfully!</span>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="legal.html#about">
+                        <i class="fas fa-info-circle"></i> About
+                    </a>
+                    <a href="legal.html#privacy">
+                        <i class="fas fa-shield-alt"></i> Privacy Policy
+                    </a>
+                    <a href="legal.html#terms">
+                        <i class="fas fa-file-contract"></i> Terms of Use
+                    </a>
+                </div>
+                <div class="copyright">
+                    &copy; <span id="currentYear"></span> AI Background Remover. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { removeBackground as removeBg } from 'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.7.0/+esm';
+
+        let originalFile = null;
+        let processedBlob = null;
+
+        // DOM Elements
+        const dropArea = document.getElementById('dropArea');
+        const fileInput = document.getElementById('fileInput');
+        const originalImg = document.getElementById('originalImg');
+        const resultImg = document.getElementById('resultImg');
+        const previewContainer = document.getElementById('previewContainer');
+        const removeBtn = document.getElementById('removeBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const loading = document.getElementById('loading');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+        const flyinAd = document.getElementById('flyinAd');
+        const closeAdBtn = document.getElementById('closeAd');
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // Setup event listeners
+            closeAdBtn.addEventListener('click', closeFlyinAd);
+            
+            // Show fly-in ad after delay
+            setTimeout(() => {
+                showFlyinAd();
+            }, 2000);
+        });
+
+        // Drag & Drop
+        dropArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropArea.classList.add('dragover');
+        });
+        dropArea.addEventListener('dragleave', () => dropArea.classList.remove('dragover'));
+        dropArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropArea.classList.remove('dragover');
+            if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+        });
+
+        // Click to open file dialog - FIX ADDED HERE
+        dropArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length) handleFile(e.target.files[0]);
+        });
+
+        // Show fly-in ad
+        function showFlyinAd() {
+            if (!localStorage.getItem('adClosed')) {
+                flyinAd.classList.add('show');
+                try {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    setTimeout(() => {
+                        const loadingMsg = document.querySelector('.ad-loading');
+                        if (loadingMsg) {
+                            loadingMsg.style.display = 'none';
+                        }
+                    }, 1500);
+                } catch (error) {
+                    console.error('AdSense error:', error);
+                }
+            }
+        }
+        
+        // Close fly-in ad
+        function closeFlyinAd() {
+            flyinAd.classList.remove('show');
+            localStorage.setItem('adClosed', 'true');
+        }
+
+        // Show toast
+        function showToast(message, type = 'success') {
+            const colors = {
+                success: '#2ecc71',
+                error: '#e74c3c',
+                info: '#3498db',
+                warning: '#f39c12'
+            };
+            
+            toast.style.background = colors[type] || colors.success;
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function handleFile(file) {
+            if (!file.type.startsWith('image/')) {
+                showToast("Please upload an image file", 'error');
+                return;
+            }
+            
+            if (file.size > 10 * 1024 * 1024) { // 10MB limit
+                showToast("Image size should be less than 10MB", 'error');
+                return;
+            }
+            
+            originalFile = file;
+            const url = URL.createObjectURL(file);
+            originalImg.src = url;
+            resultImg.src = '';
+            resultImg.classList.remove('transparent');
+            downloadBtn.style.display = 'none';
+            previewContainer.style.display = 'grid';
+            removeBtn.disabled = false;
+            
+            // Update upload area
+            dropArea.innerHTML = `
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <h3>${file.name}</h3>
+                <p>${(file.size / 1024 / 1024).toFixed(2)} MB • Ready to process</p>
+                <p style="font-size:0.9rem; margin-top:10px; color: var(--gray-color);">
+                    <i class="fas fa-sync-alt"></i> Click "Remove Background" to start
+                </p>
+            `;
+            
+            showToast('Image loaded successfully!', 'success');
+        }
+
+        window.processImage = async () => {
+            if (!originalFile) return;
+
+            removeBtn.disabled = true;
+            loading.style.display = 'block';
+            resultImg.src = '';
+
+            try {
+                const model = document.getElementById('modelSelect').value;
+                const config = {
+                    publicPath: 'https://staticimgly.com/@imgly/background-removal-data/1.7.0/dist/',
+                    model: model,
+                    debug: false,
+                    output: { format: 'image/png', quality: 0.9 },
+                };
+                
+                showToast('AI processing started...', 'info');
+                const blob = await removeBg(originalFile, config);
+                processedBlob = blob;
+
+                const url = URL.createObjectURL(blob);
+                const img = new Image();
+                img.src = url;
+
+                img.onload = () => {
+                    const mode = document.getElementById('bgMode').value;
+                    resultImg.classList.remove('transparent');
+
+                    if (mode === 'transparent') {
+                        resultImg.src = url;
+                        resultImg.classList.add('transparent');
+                    } else {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        const ctx = canvas.getContext('2d');
+
+                        if (mode === 'white') {
+                            ctx.fillStyle = '#ffffff';
+                        } else if (mode === 'black') {
+                            ctx.fillStyle = '#000000';
+                        } else if (mode === 'custom') {
+                            ctx.fillStyle = document.getElementById('customColor').value;
+                        }
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                        ctx.drawImage(img, 0, 0);
+                        resultImg.src = canvas.toDataURL('image/png');
+                    }
+
+                    downloadBtn.style.display = 'flex';
+                    loading.style.display = 'none';
+                    removeBtn.disabled = false;
+                    
+                    showToast('Background removed successfully!', 'success');
+                };
+
+            } catch (err) {
+                console.error('Error:', err);
+                loading.style.display = 'none';
+                removeBtn.disabled = false;
+                showToast("Error processing image. Try a smaller image or different model.", 'error');
+            }
+        };
+
+        window.downloadImage = () => {
+            if (!processedBlob) return;
+            const mode = document.getElementById('bgMode').value;
+            let finalBlob = processedBlob;
+
+            if (mode !== 'transparent') {
+                const img = new Image();
+                img.src = URL.createObjectURL(processedBlob);
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    const ctx = canvas.getContext('2d');
+
+                    let fillColor = '#ffffff';
+                    if (mode === 'black') fillColor = '#000000';
+                    else if (mode === 'custom') fillColor = document.getElementById('customColor').value;
+
+                    ctx.fillStyle = fillColor;
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0);
+
+                    canvas.toBlob((blob) => {
+                        const link = document.createElement('a');
+                        link.href = URL.createObjectURL(blob);
+                        link.download = `background-removed-${Date.now()}.png`;
+                        link.click();
+                        showToast('Image downloaded!', 'success');
+                    }, 'image/png');
+                };
+            } else {
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(finalBlob);
+                link.download = `background-removed-${Date.now()}.png`;
+                link.click();
+                showToast('Image downloaded!', 'success');
+            }
+        };
+
+        window.resetTool = () => {
+            if (confirm('Are you sure you want to reset? This will clear the current image.')) {
+                originalFile = null;
+                processedBlob = null;
+                originalImg.src = '';
+                resultImg.src = '';
+                previewContainer.style.display = 'none';
+                removeBtn.disabled = true;
+                downloadBtn.style.display = 'none';
+                fileInput.value = '';
+                
+                // Reset upload area
+                dropArea.innerHTML = `
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h3>Drop Image Here</h3>
+                    <p>or click to browse files</p>
+                    <p style="font-size:0.9rem; margin-top:10px; color: var(--gray-color);">
+                        <i class="fas fa-info-circle"></i> Supports JPG, PNG, WEBP (Max 10MB)
+                    </p>
+                `;
+                
+                showToast('Tool reset successfully', 'info');
+            }
+        };
+    </script>
+</body>
+</html>
