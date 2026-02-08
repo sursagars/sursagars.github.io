@@ -20,11 +20,11 @@
 
 <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.21.0-dev.20250206-d981b153d3/dist/ort.min.js"></script>
 
-<!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4319187914977768" crossorigin="anonymous"></script>
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- JSZip for batch download -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
 <style>
     :root {
@@ -114,6 +114,11 @@
         font-weight: 400;
     }
 
+    .header-content {
+        position: relative;
+        z-index: 2;
+    }
+
     /* Home Button */
     .home-button {
         position: absolute;
@@ -146,6 +151,8 @@
         gap: 15px;
         justify-content: center;
         margin-top: 25px;
+        position: relative;
+        z-index: 2;
     }
 
     .action-btn {
@@ -296,14 +303,25 @@
 
     /* Preview Container */
     .preview-container {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
         margin-top: 30px;
     }
 
+    .preview-item {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 30px;
+        border: 1px solid #e8ebff;
+        border-radius: var(--radius);
+        padding: 20px;
+        background: white;
+        box-shadow: var(--shadow);
+    }
+
     @media (min-width: 768px) {
-        .preview-container {
+        .preview-item {
             grid-template-columns: 1fr 1fr;
         }
     }
@@ -529,77 +547,6 @@
         line-height: 1.5;
     }
 
-    /* Fly-in Ad Container */
-    #flyinAd {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 300px;
-        background: white;
-        border-radius: var(--radius);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        z-index: 999;
-        opacity: 0;
-        transform: translateY(100px) scale(0.9);
-        transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-        border: 1px solid rgba(0,0,0,0.1);
-        overflow: hidden;
-    }
-    
-    #flyinAd.show {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-    
-    .ad-header {
-        background: linear-gradient(135deg, #f8f9ff, #e8ebff);
-        padding: 15px 20px;
-        border-bottom: 1px solid #e0e6ff;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        font-size: 0.9rem;
-        color: var(--gray-color);
-        font-weight: 500;
-    }
-    
-    .ad-close {
-        background: none;
-        border: none;
-        color: var(--gray-color);
-        cursor: pointer;
-        font-size: 1.2rem;
-        transition: var(--transition);
-        padding: 0;
-        width: 24px;
-        height: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 4px;
-    }
-    
-    .ad-close:hover {
-        background: rgba(0,0,0,0.05);
-        color: var(--dark-color);
-    }
-    
-    .ad-content {
-        min-height: 250px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-        background: #fafbff;
-    }
-    
-    .ad-loading {
-        color: var(--gray-color);
-        font-style: italic;
-        text-align: center;
-        padding: 30px;
-    }
-
     /* Toast Notification */
     .toast {
         position: fixed;
@@ -726,14 +673,6 @@
             font-size: 0.9rem;
         }
         
-        /* Fly-in Ad for Mobile */
-        #flyinAd {
-            width: calc(100% - 40px);
-            max-width: 320px;
-            right: 20px;
-            bottom: 20px;
-        }
-        
         .toast {
             left: 20px;
             right: 20px;
@@ -758,13 +697,6 @@
             right: 10px;
             padding: 6px 12px;
             font-size: 0.85rem;
-        }
-        
-        #flyinAd {
-            width: calc(100% - 30px);
-            max-width: 280px;
-            right: 15px;
-            bottom: 15px;
         }
     }
 
@@ -808,10 +740,10 @@
                 <h1>AI Background Remover</h1>
                 <p>Professional client-side AI • No uploads • No server • Best quality for any image</p>
                 <div class="action-buttons">
-                    <button class="action-btn success" onclick="document.getElementById('fileInput').click()">
-                        <i class="fas fa-upload"></i> Select Image
+                    <button id="selectImageBtn" class="action-btn success">
+                        <i class="fas fa-upload"></i> Select Images
                     </button>
-                    <button class="action-btn danger" onclick="resetTool()">
+                    <button id="clearAllBtn" class="action-btn danger">
                         <i class="fas fa-trash"></i> Clear All
                     </button>
                 </div>
@@ -835,9 +767,9 @@
                         <h3>Drop Image Here</h3>
                         <p>or click to browse files</p>
                         <p style="font-size:0.9rem; margin-top:10px; color: var(--gray-color);">
-                            <i class="fas fa-info-circle"></i> Supports JPG, PNG, WEBP (Max 10MB)
+                            <i class="fas fa-info-circle"></i> Supports JPG, PNG, WEBP (Max 10MB each, up to 5 images)
                         </p>
-                        <input type="file" id="fileInput" accept="image/*" hidden>
+                        <input type="file" id="fileInput" accept="image/*" multiple hidden>
                     </div>
 
                     <!-- Options -->
@@ -864,10 +796,10 @@
 
                     <!-- Controls -->
                     <div class="action-buttons">
-                        <button id="removeBtn" onclick="processImage()" class="btn-primary" disabled>
+                        <button id="removeBtn" class="btn-primary" disabled>
                             <i class="fas fa-magic"></i> Remove Background
                         </button>
-                        <button id="downloadBtn" onclick="downloadImage()" class="btn-success" style="display:none;">
+                        <button id="downloadBtn" class="btn-success" style="display:none;">
                             <i class="fas fa-download"></i> Download Result
                         </button>
                     </div>
@@ -885,14 +817,6 @@
 
                 <!-- Preview Section -->
                 <div class="preview-container" id="previewContainer" style="display:none;">
-                    <div class="preview-box">
-                        <h3><i class="fas fa-image"></i> Original</h3>
-                        <img id="originalImg">
-                    </div>
-                    <div class="preview-box">
-                        <h3><i class="fas fa-star"></i> Result</h3>
-                        <img id="resultImg" alt="Processed Image">
-                    </div>
                 </div>
             </div>
 
@@ -964,31 +888,6 @@
         </div>
     </div>
     
-    <!-- Fly-in Ad (Bottom Right) -->
-    <div id="flyinAd">
-        <div class="ad-header">
-            <div>
-                <i class="fas fa-ad"></i>
-                <span>Advertisement</span>
-            </div>
-            <button class="ad-close" id="closeAd">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="ad-content">
-            <div class="ad-loading">
-                <i class="fas fa-spinner fa-spin"></i><br>
-                Loading Ad...
-            </div>
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-4319187914977768"
-                 data-ad-slot="4555770131"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-        </div>
-    </div>
-    
     <!-- Toast Notification -->
     <div class="toast" id="toast">
         <i class="fas fa-check-circle"></i>
@@ -1020,261 +919,262 @@
     <script type="module">
         import { removeBackground as removeBg } from 'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.7.0/+esm';
 
-        let originalFile = null;
-        let processedBlob = null;
-
-        // DOM Elements
-        const dropArea = document.getElementById('dropArea');
-        const fileInput = document.getElementById('fileInput');
-        const originalImg = document.getElementById('originalImg');
-        const resultImg = document.getElementById('resultImg');
-        const previewContainer = document.getElementById('previewContainer');
-        const removeBtn = document.getElementById('removeBtn');
-        const downloadBtn = document.getElementById('downloadBtn');
-        const loading = document.getElementById('loading');
-        const toast = document.getElementById('toast');
-        const toastMessage = document.getElementById('toastMessage');
-        const flyinAd = document.getElementById('flyinAd');
-        const closeAdBtn = document.getElementById('closeAd');
-
-        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             // Set current year
             document.getElementById('currentYear').textContent = new Date().getFullYear();
             
+            let originalFiles = [];
+            let processedBlobs = [];
+
+            // DOM Elements
+            const dropArea = document.getElementById('dropArea');
+            const fileInput = document.getElementById('fileInput');
+            const previewContainer = document.getElementById('previewContainer');
+            const removeBtn = document.getElementById('removeBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const loading = document.getElementById('loading');
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            const selectImageBtn = document.getElementById('selectImageBtn');
+            const clearAllBtn = document.getElementById('clearAllBtn');
+
             // Setup event listeners
-            closeAdBtn.addEventListener('click', closeFlyinAd);
+            selectImageBtn.addEventListener('click', () => {
+                fileInput.click();
+            });
+
+            clearAllBtn.addEventListener('click', resetTool);
             
-            // Show fly-in ad after delay
-            setTimeout(() => {
-                showFlyinAd();
-            }, 2000);
-        });
-
-        // Drag & Drop
-        dropArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropArea.classList.add('dragover');
-        });
-        dropArea.addEventListener('dragleave', () => dropArea.classList.remove('dragover'));
-        dropArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropArea.classList.remove('dragover');
-            if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
-        });
-
-        // Click to open file dialog - FIX ADDED HERE
-        dropArea.addEventListener('click', () => {
-            fileInput.click();
-        });
-
-        fileInput.addEventListener('change', (e) => {
-            if (e.target.files.length) handleFile(e.target.files[0]);
-        });
-
-        // Show fly-in ad
-        function showFlyinAd() {
-            if (!localStorage.getItem('adClosed')) {
-                flyinAd.classList.add('show');
-                try {
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                    setTimeout(() => {
-                        const loadingMsg = document.querySelector('.ad-loading');
-                        if (loadingMsg) {
-                            loadingMsg.style.display = 'none';
-                        }
-                    }, 1500);
-                } catch (error) {
-                    console.error('AdSense error:', error);
-                }
-            }
-        }
-        
-        // Close fly-in ad
-        function closeFlyinAd() {
-            flyinAd.classList.remove('show');
-            localStorage.setItem('adClosed', 'true');
-        }
-
-        // Show toast
-        function showToast(message, type = 'success') {
-            const colors = {
-                success: '#2ecc71',
-                error: '#e74c3c',
-                info: '#3498db',
-                warning: '#f39c12'
-            };
+            removeBtn.addEventListener('click', processImage);
+            downloadBtn.addEventListener('click', downloadImage);
             
-            toast.style.background = colors[type] || colors.success;
-            toastMessage.textContent = message;
-            toast.classList.add('show');
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
 
-        function handleFile(file) {
-            if (!file.type.startsWith('image/')) {
-                showToast("Please upload an image file", 'error');
-                return;
-            }
-            
-            if (file.size > 10 * 1024 * 1024) { // 10MB limit
-                showToast("Image size should be less than 10MB", 'error');
-                return;
-            }
-            
-            originalFile = file;
-            const url = URL.createObjectURL(file);
-            originalImg.src = url;
-            resultImg.src = '';
-            resultImg.classList.remove('transparent');
-            downloadBtn.style.display = 'none';
-            previewContainer.style.display = 'grid';
-            removeBtn.disabled = false;
-            
-            // Update upload area
-            dropArea.innerHTML = `
-                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
-                <h3>${file.name}</h3>
-                <p>${(file.size / 1024 / 1024).toFixed(2)} MB • Ready to process</p>
-                <p style="font-size:0.9rem; margin-top:10px; color: var(--gray-color);">
-                    <i class="fas fa-sync-alt"></i> Click "Remove Background" to start
-                </p>
-            `;
-            
-            showToast('Image loaded successfully!', 'success');
-        }
+            // Drag & Drop
+            dropArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropArea.classList.add('dragover');
+            });
+            dropArea.addEventListener('dragleave', () => dropArea.classList.remove('dragover'));
+            dropArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropArea.classList.remove('dragover');
+                if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
+            });
 
-        window.processImage = async () => {
-            if (!originalFile) return;
+            // Click to open file dialog
+            dropArea.addEventListener('click', () => {
+                fileInput.click();
+            });
 
-            removeBtn.disabled = true;
-            loading.style.display = 'block';
-            resultImg.src = '';
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length) handleFiles(e.target.files);
+            });
 
-            try {
-                const model = document.getElementById('modelSelect').value;
-                const config = {
-                    publicPath: 'https://staticimgly.com/@imgly/background-removal-data/1.7.0/dist/',
-                    model: model,
-                    debug: false,
-                    output: { format: 'image/png', quality: 0.9 },
+            // Show toast
+            function showToast(message, type = 'success') {
+                const colors = {
+                    success: '#2ecc71',
+                    error: '#e74c3c',
+                    info: '#3498db',
+                    warning: '#f39c12'
                 };
                 
-                showToast('AI processing started...', 'info');
-                const blob = await removeBg(originalFile, config);
-                processedBlob = blob;
-
-                const url = URL.createObjectURL(blob);
-                const img = new Image();
-                img.src = url;
-
-                img.onload = () => {
-                    const mode = document.getElementById('bgMode').value;
-                    resultImg.classList.remove('transparent');
-
-                    if (mode === 'transparent') {
-                        resultImg.src = url;
-                        resultImg.classList.add('transparent');
-                    } else {
-                        const canvas = document.createElement('canvas');
-                        canvas.width = img.width;
-                        canvas.height = img.height;
-                        const ctx = canvas.getContext('2d');
-
-                        if (mode === 'white') {
-                            ctx.fillStyle = '#ffffff';
-                        } else if (mode === 'black') {
-                            ctx.fillStyle = '#000000';
-                        } else if (mode === 'custom') {
-                            ctx.fillStyle = document.getElementById('customColor').value;
-                        }
-                        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                        ctx.drawImage(img, 0, 0);
-                        resultImg.src = canvas.toDataURL('image/png');
-                    }
-
-                    downloadBtn.style.display = 'flex';
-                    loading.style.display = 'none';
-                    removeBtn.disabled = false;
-                    
-                    showToast('Background removed successfully!', 'success');
-                };
-
-            } catch (err) {
-                console.error('Error:', err);
-                loading.style.display = 'none';
-                removeBtn.disabled = false;
-                showToast("Error processing image. Try a smaller image or different model.", 'error');
+                toast.style.background = colors[type] || colors.success;
+                toastMessage.textContent = message;
+                toast.classList.add('show');
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
             }
-        };
 
-        window.downloadImage = () => {
-            if (!processedBlob) return;
-            const mode = document.getElementById('bgMode').value;
-            let finalBlob = processedBlob;
+            function handleFiles(files) {
+                const validFiles = Array.from(files).filter(file => file.type.startsWith('image/') && file.size <= 10 * 1024 * 1024);
+                if (validFiles.length === 0) {
+                    showToast("No valid image files selected", 'error');
+                    return;
+                }
+                if (validFiles.length > 5) {
+                    validFiles.splice(5);
+                    showToast("Maximum 5 images allowed. Taking first 5.", 'warning');
+                }
+                originalFiles = validFiles;
+                previewContainer.innerHTML = '';
+                originalFiles.forEach((file, index) => {
+                    const previewItem = document.createElement('div');
+                    previewItem.classList.add('preview-item');
+                    previewItem.innerHTML = `
+                        <div class="preview-box">
+                            <h3><i class="fas fa-image"></i> Original ${index + 1}</h3>
+                            <img id="originalImg${index}" src="${URL.createObjectURL(file)}">
+                        </div>
+                        <div class="preview-box">
+                            <h3><i class="fas fa-star"></i> Result ${index + 1}</h3>
+                            <img id="resultImg${index}" alt="Processed Image">
+                        </div>
+                    `;
+                    previewContainer.appendChild(previewItem);
+                });
+                previewContainer.style.display = 'flex';
+                removeBtn.disabled = false;
+                const fileNames = originalFiles.map(f => f.name).join('<br>');
+                dropArea.innerHTML = `
+                    <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                    <h3>${originalFiles.length} Images Selected</h3>
+                    <p>${fileNames}</p>
+                    <p style="font-size:0.9rem; margin-top:10px; color: var(--gray-color);">
+                        <i class="fas fa-sync-alt"></i> Click "Remove Background" to start
+                    </p>
+                `;
+                showToast(`${originalFiles.length} image(s) loaded successfully!`, 'success');
+            }
 
-            if (mode !== 'transparent') {
-                const img = new Image();
-                img.src = URL.createObjectURL(processedBlob);
-                img.onload = () => {
+            async function applyBackground(blob, index) {
+                const mode = document.getElementById('bgMode').value;
+                const resultImg = document.getElementById(`resultImg${index}`);
+                resultImg.classList.remove('transparent');
+                if (mode === 'transparent') {
+                    resultImg.src = URL.createObjectURL(blob);
+                    resultImg.classList.add('transparent');
+                } else {
+                    const img = new Image();
+                    img.src = URL.createObjectURL(blob);
+                    await new Promise(resolve => img.onload = resolve);
                     const canvas = document.createElement('canvas');
                     canvas.width = img.width;
                     canvas.height = img.height;
                     const ctx = canvas.getContext('2d');
-
                     let fillColor = '#ffffff';
                     if (mode === 'black') fillColor = '#000000';
                     else if (mode === 'custom') fillColor = document.getElementById('customColor').value;
-
                     ctx.fillStyle = fillColor;
                     ctx.fillRect(0, 0, canvas.width, canvas.height);
                     ctx.drawImage(img, 0, 0);
-
-                    canvas.toBlob((blob) => {
-                        const link = document.createElement('a');
-                        link.href = URL.createObjectURL(blob);
-                        link.download = `background-removed-${Date.now()}.png`;
-                        link.click();
-                        showToast('Image downloaded!', 'success');
-                    }, 'image/png');
-                };
-            } else {
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(finalBlob);
-                link.download = `background-removed-${Date.now()}.png`;
-                link.click();
-                showToast('Image downloaded!', 'success');
+                    resultImg.src = canvas.toDataURL('image/png');
+                }
             }
-        };
 
-        window.resetTool = () => {
-            if (confirm('Are you sure you want to reset? This will clear the current image.')) {
-                originalFile = null;
-                processedBlob = null;
-                originalImg.src = '';
-                resultImg.src = '';
-                previewContainer.style.display = 'none';
+            async function processImage() {
+                if (originalFiles.length === 0) return;
                 removeBtn.disabled = true;
-                downloadBtn.style.display = 'none';
-                fileInput.value = '';
-                
-                // Reset upload area
-                dropArea.innerHTML = `
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <h3>Drop Image Here</h3>
-                    <p>or click to browse files</p>
-                    <p style="font-size:0.9rem; margin-top:10px; color: var(--gray-color);">
-                        <i class="fas fa-info-circle"></i> Supports JPG, PNG, WEBP (Max 10MB)
-                    </p>
-                `;
-                
-                showToast('Tool reset successfully', 'info');
-            }
-        };
+                loading.style.display = 'block';
+                processedBlobs = [];
+                try {
+                    const model = document.getElementById('modelSelect').value;
+                    const config = {
+                        publicPath: 'https://staticimgly.com/@imgly/background-removal-data/1.7.0/dist/',
+                        model: model,
+                        debug: false,
+                        output: { format: 'image/png', quality: 0.9 },
+                    };
+                    showToast('AI processing started...', 'info');
+                    for (let i = 0; i < originalFiles.length; i++) {
+                        const file = originalFiles[i];
+                        const blob = await removeBg(file, config);
+                        processedBlobs.push(blob);
+                        await applyBackground(blob, i);
+                    }
+                    downloadBtn.style.display = 'flex';
+                    loading.style.display = 'none';
+                    removeBtn.disabled = false;
+                    showToast('Background(s) removed successfully!', 'success');
+                } catch (err) {
+                    console.error('Error:', err);
+                    loading.style.display = 'none';
+                    removeBtn.disabled = false;
+                    showToast("Error processing image(s). Try smaller images or different model.", 'error');
+                }
+            };
+
+            async function downloadImage() {
+                if (processedBlobs.length === 0) return;
+                const mode = document.getElementById('bgMode').value;
+                if (originalFiles.length === 1) {
+                    let finalBlob = processedBlobs[0];
+                    if (mode !== 'transparent') {
+                        const img = new Image();
+                        img.src = URL.createObjectURL(finalBlob);
+                        await new Promise(resolve => img.onload = resolve);
+                        const canvas = document.createElement('canvas');
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        const ctx = canvas.getContext('2d');
+                        let fillColor = '#ffffff';
+                        if (mode === 'black') fillColor = '#000000';
+                        else if (mode === 'custom') fillColor = document.getElementById('customColor').value;
+                        ctx.fillStyle = fillColor;
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        ctx.drawImage(img, 0, 0);
+                        await new Promise(resolve => {
+                            canvas.toBlob(blob => {
+                                finalBlob = blob;
+                                resolve();
+                            }, 'image/png');
+                        });
+                    }
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(finalBlob);
+                    link.download = `background-removed-${Date.now()}.png`;
+                    link.click();
+                    showToast('Image downloaded!', 'success');
+                } else {
+                    const zip = new JSZip();
+                    for (let i = 0; i < processedBlobs.length; i++) {
+                        let finalBlob = processedBlobs[i];
+                        if (mode !== 'transparent') {
+                            const img = new Image();
+                            img.src = URL.createObjectURL(finalBlob);
+                            await new Promise(resolve => img.onload = resolve);
+                            const canvas = document.createElement('canvas');
+                            canvas.width = img.width;
+                            canvas.height = img.height;
+                            const ctx = canvas.getContext('2d');
+                            let fillColor = '#ffffff';
+                            if (mode === 'black') fillColor = '#000000';
+                            else if (mode === 'custom') fillColor = document.getElementById('customColor').value;
+                            ctx.fillStyle = fillColor;
+                            ctx.fillRect(0, 0, canvas.width, canvas.height);
+                            ctx.drawImage(img, 0, 0);
+                            await new Promise(resolve => {
+                                canvas.toBlob(blob => {
+                                    finalBlob = blob;
+                                    resolve();
+                                }, 'image/png');
+                            });
+                        }
+                        zip.file(`background-removed-${originalFiles[i].name}`, finalBlob);
+                    }
+                    const content = await zip.generateAsync({type: "blob"});
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(content);
+                    link.download = `background-removed-batch-${Date.now()}.zip`;
+                    link.click();
+                    showToast('Batch downloaded as ZIP!', 'success');
+                }
+            };
+
+            function resetTool() {
+                if (confirm('Are you sure you want to reset? This will clear the current image(s).')) {
+                    originalFiles = [];
+                    processedBlobs = [];
+                    previewContainer.innerHTML = '';
+                    previewContainer.style.display = 'none';
+                    removeBtn.disabled = true;
+                    downloadBtn.style.display = 'none';
+                    fileInput.value = '';
+                    // Reset upload area
+                    dropArea.innerHTML = `
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>Drop Image Here</h3>
+                        <p>or click to browse files</p>
+                        <p style="font-size:0.9rem; margin-top:10px; color: var(--gray-color);">
+                            <i class="fas fa-info-circle"></i> Supports JPG, PNG, WEBP (Max 10MB each, up to 5 images)
+                        </p>
+                    `;
+                    showToast('Tool reset successfully', 'info');
+                }
+            };
+        });
     </script>
 </body>
 </html>
